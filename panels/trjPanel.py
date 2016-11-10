@@ -1,4 +1,5 @@
-#Generates panel figure from eq-VTIs and H5p file
+#Generates trajectory panel figure
+
 import numpy as np
 import os
 import lfmViz as lfmv
@@ -19,90 +20,110 @@ def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
 
 	return xi,yi,dBz
 
-def getPs(h5pDir,h5pStub,t,dt=10.0):
-	tSlc = np.int(t/dt)
-	h5pFile = h5pDir + "/" + h5pStub
-	t,xeq = lfmpp.getH5pT(h5pFile,"xeq",tSlc)
-	t,yeq = lfmpp.getH5pT(h5pFile,"yeq",tSlc)
-	t,kev = lfmpp.getH5pT(h5pFile,"kev",tSlc)
-
-	t,mp = lfmpp.getH5pT(h5pFile,"mp",tSlc)
-	t,tl = lfmpp.getH5pT(h5pFile,"tl",tSlc)
-	t,atm = lfmpp.getH5pT(h5pFile,"atm",tSlc)
-
-	In = (atm+tl+mp) < 0.5
-	xeq = xeq[In]
-	yeq = yeq[In]
-	kev = kev[In]
+def getPTop(h5pFile,pId):
 	
-	return xeq,yeq,kev
+	t,x = lfmpp.getH5pid(h5pFile,"x",pId)
+	t,y = lfmpp.getH5pid(h5pFile,"y",pId)
+	
+	t,Om = lfmpp.getH5pid(h5pFile,"Om",pId)
+	t,Op = lfmpp.getH5pid(h5pFile,"Op",pId)
+	Omp = (Om+Op)
 
-Spcs = ["H+","O+","e-"]
-h5ps = ["H.100keV.h5part","O.100keV.h5part","e.100keV.h5part"]
-Ts = [500,1000,2500,3500]
+	return x,y,Omp
 
+#Particle data
+s0 = 0
+SpcsStub = ["O.100kev"]
+SpcsLab = ["O+ 100 keV"]
+KStubs = [10,25,50]
+Kcs = [50,100,200]
+
+#Traj data
+IDs = [1335,301,95834,12593,63464,75685]
+
+#Nx = 6; Ny = 5
+Nx = 3; Ny = 2
+DomX = [-15,12]
+DomY = [-20,20]
+
+#Field data
+tSlc = 250
+
+#Figure defaults
 figSize = (10,10)
 figQ = 300 #DPI
-figName = "fpPanel.png"
 
 #Plot bounds fields/particles (nT/keV), plot details
 fldBds = [-35,35]
+Nc = 5
 fldCMap = "RdGy_r"
 fldOpac = 0.5
-fldDomX = [-15,13]
-fldDomY = [-20,20]
-
-pBds = [50,150]
 pCMap = "cool"
-pSize = 2; pMark = 'o'; pLW = 0.2
+pSize = 10; pMark = 'o'; pLW = 1
+
+
+#Gridspec defaults
+hRat = list(4*np.ones(Nx+1))
+hRat[0] = 0.25
+
 
 #Locations
-RootDir = "/Users/soratka1/Work/Magnetoloss/Data"
+RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data"
 vtiDir = RootDir + "/" + "eqSlc"
 h5pDir = RootDir + "/" "H5p"
 
-#Do figures
+#Spcs = ["H+ 10 keV"]
+#h5ps = ["Inj10.All.h5part"]
+
+Nk = len(IDs)
 lfmv.initLatex()
+xi,yi,dBz = getFld(vtiDir,tSlc)
+
+h5p = h5pDir + "/" + SpcsStub[s0] + ".h5part"
+figName = SpcsStub[s0] + ".Trjs.png"
+titS = "Sampled High-Transit Trajectories for %s "%(SpcsLab[s0])
+
 fig = plt.figure(figsize=figSize,tight_layout=True)
-#fig = plt.figure()
+gs = gridspec.GridSpec(Nx+1,Ny)
 
-Ns = len(Spcs)
-Nt = len(Ts)
-
-gs = gridspec.GridSpec(Ns,Nt)
-
-for t in range(Nt):
-	xi,yi,dBz = getFld(vtiDir,Ts[t])
-	for s in range(Ns):
+n = 0
+for i in range(1,Nx+1):
+	for j in range(Ny):
 		
-		Ax = fig.add_subplot(gs[s,t])
-		if (t == 0):
-			plt.ylabel(Spcs[s],fontsize="large")
-		elif (t == Nt-1):
-			plt.ylabel("GSM-Y [Re]")
-			Ax.yaxis.tick_right()
-			Ax.yaxis.set_label_position("right")
+		Ax = fig.add_subplot(gs[i,j])
+
+		if (i == Nx):
+			plt.xlabel("GSM-X [Re]",fontsize="small")
+		else:
+			plt.setp(Ax.get_xticklabels(),visible=False)
+		if (j == 0):
+			plt.ylabel("GSM-Y [Re]",fontsize="small")
 		else:
 			plt.setp(Ax.get_yticklabels(),visible=False)
 
 
-		if (s < Ns-1):
-			plt.setp(Ax.get_xticklabels(),visible=False)
-		else:
-			plt.xlabel('GSM-X [Re]')
-		if (s == 0):
-			plt.title("T = %d [s]"%Ts[t])
-
 		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
+		#plt.contour(xi,yi,dBz,Bv,cmap=fldCMap)
 		lfmv.addEarth2D()
 
 		#Now do particles
-		xs,ys,zs = getPs(h5pDir,h5ps[s],Ts[t])
-		pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
+		xs,ys,zs = getPTop(h5p,IDs[n])
+
+		pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=0,vmax=1,cmap=pCMap,linewidth=pLW)
+		#Leg = ["ID %d\nK = %3.2f (keV)"%(pIds[n],zs.max())]
+		#plt.legend(Leg,loc="lower left",fontsize="xx-small",scatterpoints=1,markerscale=0,markerfirst=False,frameon=False)
+
+		plt.plot(xs,ys,'w-',linewidth=0.2)
 		plt.axis('scaled')
-		plt.xlim(fldDomX); plt.ylim(fldDomY)
+		plt.xlim(DomX); plt.ylim(DomY)
+		plt.tick_params(axis='both', which='major', labelsize=6)
+		plt.tick_params(axis='both', which='minor', labelsize=4)
 		
-#gs.tight_layout(fig)
+		n=n+1
+	
+plt.suptitle(titS,fontsize="large")
+gs.tight_layout(fig)
 plt.savefig(figName,dpi=figQ)
+plt.close('all')
 
