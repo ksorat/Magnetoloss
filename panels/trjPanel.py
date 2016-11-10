@@ -9,6 +9,13 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.patches import Wedge
 
+def lastPhi(fIn):
+	isOut = lfmpp.getOut(fIn)
+	ids,x = lfmpp.getH5pFin(fIn,"x",Mask=isOut)
+	ids,y = lfmpp.getH5pFin(fIn,"y",Mask=isOut)
+	pBX = np.arctan2(y,x)*180.0/np.pi
+	return ids,pBX
+
 def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
 	tSlc = np.int(t/dt)
 	vtiFile = vtiDir + "/" + eqStub + ".%04d.vti"%(tSlc)
@@ -20,6 +27,20 @@ def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
 
 	return xi,yi,dBz
 
+def getPs(h5pFile,pC,Nk):
+	isOut = lfmpp.getOut(h5pFile)
+	R, PhiMP0, LambdaF, Tmp = lfmpp.getSphLoss1st(h5pFile)
+	ids, PhiBX = lastPhi(h5pFile)
+
+	dPhi = PhiBX-PhiMP0
+
+	Ind = (abs(dPhi)>=pC)
+	Ntot = Ind.sum()
+	ids = ids[Ind]
+	print("Found %d values larger than %3.2f"%(Ntot,pC))
+	IndR = np.random.choice(Ntot,Nk,replace=False)
+	ids = ids[IndR]
+	return ids
 def getPTop(h5pFile,pId):
 	
 	t,x = lfmpp.getH5pid(h5pFile,"x",pId)
@@ -33,16 +54,14 @@ def getPTop(h5pFile,pId):
 
 #Particle data
 s0 = 0
+np.random.seed(seed=31337)
 SpcsStub = ["O.100kev"]
 SpcsLab = ["O+ 100 keV"]
-KStubs = [10,25,50]
-Kcs = [50,100,200]
-
-#Traj data
-IDs = [1335,301,95834,12593,63464,75685]
+pC = 100.0
 
 #Nx = 6; Ny = 5
-Nx = 3; Ny = 2
+Nx = 3; Ny = 4
+Nk = Nx*Ny
 DomX = [-15,12]
 DomY = [-20,20]
 
@@ -64,7 +83,7 @@ pSize = 10; pMark = 'o'; pLW = 1
 
 #Gridspec defaults
 hRat = list(4*np.ones(Nx+1))
-hRat[0] = 0.25
+hRat[0] = 0.2
 
 
 #Locations
@@ -75,7 +94,6 @@ h5pDir = RootDir + "/" "H5p"
 #Spcs = ["H+ 10 keV"]
 #h5ps = ["Inj10.All.h5part"]
 
-Nk = len(IDs)
 lfmv.initLatex()
 xi,yi,dBz = getFld(vtiDir,tSlc)
 
@@ -84,8 +102,12 @@ figName = SpcsStub[s0] + ".Trjs.png"
 titS = "Sampled High-Transit Trajectories for %s "%(SpcsLab[s0])
 
 fig = plt.figure(figsize=figSize,tight_layout=True)
-gs = gridspec.GridSpec(Nx+1,Ny)
+gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
+#Traj data
+#IDs = [1335,301,95834,12593,63464,75685]
+IDs = getPs(h5p,pC,Nk)
+print(IDs)
 n = 0
 for i in range(1,Nx+1):
 	for j in range(Ny):
