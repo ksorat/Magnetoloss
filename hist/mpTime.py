@@ -32,7 +32,8 @@ def getTimes(fIn,doTail=False):
 
 	return Tmpx,Tmpx0,Tbx,pid
 
-#doCalc = True
+
+lfmv.initLatex()
 msDataFile = "msIonT.pkl"
 
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
@@ -92,37 +93,3 @@ plt.ylim(0,pMax)
 plt.savefig("DelTms.png")
 plt.close()
 
-
-# #Sheath time 
-
-
-# #Time on MP
-# Nb = 50
-# T0 = 0; Tf = 350
-# doNorm = True
-# doLog = False
-# pMax = 0.015
-# bins = np.linspace(T0,Tf,Nb)
-# dtFig = plt.hist(aDelTmp[0:2],bins,normed=doNorm,log=doLog)
-# plt.legend(Leg)
-# plt.xlabel("Time between first and last MPX [s]")
-# plt.ylabel("Fraction")
-# plt.ylim(0,pMax)
-# plt.savefig("DelTmp.png")
-# plt.close()
-
-# #2D histogram of time
-
-# Nb = 40
-# xBin = np.linspace(0,350,Nb)
-# yBin = np.linspace(0,250,Nb)
-# for s in range(2):
-# 	plt.hist2d(aDelTmp[s],aDelT[s],[xBin,yBin],normed=True,norm=LogNorm(1.0e-6,5e-4))#(1.0e-6,1.0e-2))
-# 	plt.xlim(0,350)
-# 	plt.ylim(0,250)
-# 	plt.axis('scaled')
-# 	plt.xlabel('Between First/Last MPX [s]')
-# 	plt.ylabel('After Last MPX [s]')
-# 	plt.colorbar()
-# 	plt.savefig("DelT2D.%s.png"%spcs[s])
-# 	plt.close('all')
