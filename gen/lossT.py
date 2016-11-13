@@ -21,7 +21,7 @@ lfmv.initLatex()
 for i in range(Ns):
 	fIn = RootDir + spcs[i] + "." + fileStub
 	t,mpTp = lfmpp.getH5p(fIn,"mp")
-	Np = mpTp.shape[0]
+	Np = mpTp.shape[1]
 	mpT = mpTp.sum(axis=1)
 	print(Np)
 	plt.plot(t,mpT/Np)
