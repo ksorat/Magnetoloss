@@ -51,7 +51,7 @@ else:
 	with open(msDataFile, "wb") as f:
 		pickle.dump(aDPms,f)
 
-pMax = 0.05
+pMax = 0.03
 Nb = 40
 N0 = -60; N1 = 120
 bins = np.linspace(N0,N1,Nb)
