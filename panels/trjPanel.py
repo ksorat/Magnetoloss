@@ -55,7 +55,7 @@ def getPTop(h5pFile,pId):
 #Particle data
 s0 = 0
 np.random.seed(seed=31337)
-SpcsStub = ["O.100.kev"]
+SpcsStub = ["O.100kev"]
 SpcsLab = ["O+ 100 keV"]
 pC = 80.0
 
@@ -105,8 +105,9 @@ fig = plt.figure(figsize=figSize,tight_layout=True)
 gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
 #Traj data
-#IDs = [1335,301,95834,12593,63464,75685]
-IDs = getPs(h5p,pC,Nk)
+print(h5p)
+IDs = [1335,301,95834,12593,63464,75685]
+#IDs = getPs(h5p,pC,Nk)
 print(IDs)
 n = 0
 for i in range(1,Nx+1):
