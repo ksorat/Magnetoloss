@@ -37,16 +37,16 @@ for i in range(Ns):
 	fIn = RootDir + spcs[i] + "." + fileStub
 	figName = figStub + "." + spcs[i] + ".png"
 	if (doFirst):
-		R,Phi,Lambda,Tl = getSphLoss1st(fIn)
+		R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
 	else:
-		R,Phi,Lambda = getSphLoss(fIn)
+		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 	fig = plt.figure(figsize=figSize,tight_layout=True)
 	gs = gridspec.GridSpec(2,1,height_ratios=[1,1])
 
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
 	Ax1D.hist(Phi,Lambda,pBin,color='blue',normed=True)
-	
+
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,0])
 	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
