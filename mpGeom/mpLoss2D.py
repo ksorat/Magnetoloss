@@ -48,7 +48,7 @@ lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure(figsize=figSize)
 #fig = plt.figure(figsize=figSize,tight_layout=True)
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[1,3])
+gs = gridspec.GridSpec(2,Ns,height_ratios=[1,2.5])
 
 for i in range(Ns):
 	
