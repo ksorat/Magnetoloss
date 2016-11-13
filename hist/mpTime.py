@@ -1,5 +1,6 @@
 #Calculate time lost particles spend on open field lines before leaving box
 import numpy as np
+import o
 import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
