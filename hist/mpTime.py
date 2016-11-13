@@ -75,7 +75,7 @@ else:
 		pickle.dump(aTbar,f)
 
 pMax = 0.01
-Nb = 45
+Nb = 42
 T0 = 0; Tf = 600
 LW = 2
 doNorm = True
