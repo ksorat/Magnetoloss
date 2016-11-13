@@ -80,8 +80,10 @@ for i in range(Ns):
 	plt.axis('scaled')
 	Ax1D.set_xlim(P0,P1)
 	Ax1D.set_ylim(0,fMax)
-	Ax1D.set_yticks(np.arange(0.003,fMax+1.0e-8,0.003))
+	Ax1D.set_xticks(xTk)
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
+	Ax1D.set_yticks(np.arange(0.003,fMax+1.0e-8,0.003))
+	
 
 	#Ax1D.yaxis.tick_right()
 	#Ax1D.yaxis.set_label_position("right")
