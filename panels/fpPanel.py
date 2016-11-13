@@ -57,7 +57,7 @@ pCMap = "cool"
 pSize = 2; pMark = 'o'; pLW = 0.2
 
 #Locations
-RootDir = "/Users/soratka1/Work/Magnetoloss/Data"
+RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data"
 vtiDir = RootDir + "/" + "eqSlc"
 h5pDir = RootDir + "/" "H5p"
 
