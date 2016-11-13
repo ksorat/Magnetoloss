@@ -80,7 +80,7 @@ T0 = 0; Tf = 600
 doNorm = True
 doLog = False
 bins = np.linspace(T0,Tf,Nb)
-dtFig = plt.hist(DelT0,bins,normed=doNorm,log=doLog)
+dtFig = plt.hist(aTms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
 plt.xlabel("Time after first MPX [s]")
 plt.ylabel("Fraction")
