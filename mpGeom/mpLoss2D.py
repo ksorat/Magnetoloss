@@ -36,7 +36,7 @@ else:
 	Ns = len(spcs)
 
 lfmv.initLatex()
-P0 = -180; P1 = 180
+P0 = -120; P1 = 120
 L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
@@ -51,20 +51,21 @@ for i in range(Ns):
 		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 	#fig = plt.figure(figsize=figSize,tight_layout=True)
 	fig = plt.figure()
-	gs = gridspec.GridSpec(2,1,height_ratios=[1,4])
+	gs = gridspec.GridSpec(2,1,height_ratios=[1,3])
 	plt.axis('scaled')
 	
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
 	Ax1D.hist(Phi,pBin,color='blue',normed=True)
-	plt.setp(Ax1D.get_xticklabels(),visible=False)
 	Ax1D.set_xlim(P0,P1)
+	plt.setp(Ax1D.get_xticklabels(),visible=False)
+	
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,0])
 	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
 	Ax2D.set_xlim(P0,P1)
-	Ax2D.set_ylim(L0,L1)
+	#Ax2D.set_ylim(L0,L1)
 	#Ax2D.set_xticks(xTk)
 	#Ax2D.set_xticklabels(xTkLab)
 
