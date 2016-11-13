@@ -84,7 +84,7 @@ doLog = False
 bins = np.linspace(T0,Tf,Nb)
 dtFig = plt.hist(aTms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
-plt.xlabel("Time in Magnetosheat [s]")
+plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
 plt.ylim(0,pMax)
 # plt.axvline(aTbar[0],color='b',linewidth=LW)
