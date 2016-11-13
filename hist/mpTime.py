@@ -33,7 +33,7 @@ def getTimes(fIn,doTail=False):
 	return Tmpx,Tmpx0,Tbx,pid
 
 #doCalc = True
-msDataFile = "msIon.pkl"
+msDataFile = "msIonT.pkl"
 
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 fileStub = "100keV.h5part"
@@ -74,22 +74,23 @@ else:
 		pickle.dump(aTms,f)
 		pickle.dump(aTbar,f)
 
+pMax = 0.01
+Nb = 30
+T0 = 0; Tf = 600
+doNorm = True
+doLog = False
+bins = np.linspace(T0,Tf,Nb)
+dtFig = plt.hist(DelT0,bins,normed=doNorm,log=doLog)
+plt.legend(Leg)
+plt.xlabel("Time after first MPX [s]")
+plt.ylabel("Fraction")
+plt.ylim(0,pMax)
+plt.savefig("DelTms.png")
+plt.close()
+
 
 # #Sheath time 
-# pMax = 0.01
-# Nb = 30
-# T0 = 0; Tf = 600
-# doNorm = True
-# doLog = False
 
-# bins = np.linspace(T0,Tf,Nb)
-# dtFig = plt.hist(aDelT0[0:2],bins,normed=doNorm,log=doLog)
-# plt.legend(Leg)
-# plt.xlabel("Time after first MPX [s]")
-# plt.ylabel("Fraction")
-# plt.ylim(0,pMax)
-# plt.savefig("DelTms.png")
-# plt.close()
 
 # #Time on MP
 # Nb = 50
