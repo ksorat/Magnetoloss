@@ -44,16 +44,16 @@ lBin = np.linspace(L0,L1,Nl)
 for i in range(Ns):
 	fIn = RootDir + spcs[i] + "." + fileStub
 	figName = figStub + "." + spcs[i] + ".png"
+	print("Generating %s"%figName)
 	if (doFirst):
 		R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
 	else:
 		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 	#fig = plt.figure(figsize=figSize,tight_layout=True)
 	fig = plt.figure()
-
-	plt.axis('scaled')
 	gs = gridspec.GridSpec(2,1,height_ratios=[1,4])
-
+	plt.axis('scaled')
+	
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
 	#Ax1D.hist(Phi,pBin,color='blue',normed=True)
