@@ -9,8 +9,8 @@ import matplotlib.gridspec as gridspec
 
 #Figure defaults
 figSize = (8,8)
-#figQ = 300 #DPI
-figQ = 50
+figQ = 300 #DPI
+#figQ = 50
 
 figStub = "mpLoss"
 doFirst = False
