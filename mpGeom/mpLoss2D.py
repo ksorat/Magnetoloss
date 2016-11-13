@@ -8,7 +8,7 @@ from matplotlib.colors import LogNorm
 import matplotlib.gridspec as gridspec
 
 #Figure defaults
-figSize = (8,8)
+#figSize = (8,8)
 figQ = 300 #DPI
 
 
