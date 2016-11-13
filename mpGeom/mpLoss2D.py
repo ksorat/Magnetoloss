@@ -79,7 +79,7 @@ for i in range(Ns):
 	plt.axis('scaled')
 	Ax1D.set_xlim(P0,P1)
 	Ax1D.set_ylim(0,fMax)
-	Ax1D.set_yticks(np.arange(0.003,fMax,0.003))
+	Ax1D.set_yticks(np.arange(0.003,fMax+1.0e-8,0.003))
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
 
 	#Ax1D.yaxis.tick_right()
@@ -92,7 +92,7 @@ for i in range(Ns):
 	Ax2D.set_xticks(xTk)
 	Ax2D.set_xticklabels(xTkLab)
 	Ax2D.set_xlabel("Magnetic Local Time")
-	Ax2D.text(0.05,0.95,Leg[i],fontsize="large")
+	Ax2D.text(-120,45,Leg[i],fontsize="large")
 	if (i==0):
 		Ax1D.set_ylabel("Fraction")
 		Ax2D.set_ylabel("Magnetic Latitude")
