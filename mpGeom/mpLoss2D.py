@@ -70,9 +70,10 @@ for i in range(Ns):
 
 	Ax2D.set_xlim(P0,P1)
 	Ax2D.set_ylim(L0,L1)
-	#Ax2D.set_xticks(xTk)
-	#Ax2D.set_xticklabels(xTkLab)
+	Ax2D.set_xticks(xTk)
+	Ax2D.set_xticklabels(xTkLab)
 
 	#Save
+	plt.tight_layout()
 	plt.savefig(figName,dpi=figQ)
 	plt.close('all')
