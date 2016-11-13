@@ -38,13 +38,15 @@ if (doFirst):
 	figStub = figStub + ".1st"
 else:
 	Ns = len(spcs)
+	figSize = (3,9)
 
 lfmv.initLatex()
 P0 = -150; P1 = 150
 L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
-fig = plt.figure()
+fig = plt.figure(figSie=figSize)
+#fig = plt.figure(figsize=figSize,tight_layout=True)
 
 gs = gridspec.GridSpec(2,Ns,height_ratios=[1,4])
 
@@ -62,7 +64,7 @@ for i in range(Ns):
 		else:
 			R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 
-	#fig = plt.figure(figsize=figSize,tight_layout=True)
+	
 	
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,i])
