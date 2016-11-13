@@ -8,7 +8,7 @@ from matplotlib.colors import LogNorm
 import matplotlib.gridspec as gridspec
 
 #Figure defaults
-figSize = (10,10)
+figSize = (4,6)
 figQ = 300 #DPI
 figStub = "mpLoss"
 doFirst = False
@@ -46,8 +46,8 @@ for i in range(Ns):
 		R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
 	else:
 		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
-	#fig = plt.figure(figsize=figSize,tight_layout=True)
-	fig = plt.figure()
+	fig = plt.figure(figsize=figSize,tight_layout=True)
+	#fig = plt.figure()
 	
 	plt.axis('scaled')
 	gs = gridspec.GridSpec(2,1,height_ratios=[1,4])
