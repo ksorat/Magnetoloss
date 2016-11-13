@@ -9,7 +9,9 @@ import matplotlib.gridspec as gridspec
 
 #Figure defaults
 figSize = (8,8)
-figQ = 300 #DPI
+#figQ = 300 #DPI
+figQ = 50
+
 figStub = "mpLoss"
 doFirst = False
 cAx=[1.0e-6,1.0e-3]
@@ -48,18 +50,19 @@ for i in range(Ns):
 		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 	#fig = plt.figure(figsize=figSize,tight_layout=True)
 	fig = plt.figure()
+
 	plt.axis('scaled')
 	gs = gridspec.GridSpec(2,1,height_ratios=[1,4])
 
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
-	Ax1D.hist(Phi,pBin,color='blue',normed=True)
+	#Ax1D.hist(Phi,pBin,color='blue',normed=True)
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
 	Ax1D.set_xlim(P0,P1)
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,0])
-	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
+	#Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
 	Ax2D.set_xlim(P0,P1)
 	Ax2D.set_ylim(L0,L1)
 	#Ax2D.set_xticks(xTk)
