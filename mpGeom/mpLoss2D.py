@@ -14,7 +14,7 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = True
-doTest = True
+doTest = False
 
 cAx=[1.0e-6,1.0e-3]
 fMax = 0.015
@@ -95,7 +95,7 @@ for i in range(Ns):
 	Ax2D.set_xlabel("Magnetic Local Time")
 	Ax2D.text(-120,40,Leg[i],fontsize="x-large")
 	if (i==0):
-		Ax1D.set_ylabel("Fraction")
+		Ax1D.set_ylabel("Density")
 		Ax2D.set_ylabel("Magnetic Latitude [$^{\circ}$]")
 	else:
 		plt.setp(Ax2D.get_yticklabels(),visible=False)
