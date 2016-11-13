@@ -45,7 +45,7 @@ for i in range(Ns):
 
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
-	Ax1D.hist(Phi,Lambda,pBin,color='blue',normed=True)
+	Ax1D.hist(Phi,pBin,color='blue',normed=True)
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,0])
