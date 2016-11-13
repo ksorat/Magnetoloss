@@ -97,6 +97,6 @@ for i in range(Ns):
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
 
 #Save
-#plt.tight_layout()
+plt.tight_layout()
 plt.savefig(figName,dpi=figQ)
 plt.close('all')
