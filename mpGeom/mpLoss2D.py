@@ -46,7 +46,7 @@ pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure()
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[1,2])
+gs = gridspec.GridSpec(2,Ns,height_ratios=[1,4])
 
 for i in range(Ns):
 	
@@ -95,6 +95,6 @@ for i in range(Ns):
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
 
 #Save
-	#plt.tight_layout()
+plt.tight_layout()
 plt.savefig(figName,dpi=figQ)
 plt.close('all')
