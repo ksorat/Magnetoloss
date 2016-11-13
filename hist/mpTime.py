@@ -5,6 +5,7 @@ import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import cPickle as pickle
 
 
 def getTimes(fIn,doTail=False):
@@ -31,6 +32,9 @@ def getTimes(fIn,doTail=False):
 
 	return Tmpx,Tmpx0,Tbx,pid
 
+#doCalc = True
+msDataFile = "msIon.pkl"
+
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 fileStub = "100keV.h5part"
 
@@ -41,21 +45,35 @@ Ns = len(spcs)
 aTms = []
 aTbar = []
 
-for i in range(Ns):
-	fIn = RootDir + spcs[i] + "." + fileStub
-	print("Reading %s"%(fIn))
+if (os.path.isfile(msDataFile)):
+	print("Loading data")
+	with open(msDataFile, "rb") as f:
+		aTms = pickle.load(f)
+		aTbar = pickle.load(f)
+else:
+	print("No data file found, calculating")
 
-	Tmpx, Tmpx0, Tbx,pids = getTimes(fIn,doTail=True)
-	DelT0 = Tbx-Tmpx0
-	Tb = DelT0.mean()
-	aTms.append(DelT0)
-	aTbar.append(Tb)
+	for i in range(Ns):
+		fIn = RootDir + spcs[i] + "." + fileStub
+		print("Reading %s"%(fIn))
+		Tmpx, Tmpx0, Tbx,pids = getTimes(fIn,doTail=True)
+	
+		DelT0 = Tbx-Tmpx0
+		Tb = DelT0.mean()
+		aTms.append(DelT0)
+		aTbar.append(Tb)
+		print("Species %s"%(Leg[i]))
+		print("\tMin / Max DelT = %d / %d"%(np.amin(DelT0),np.amax(DelT0)) )
+		print("\t# particles = %d"%len(DelT0))
+		print("\tMax @ %d"%(pids[np.argmax(DelT0)]))
+		print("\tMean Tms = %f"%Tb)
 
-	print("Species %s"%(Leg[i]))
-	print("\tMin / Max DelT = %d / %d"%(np.amin(DelT0),np.amax(DelT0)) )
-	print("\t# particles = %d"%len(DelT))
-	print("\tMax @ %d"%(pids[np.argmax(DelT)]))
-	print("\tMean Tms = %f"%Tb)
+	#Save to pickle
+	print("Writing pickle")
+	with open(msDataFile, "wb") as f:
+		pickle.dump(aTms,f)
+		pickle.dump(aTbar,f)
+
 
 # #Sheath time 
 # pMax = 0.01
