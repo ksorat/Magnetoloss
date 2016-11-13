@@ -2,6 +2,7 @@
 #Only bother with ions
 
 import numpy as np
+import os
 import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
