@@ -95,7 +95,7 @@ for i in range(Ns):
 	Ax2D.text(-120,40,Leg[i],fontsize="x-large")
 	if (i==0):
 		Ax1D.set_ylabel("Fraction")
-		Ax2D.set_ylabel("Magnetic Latitude")
+		Ax2D.set_ylabel("Magnetic Latitude [$^{\circ}$]")
 	else:
 		plt.setp(Ax2D.get_yticklabels(),visible=False)
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
