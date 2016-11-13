@@ -46,8 +46,8 @@ for i in range(Ns):
 		R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
 	else:
 		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
-	fig = plt.figure(figsize=figSize,tight_layout=True)
-	
+	#fig = plt.figure(figsize=figSize,tight_layout=True)
+	fig = plt.figure()
 	plt.axis('scaled')
 	gs = gridspec.GridSpec(2,1,height_ratios=[1,4])
 
@@ -62,8 +62,8 @@ for i in range(Ns):
 	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
 	Ax2D.set_xlim(P0,P1)
 	Ax2D.set_ylim(L0,L1)
-	Ax2D.set_xticks(xTk)
-	Ax2D.set_xticklabels(xTkLab)
+	#Ax2D.set_xticks(xTk)
+	#Ax2D.set_xticklabels(xTkLab)
 
 	#Save
 	plt.savefig(figName,dpi=figQ)
