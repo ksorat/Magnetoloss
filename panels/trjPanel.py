@@ -60,7 +60,7 @@ SpcsLab = ["O+ 100 keV"]
 pC = 80.0
 
 #Nx = 6; Ny = 5
-Nx = 3; Ny = 2
+Nx = 2; Ny = 3
 Nk = Nx*Ny
 DomX = [-15,12]
 DomY = [-20,20]
@@ -69,7 +69,7 @@ DomY = [-20,20]
 tSlc = 250
 
 #Figure defaults
-figSize = (10,10)
+figSize = (8,8)
 figQ = 300 #DPI
 
 #Plot bounds fields/particles (nT/keV), plot details
@@ -124,7 +124,7 @@ for i in range(1,Nx+1):
 			plt.setp(Ax.get_yticklabels(),visible=False)
 
 
-		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
 		#plt.contour(xi,yi,dBz,Bv,cmap=fldCMap)
 		lfmv.addEarth2D()
@@ -132,7 +132,7 @@ for i in range(1,Nx+1):
 		#Now do particles
 		xs,ys,zs = getPTop(h5p,IDs[n])
 
-		pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=0,vmax=1,cmap=pCMap,linewidth=pLW)
+		#pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=0,vmax=1,cmap=pCMap,linewidth=pLW)
 		#Leg = ["ID %d\nK = %3.2f (keV)"%(pIds[n],zs.max())]
 		#plt.legend(Leg,loc="lower left",fontsize="xx-small",scatterpoints=1,markerscale=0,markerfirst=False,frameon=False)
 
