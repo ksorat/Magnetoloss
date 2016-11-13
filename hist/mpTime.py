@@ -82,9 +82,12 @@ doLog = False
 bins = np.linspace(T0,Tf,Nb)
 dtFig = plt.hist(aTms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
-plt.xlabel("Time after first MPX [s]")
-plt.ylabel("Fraction")
+plt.xlabel("Time in Magnetosheat [s]")
+plt.ylabel("Density")
 plt.ylim(0,pMax)
+ax.axvline(aTbar[0],'b')
+ax.axvline(aTbar[1],'g')
+
 plt.savefig("DelTms.png")
 plt.close()
 
