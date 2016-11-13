@@ -8,7 +8,7 @@ from matplotlib.colors import LogNorm
 import matplotlib.gridspec as gridspec
 
 #Figure defaults
-figSize = (4,6)
+figSize = (8,8)
 figQ = 300 #DPI
 figStub = "mpLoss"
 doFirst = False
@@ -47,7 +47,6 @@ for i in range(Ns):
 	else:
 		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 	fig = plt.figure(figsize=figSize,tight_layout=True)
-	#fig = plt.figure()
 	
 	plt.axis('scaled')
 	gs = gridspec.GridSpec(2,1,height_ratios=[1,4])
@@ -56,13 +55,13 @@ for i in range(Ns):
 	Ax1D = fig.add_subplot(gs[0,0])
 	Ax1D.hist(Phi,pBin,color='blue',normed=True)
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
-	plt.xlim(P0,P1)
+	Ax1D.set_xlim(P0,P1)
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,0])
 	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
-	plt.xlim(P0,P1)
-	plt.ylim(L0,L1)
+	Ax2D.set_xlim(P0,P1)
+	Ax2D.set_ylim(L0,L1)
 	Ax2D.set_xticks(xTk)
 	Ax2D.set_xticklabels(xTkLab)
 
