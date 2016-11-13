@@ -19,8 +19,8 @@ cMap="jet"
 Np = 50
 Nl = 50
 
-xTk = [-90,-45,0,45,90]
-xTkLab = ["Dawn","9:00","Noon","15:00","Dusk"]
+xTk = [-120,-90,-45,0,45,90,120]
+xTkLab = ["4:00","Dawn","9:00","Noon","15:00","Dusk","20:00"]
 
 
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
@@ -36,7 +36,7 @@ else:
 	Ns = len(spcs)
 
 lfmv.initLatex()
-P0 = -120; P1 = 120
+P0 = -150; P1 = 150
 L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
@@ -54,9 +54,6 @@ for i in range(Ns):
 
 	#fig = plt.figure(figsize=figSize,tight_layout=True)
 	
-	
-	
-	
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
 	Ax1D.hist(Phi,pBin,color='blue',normed=True)
@@ -67,12 +64,12 @@ for i in range(Ns):
 	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
 
 	#Axes
-	# plt.axis('scaled')
-	# Ax1D.set_xlim(P0,P1)
-	# plt.setp(Ax1D.get_xticklabels(),visible=False)
+	plt.axis('scaled')
+	Ax1D.set_xlim(P0,P1)
+	plt.setp(Ax1D.get_xticklabels(),visible=False)
 
-	# Ax2D.set_xlim(P0,P1)
-	#Ax2D.set_ylim(L0,L1)
+	Ax2D.set_xlim(P0,P1)
+	Ax2D.set_ylim(L0,L1)
 	#Ax2D.set_xticks(xTk)
 	#Ax2D.set_xticklabels(xTkLab)
 
