@@ -56,13 +56,13 @@ for i in range(Ns):
 	
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,0])
-	#Ax1D.hist(Phi,pBin,color='blue',normed=True)
+	Ax1D.hist(Phi,pBin,color='blue',normed=True)
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
 	Ax1D.set_xlim(P0,P1)
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,0])
-	#Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
+	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
 	Ax2D.set_xlim(P0,P1)
 	Ax2D.set_ylim(L0,L1)
 	#Ax2D.set_xticks(xTk)
