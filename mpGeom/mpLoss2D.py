@@ -66,14 +66,18 @@ for i in range(Ns):
 	#Axes
 	plt.axis('scaled')
 	Ax1D.set_xlim(P0,P1)
+	Ax1D.set_ylabel("Fraction")
+
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
 
 	Ax2D.set_xlim(P0,P1)
 	Ax2D.set_ylim(L0,L1)
 	Ax2D.set_xticks(xTk)
 	Ax2D.set_xticklabels(xTkLab)
+	Ax2D.set_xlabel("Magnetic Local Time")
+	Ax2D.set_ylabel("Magnetic Latitude")
 
 	#Save
-	plt.tight_layout()
+	#plt.tight_layout()
 	plt.savefig(figName,dpi=figQ)
 	plt.close('all')
