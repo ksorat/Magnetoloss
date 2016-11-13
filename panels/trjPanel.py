@@ -55,7 +55,7 @@ def getPTop(h5pFile,pId):
 #Particle data
 s0 = 0
 np.random.seed(seed=31337)
-SpcsStub = ["O.100kev"]
+SpcsStub = ["O.100.kev"]
 SpcsLab = ["O+ 100 keV"]
 pC = 80.0
 
