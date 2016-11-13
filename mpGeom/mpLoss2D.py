@@ -54,8 +54,8 @@ for i in range(Ns):
 	figName = figStub + ".png"
 	print("Generating %s"%figName)
 	if (doTest):
-		Phi = np.random.rand(Nb)*P1
-		Lambda = np.random.rand(Nb)*L1
+		Phi = np.random.rand(Np)*P1
+		Lambda = np.random.rand(Np)*L1
 	else:
 		if (doFirst):
 			R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
