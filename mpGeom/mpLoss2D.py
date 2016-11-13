@@ -79,7 +79,7 @@ for i in range(Ns):
 	plt.axis('scaled')
 	Ax1D.set_xlim(P0,P1)
 	Ax1D.set_ylim(0,fMax)
-	Ax1D.set_yticks(np.arange(0,fMax,0.003)))
+	Ax1D.set_yticks(np.arange(0,fMax,0.003))
 	plt.setp(Ax1D.get_xticklabels(),visible=False)
 
 	#Ax1D.yaxis.tick_right()
