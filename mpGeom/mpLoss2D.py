@@ -44,9 +44,9 @@ P0 = -150; P1 = 150
 L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
-fig = plt.figure(tight_layout=True)
+fig = plt.figure()
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[1,3])
+gs = gridspec.GridSpec(2,Ns,height_ratios=[1,2])
 
 for i in range(Ns):
 	
