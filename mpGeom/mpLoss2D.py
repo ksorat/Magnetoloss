@@ -13,7 +13,7 @@ figQ = 300 #DPI
 
 
 figStub = "mpLoss"
-doFirst = False
+doFirst = True
 doTest = True
 
 cAx=[1.0e-6,1.0e-3]
@@ -36,6 +36,7 @@ Leg = ["H+","O+","e-"]
 if (doFirst):
 	Ns = len(spcs)-1
 	figStub = figStub + ".1st"
+	figSize = (11,4)
 else:
 	Ns = len(spcs)
 	figSize = (16,4)
