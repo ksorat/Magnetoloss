@@ -5,7 +5,9 @@ import lfmPostproc as lfmpp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-dirStub = "/Users/soratka1/Work/magnetoloss/synth"
+figQ = 300 #DPI
+figName = "LossT.png"
+
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 fileStub = "100keV.h5part"
 
@@ -25,3 +27,4 @@ for i in range(Ns):
 
 plt.legend(Leg,loc='lower right')
 plt.xlabel('Time [s]'); plt.ylabel('Cumulative Loss Fraction')
+plt.savefig(figName,dpi=figQ)

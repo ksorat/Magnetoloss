@@ -60,7 +60,7 @@ SpcsLab = ["O+ 100 keV"]
 pC = 80.0
 
 #Nx = 6; Ny = 5
-Nx = 3; Ny = 2
+Nx = 3; Ny = 3
 Nk = Nx*Ny
 DomX = [-15,12]
 DomY = [-20,20]
@@ -105,8 +105,8 @@ fig = plt.figure(figsize=figSize,tight_layout=True)
 gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
 #Traj data
-IDs = [1335,301,95834,12593,63464,75685]
-#IDs = getPs(h5p,pC,Nk)
+#IDs = [1335,301,95834,12593,63464,75685]
+IDs = getPs(h5p,pC,Nk)
 print(IDs)
 n = 0
 for i in range(1,Nx+1):
