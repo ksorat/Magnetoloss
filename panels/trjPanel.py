@@ -57,10 +57,10 @@ s0 = 0
 np.random.seed(seed=31337)
 SpcsStub = ["O.100kev"]
 SpcsLab = ["O+ 100 keV"]
-pC = 100.0
+pC = 80.0
 
 #Nx = 6; Ny = 5
-Nx = 3; Ny = 4
+Nx = 4; Ny = 1
 Nk = Nx*Ny
 DomX = [-15,12]
 DomY = [-20,20]
