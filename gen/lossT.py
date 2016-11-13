@@ -15,14 +15,15 @@ spcs = ["H","O","e"]
 Leg = ["H+","O+","e-"]
 
 Ns = len(spcs)
+lfmv.initLatex()
 #fig = plt.figure(1, figsize=(10, 10))
 
-Np = 100000.0
 for i in range(Ns):
 	fIn = RootDir + spcs[i] + "." + fileStub
 	t,mpTp = lfmpp.getH5p(fIn,"mp")
+	Np = mpTp.shape[0]
 	mpT = mpTp.sum(axis=1)
-	print(mpT.shape)
+	print(Np)
 	plt.plot(t,mpT/Np)
 
 plt.legend(Leg,loc='lower right')
