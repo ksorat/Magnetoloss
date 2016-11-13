@@ -92,7 +92,7 @@ for i in range(Ns):
 	Ax2D.set_xticks(xTk)
 	Ax2D.set_xticklabels(xTkLab)
 	Ax2D.set_xlabel("Magnetic Local Time")
-	Ax2D.text(-120,45,Leg[i],fontsize="large")
+	Ax2D.text(-120,40,Leg[i],fontsize="x-large")
 	if (i==0):
 		Ax1D.set_ylabel("Fraction")
 		Ax2D.set_ylabel("Magnetic Latitude")
