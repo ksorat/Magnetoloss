@@ -4,6 +4,7 @@ import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.colors import LogNorm
 import matplotlib.gridspec as gridspec
 
 #Figure defaults
