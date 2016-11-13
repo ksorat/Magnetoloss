@@ -75,7 +75,7 @@ else:
 		pickle.dump(aTbar,f)
 
 pMax = 0.01
-Nb = 30
+Nb = 60
 T0 = 0; Tf = 600
 doNorm = True
 doLog = False
@@ -85,8 +85,8 @@ plt.legend(Leg)
 plt.xlabel("Time in Magnetosheat [s]")
 plt.ylabel("Density")
 plt.ylim(0,pMax)
-ax.axvline(aTbar[0],'b')
-ax.axvline(aTbar[1],'g')
+dtFig.axvline(aTbar[0],'b')
+dtFig.axvline(aTbar[1],'g')
 
 plt.savefig("DelTms.png")
 plt.close()
