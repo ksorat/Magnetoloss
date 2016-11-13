@@ -37,7 +37,7 @@ else:
 	print("No data file found, calculating")
 
 	for i in range(Ns):
-		fIn = dirStub + "/" + spcs[i] + "." + fileStub
+		fIn = RootDir + spcs[i] + "." + fileStub
 		print("Reading %s"%(fIn))
 		print("Species %s"%(Leg[i]))
 	
@@ -51,7 +51,6 @@ else:
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
 		pickle.dump(aDPms,f)
-
 
 # Nb = 40
 # N0 = -60; N1 = 120
