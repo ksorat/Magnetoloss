@@ -38,7 +38,7 @@ if (doFirst):
 	figStub = figStub + ".1st"
 else:
 	Ns = len(spcs)
-	figSize = (3,9)
+	figSize = (8,3)
 
 lfmv.initLatex()
 P0 = -150; P1 = 150
