@@ -14,6 +14,8 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = False
+doTest = True
+
 cAx=[1.0e-6,1.0e-3]
 fMax = 0.015
 
@@ -49,12 +51,16 @@ gs = gridspec.GridSpec(2,Ns,height_ratios=[1,3])
 for i in range(Ns):
 	
 	fIn = RootDir + spcs[i] + "." + fileStub
-	figName = figStub + "." + spcs[i] + ".png"
+	figName = figStub + ".png"
 	print("Generating %s"%figName)
-	if (doFirst):
-		R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
+	if (doTest):
+		Phi = np.random.rand(Nb)*P1
+		Lambda = np.random.rand(Nb)*L1
 	else:
-		R,Phi,Lambda = lfmpp.getSphLoss(fIn)
+		if (doFirst):
+			R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
+		else:
+			R,Phi,Lambda = lfmpp.getSphLoss(fIn)
 
 	#fig = plt.figure(figsize=figSize,tight_layout=True)
 	
