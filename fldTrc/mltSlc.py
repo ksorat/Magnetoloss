@@ -10,7 +10,7 @@ import pyVisit as pyv
 #fIn = "fldDatLorez.vti"
 fIn = "fldDat.vti"
 db = fIn
-Quiet = False
+Quiet = True
 
 PhiCs = [0,30,45,60,75]
 LatCs = [25,25,22.5,20,15]
