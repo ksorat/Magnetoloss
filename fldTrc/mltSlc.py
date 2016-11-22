@@ -19,8 +19,8 @@ LatCs = [25,25,22.5,20,15]
 PhiCs = [0]
 LatCs = [25]
 
-Nl = 3
-Nr = 3
+Nl = 7
+Nr = 7
 
 #Rc = 10.5 #
 Rc0 = 8
@@ -36,7 +36,7 @@ Theta = np.linspace(-dLam,dLam,Nl)
 Rad = np.linspace(Rc0,Rc1,Nr)
 
 pcOpac = 0.75
-pcOpacP = 0.35
+pcOpacP = 0.5
 
 if (Quiet):
 	LaunchNowin()
