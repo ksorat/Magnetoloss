@@ -62,13 +62,16 @@ for k in range(Nphi):
 	#Generate seed points
 	Cp = np.cos(PhiC*radScl)
 	Sp = np.sin(PhiC*radScl)
+	ThCp = 90 - LatC #Critical latitudes in theta
+	ThCm = 90 + LatC
+
 	x = np.zeros(Np); y = np.zeros(Np); z = np.zeros(Np)
 	n=0
-
 	for i in range(Nr):
 		for j in range(Nl):
-			thP = ( LatC + Theta[j])*radScl
-			thM = (-LatC + Theta[j])*radScl
+
+			thP = (ThCp + Theta[j])*radScl
+			thM = (ThCm + Theta[j])*radScl
 			R = Rad[i]
 
 			x[n] = R*Cp*np.sin(thP)
@@ -137,7 +140,6 @@ for k in range(Nphi):
 	pcOp = GetPlotOptions()
 	pcOp.minFlag=1; pcOp.maxFlag=1
 	pcOp.min = -dpMax; pcOp.max = dpMax
-	print(pcOp)
 	SetPlotOptions(pcOp)
 
 	pyv.SetWin3D(Ax=2,Ang=-PhiC)
@@ -151,7 +153,7 @@ for k in range(Nphi):
 	lcStr = "Critical Latitude = %d"%np.int(LatC)
 
 	mltLab = pyv.genTit(mltStr,Pos=(0.025,0.1) )
-	lcLab = pyv.genTit(lcStr,Pos=(0.025,0.03))
+	lcLab = pyv.genTit(lcStr,Pos=(0.025,0.075))
 	lcLab.height = 0.015
 
 	#Show them all
