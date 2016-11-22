@@ -1,6 +1,7 @@
 #Plots 3D field tracings over 2D phi slice
 
 import numpy as np
+import os
 from visit import *
 from visit_utils import *
 from visit_utils.common import lsearch #lsearch(dir(),"blah")
@@ -18,16 +19,20 @@ LatCs = [25,25,22.5,20,15]
 PhiCs = [0]
 LatCs = [25]
 
-Nl = 20
+Nl = 3
 Nr = 3
+
 #Rc = 10.5 #
-Rc0 = 9.5
-Rc1 = 10.5
+Rc0 = 8
+Rc1 = 12.0
+dLam = 10 #+/ from critical latitude
+
 dpMax = 7.5
 dBzMax = 35
 
-Np = Nl*Nr
-Theta = np.linspace(30,150,Nl)
+Np = 2*Nl*Nr
+#Theta = np.linspace(30,150,Nl)
+Theta = np.linspace(-dLam,dLam,Nl)
 Rad = np.linspace(Rc0,Rc1,Nr)
 
 pcOpac = 0.75
@@ -48,27 +53,33 @@ pyv.lfmExprsEB()
 pyv.setAtts() #Some defaults
 
 Nphi = len(PhiCs)
+radScl = np.pi/180.0
 for k in range(Nphi):
-#for k in [2]:	
 	PhiC = PhiCs[k]
 	LatC = LatCs[k]
 
 	fOut = "Slc.P%d.png"%np.int(PhiC)
 	#Generate seed points
-	Cp = np.cos(PhiC*np.pi/180)
-	Sp = np.sin(PhiC*np.pi/180)
+	Cp = np.cos(PhiC*radScl)
+	Sp = np.sin(PhiC*radScl)
 	x = np.zeros(Np); y = np.zeros(Np); z = np.zeros(Np)
 	n=0
 
 	for i in range(Nr):
 		for j in range(Nl):
-
-			th = Theta[j]*np.pi/180.0
+			thP = ( LatC + Theta[j])*radScl
+			thM = (-LatC + Theta[j])*radScl
 			R = Rad[i]
-			x[n] = R*Cp*np.sin(th)
-			y[n] = R*Sp*np.sin(th)
-			z[n] = R*np.cos(th)
-			n=n+1
+
+			x[n] = R*Cp*np.sin(thP)
+			y[n] = R*Sp*np.sin(thP)
+			z[n] = R*   np.cos(thP)
+
+			x[n+1] = R*Cp*np.sin(thM)
+			y[n+1] = R*Sp*np.sin(thM)
+			z[n+1] = R*   np.cos(thM)
+
+			n=n+2
 
 	dPhiStr = "Phi-%f"%(PhiC)
 	
@@ -117,7 +128,7 @@ for k in range(Nphi):
 	SetOperatorOptions(sOps)
 
 	#Do streams
-	pyv.lfmStream(fIn,"Bfld",x,y,z,cMap="Cool",tRad=0.003,Legend=False)
+	pyv.lfmStream(fIn,"Bfld",x,y,z,cMap="Cool",tRad=0.0015,Legend=False)
 	icOp = GetOperatorOptions(0)
 	icOp.dataValue = 10
 	icOp.dataVariable = "dPhi" 
@@ -126,6 +137,7 @@ for k in range(Nphi):
 	pcOp = GetPlotOptions()
 	pcOp.minFlag=1; pcOp.maxFlag=1
 	pcOp.min = -dpMax; pcOp.max = dpMax
+	print(pcOp)
 	SetPlotOptions(pcOp)
 
 	pyv.SetWin3D(Ax=2,Ang=-PhiC)
@@ -138,8 +150,8 @@ for k in range(Nphi):
 	mltStr = "MLT %d:00"%mltHr
 	lcStr = "Critical Latitude = %d"%np.int(LatC)
 
-	mltLab = pyv.genTit(mltStr,Pos=(0.025,0.05) )
-	lcLab = pyv.genTit(lcStr,Pos=(0.025,0.025))
+	mltLab = pyv.genTit(mltStr,Pos=(0.025,0.1) )
+	lcLab = pyv.genTit(lcStr,Pos=(0.025,0.03))
 	lcLab.height = 0.015
 
 	#Show them all
@@ -152,3 +164,7 @@ for k in range(Nphi):
 	SaveWindow()
 	ResetView()
 	DeleteAllPlots()
+
+	#Run trim on file
+	ComS = "convert tmpVid/%s"%fOut + " -trim P%d.png"%np.int(PhiC)
+	os.system(ComS)
