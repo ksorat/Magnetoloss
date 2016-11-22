@@ -16,9 +16,6 @@ Quiet = True
 PhiCs = [0,30,45,60,75]
 LatCs = [25,25,22.5,20,15]
 
-PhiCs = [0]
-LatCs = [25]
-
 Nl = 7
 Nr = 7
 
