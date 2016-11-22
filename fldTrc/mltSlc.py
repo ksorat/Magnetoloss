@@ -136,7 +136,7 @@ for k in range(Nphi):
 	#Create labels
 	mltHr = np.int(PhiC/15) + 12
 	mltStr = "MLT %d:00"%mltHr
-	lcStr = "Critical Latitude = %d"np.int(LatC)
+	lcStr = "Critical Latitude = %d"%np.int(LatC)
 
 	mltLab = pyv.genTit(mltStr,Pos=(0.025,0.05) )
 	lcLab = pyv.genTit(lcStr,Pos=(0.025,0.025))
