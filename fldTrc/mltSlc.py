@@ -16,13 +16,14 @@ Quiet = True
 PhiCs = [0,30,45,60,75]
 LatCs = [25,25,22.5,20,15]
 
-Nl = 7
-Nr = 7
+Nl = 3
+Nr = 10
+dLam = 5 #+/ from critical latitude
+
 
 #Rc = 10.5 #
-Rc0 = 8
-Rc1 = 12.0
-dLam = 10 #+/ from critical latitude
+Rc0 = 9.5
+Rc1 = 11.5
 
 dpMax = 7.5
 dBzMax = 35
