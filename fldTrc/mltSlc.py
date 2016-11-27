@@ -20,10 +20,9 @@ Nl = 3
 Nr = 10
 dLam = 5 #+/ from critical latitude
 
-
 #Rc = 10.5 #
-Rc0 = 9.5
-Rc1 = 11.5
+Rc0 = 8.0
+Rc1 = 11.0
 
 dpMax = 7.5
 dBzMax = 35
@@ -32,6 +31,7 @@ Np = 2*Nl*Nr
 #Theta = np.linspace(30,150,Nl)
 Theta = np.linspace(-dLam,dLam,Nl)
 Rad = np.linspace(Rc0,Rc1,Nr)
+dR = Rad[1]-Rad[0]
 
 pcOpac = 0.75
 pcOpacP = 0.5
@@ -76,9 +76,9 @@ for k in range(Nphi):
 			y[n] = R*Sp*np.sin(thP)
 			z[n] = R*   np.cos(thP)
 
-			x[n+1] = R*Cp*np.sin(thM)
-			y[n+1] = R*Sp*np.sin(thM)
-			z[n+1] = R*   np.cos(thM)
+			x[n+1] = (R+dR)*Cp*np.sin(thM)
+			y[n+1] = (R+dR)*Sp*np.sin(thM)
+			z[n+1] = (R+dR)*   np.cos(thM)
 
 			n=n+2
 
