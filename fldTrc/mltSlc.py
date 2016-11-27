@@ -164,6 +164,7 @@ for k in range(Nphi):
 	ResetView()
 	DeleteAllPlots()
 
+	pyv.killAnnotations()
 	#Run trim on file
 	ComS = "convert tmpVid/%s"%fOut + " -trim P%d.png"%np.int(PhiC)
 	os.system(ComS)
