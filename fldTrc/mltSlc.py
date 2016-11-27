@@ -166,5 +166,6 @@ for k in range(Nphi):
 
 	pyv.killAnnotations()
 	#Run trim on file
-	ComS = 'convert tmpVid/%s'%fOut + ' -trim -border 20x20 -bordercolor "#FFFFFF" P%d.png'%np.int(PhiC)
+	#ComS = 'convert tmpVid/%s'%fOut + ' -trim -border 20x20 -bordercolor "#FFFFFF" P%d.png'%np.int(PhiC)
+	ComS = 'convert tmpVid/%s'%fOut + ' -trim P%d.png'%np.int(PhiC)
 	os.system(ComS)
