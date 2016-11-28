@@ -16,9 +16,9 @@ Quiet = True
 PhiCs = [0,30,45,60,75]
 LatCs = [25,25,22.5,20,15]
 
-Nl = 3
-Nr = 10
-dLam = 5 #+/ from critical latitude
+Nl = 1
+Nr = 15
+dLam = 0 #+/ from critical latitude
 
 #Rc = 10.5 #
 Rc0 = 8.0
