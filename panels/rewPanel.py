@@ -41,7 +41,7 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 	return xeq,yeq,kev
 
 Spcs = ["e-"]
-h5ps = ["e.100keV.h5part"]
+h5ps = ["eRewind.100keV.h5part"]
 
 Tslcs = [0,75,150,225]
 Ts = 4500 - 2*np.array(Tslcs)
