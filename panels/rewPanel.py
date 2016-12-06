@@ -48,7 +48,7 @@ Ts = 4500 - 2*np.array(Tslcs)
 
 figSize = (10,10)
 figQ = 300 #DPI
-figName = "fpPanel.png"
+figName = "rewePanel.png"
 
 #Plot bounds fields/particles (nT/keV), plot details
 fldBds = [-35,35]
