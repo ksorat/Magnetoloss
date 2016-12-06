@@ -43,8 +43,11 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 Spcs = ["e-"]
 h5ps = ["eRewind.100keV.h5part"]
 
-Tslcs = [0,75,150,225]
-Ts = 4500 - 2*np.array(Tslcs)
+Ts = np.array([4500,4400,4450,4150])
+Tslcs = np.int(0.5*(4500-Ts))
+#Tslcs = [0,75,150,225]
+
+#Ts = 4500 - 2*np.array(Tslcs)
 
 figSize = (10,10)
 figQ = 300 #DPI
