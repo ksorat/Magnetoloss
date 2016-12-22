@@ -77,9 +77,9 @@ else:
 		pickle.dump(aTms,f)
 		pickle.dump(aTbar,f)
 
-pMax = 0.03
-pMin = 1.0e-5
-alph = 0.5
+pMax = 1.0e-2
+pMin = 1.0e-6
+alph = 0.75
 Nb = 70
 T0 = 0; Tf = 2000.0
 LW = 2
@@ -97,8 +97,6 @@ plt.ylabel("Density")
 plt.ylim(pMin,pMax)
 #plt.axvline(aTbar[0],color='b',linewidth=LW)
 #plt.axvline(aTbar[1],color='g',linewidth=LW)
-plt.plot([aTbar[0],pMin],'bo')
-plt.plot([aTbar[1],pMin],'go')
 
 plt.savefig("msTime.png",dpi=figQ)
 plt.close()
