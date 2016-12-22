@@ -62,7 +62,7 @@ else:
 pMax = 0.025
 pMin = 1.0e-5
 Nb = 30
-N0 = -120; N1 = 160
+N0 = -100; N1 = 160
 bins = np.linspace(N0,N1,Nb)
 
 doNorm = True
