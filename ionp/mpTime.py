@@ -80,17 +80,17 @@ else:
 pMax = 1.0e-2
 pMin = 2.5-6
 alph = 0.75
-Nb = 35
-T0 = 0; Tf = 1200.0
+Nb = 30
+T0 = 0; Tf = 900.0
 LW = 2
 doNorm = True
 doLog = True
 bins = np.linspace(T0,Tf,Nb)
 
 fig = plt.figure(figsize=figSize)
-plt.hist(aTms[0],bins,alpha=alph,normed=doNorm,log=doLog)
-plt.hist(aTms[1],bins,alpha=alph,normed=doNorm,log=doLog)
-
+#plt.hist(aTms[0],bins,alpha=alph,normed=doNorm,log=doLog)
+#plt.hist(aTms[1],bins,alpha=alph,normed=doNorm,log=doLog)
+plt.hist(aTms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
