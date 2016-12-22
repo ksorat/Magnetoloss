@@ -77,23 +77,24 @@ else:
 		pickle.dump(aTms,f)
 		pickle.dump(aTbar,f)
 
-pMax = 0.01
-Nb = 30
-T0 = 0; Tf = 600
+pMax = 0.03
+alph = 0.5
+Nb = 60
+T0 = 0; Tf = 1500.0
 LW = 2
 doNorm = True
 doLog = True
 bins = np.linspace(T0,Tf,Nb)
 
 fig = plt.figure(figsize=figSize)
-plt.hist(aTms,bins,normed=doNorm,log=doLog)
+plt.hist(aTms,bins,alpha=alph,normed=doNorm,log=doLog,stacked=True)
 
 plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
 plt.ylim(0,pMax)
-# plt.axvline(aTbar[0],color='b',linewidth=LW)
-# plt.axvline(aTbar[1],color='g',linewidth=LW)
+plt.axvline(aTbar[0],color='b',linewidth=LW)
+plt.axvline(aTbar[1],color='g',linewidth=LW)
 
 plt.savefig("msTime.png",dpi=figQ)
 plt.close()
