@@ -81,7 +81,7 @@ pMax = 1.0e-2
 pMin = 2.5-6
 alph = 0.75
 Nb = 50
-T0 = 0; Tf = 1500.0
+T0 = 0; Tf = 1200.0
 LW = 2
 doNorm = True
 doLog = True
