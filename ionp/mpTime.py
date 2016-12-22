@@ -77,8 +77,8 @@ else:
 		pickle.dump(aTms,f)
 		pickle.dump(aTbar,f)
 
-pMax = 1.0e-2
-pMin = 2.5-6
+pMax = 2.0e-2
+pMin = 1.0e-5
 alph = 0.75
 Nb = 30
 T0 = 0; Tf = 900.0
