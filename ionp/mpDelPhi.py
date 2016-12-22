@@ -27,7 +27,7 @@ Leg = ["H+","O+"]
 Ns = len(spcs)
 
 aDPms = []
-
+aP0 = []
 if (os.path.isfile(msDataFile)):
 	print("Loading data")
 	with open(msDataFile, "rb") as f:
@@ -45,7 +45,8 @@ else:
 		PhiBX = lastPhi(fIn)
 		DelP = PhiBX-PhiMP0
 		aDPms.append(DelP)
-
+		aP0.append(PhiMP0)
+		
 	#Save to pickle
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
@@ -66,3 +67,4 @@ plt.ylim(0,pMax)
 
 plt.savefig("msDelP.png")
 plt.close()
+

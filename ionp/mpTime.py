@@ -80,7 +80,7 @@ Nb = 30
 T0 = 0; Tf = 600
 LW = 2
 doNorm = True
-doLog = False
+doLog = True
 bins = np.linspace(T0,Tf,Nb)
 dtFig = plt.hist(aTms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
