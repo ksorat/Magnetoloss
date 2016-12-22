@@ -32,6 +32,7 @@ if (os.path.isfile(msDataFile)):
 	print("Loading data")
 	with open(msDataFile, "rb") as f:
 		aDPms = pickle.load(f)
+		aP0 = pickle.load(f)
 else:
 	print("No data file found, calculating")
 
@@ -51,6 +52,7 @@ else:
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
 		pickle.dump(aDPms,f)
+		pickle.dump(aP0,f)
 
 pMax = 0.025
 Nb = 40

@@ -32,6 +32,8 @@ def getTimes(fIn,doTail=False):
 
 	return Tmpx,Tmpx0,Tbx,pid
 
+figSize = (8,8)
+figQ = 300 #DPI
 
 lfmv.initLatex()
 msDataFile = "msIonT.pkl"
@@ -82,7 +84,10 @@ LW = 2
 doNorm = True
 doLog = True
 bins = np.linspace(T0,Tf,Nb)
-dtFig = plt.hist(aTms,bins,normed=doNorm,log=doLog)
+
+fig = plt.figure(figsize=figSize)
+plt.hist(aTms,bins,normed=doNorm,log=doLog)
+
 plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
@@ -90,6 +95,6 @@ plt.ylim(0,pMax)
 # plt.axvline(aTbar[0],color='b',linewidth=LW)
 # plt.axvline(aTbar[1],color='g',linewidth=LW)
 
-plt.savefig("msTime.png")
+plt.savefig("msTime.png",dpi=figQ)
 plt.close()
 
