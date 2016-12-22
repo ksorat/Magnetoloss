@@ -79,8 +79,8 @@ else:
 
 pMax = 0.03
 alph = 0.5
-Nb = 60
-T0 = 0; Tf = 1500.0
+Nb = 100
+T0 = 0; Tf = 2000.0
 LW = 2
 doNorm = True
 doLog = True
@@ -93,8 +93,10 @@ plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
 plt.ylim(0,pMax)
-plt.axvline(aTbar[0],color='b',linewidth=LW)
-plt.axvline(aTbar[1],color='g',linewidth=LW)
+#plt.axvline(aTbar[0],color='b',linewidth=LW)
+#plt.axvline(aTbar[1],color='g',linewidth=LW)
+plt.plot([aTbar[0],0],'bo')
+plt.plot([aTbar[1],0],'go')
 
 plt.savefig("msTime.png",dpi=figQ)
 plt.close()
