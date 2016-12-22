@@ -60,7 +60,8 @@ else:
 # bins = np.linspace(N0,N1,Nb)
 
 pMax = 0.025
-Nb = 40
+pMin = 1.0e-5
+Nb = 30
 N0 = -120; N1 = 160
 bins = np.linspace(N0,N1,Nb)
 
@@ -71,7 +72,8 @@ dpFig = plt.hist(aDPms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
 plt.xlabel("Azimuthal Transit in Magnetosheath [$^{\circ}$]")
 plt.ylabel("Density")
-plt.ylim(0,pMax)
+plt.xlim(N0,N1)
+plt.ylim(pMin,pMax)
 
 plt.savefig("msDelP.png")
 plt.close()
