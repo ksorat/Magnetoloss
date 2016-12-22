@@ -78,10 +78,10 @@ else:
 		pickle.dump(aTbar,f)
 
 pMax = 1.0e-2
-pMin = 1.0e-6
+pMin = 5.0e-6
 alph = 0.75
-Nb = 70
-T0 = 0; Tf = 2000.0
+Nb = 50
+T0 = 0; Tf = 1750.0
 LW = 2
 doNorm = True
 doLog = True
