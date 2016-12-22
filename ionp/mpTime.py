@@ -80,7 +80,7 @@ else:
 pMax = 1.0e-2
 pMin = 2.5-6
 alph = 0.75
-Nb = 50
+Nb = 35
 T0 = 0; Tf = 1200.0
 LW = 2
 doNorm = True
@@ -94,6 +94,7 @@ plt.hist(aTms[1],bins,alpha=alph,normed=doNorm,log=doLog)
 plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
+plt.xlim(T0,Tf)
 plt.ylim(pMin,pMax)
 #plt.axvline(aTbar[0],color='b',linewidth=LW)
 #plt.axvline(aTbar[1],color='g',linewidth=LW)
