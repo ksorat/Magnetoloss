@@ -54,12 +54,18 @@ else:
 		pickle.dump(aDPms,f)
 		pickle.dump(aP0,f)
 
+# pMax = 0.025
+# Nb = 40
+# N0 = -60; N1 = 120
+# bins = np.linspace(N0,N1,Nb)
+
 pMax = 0.025
 Nb = 40
-N0 = -60; N1 = 120
+N0 = -120; N1 = 160
 bins = np.linspace(N0,N1,Nb)
+
 doNorm = True
-doLog = False
+doLog = True
 
 dpFig = plt.hist(aDPms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
