@@ -88,18 +88,18 @@ plt.close('all')
 cMap = "summer"
 PhiI = np.linspace(-180,180,100)
 DelPhi = np.linspace(-90,160,100)
-vNorm = LogNorm(vmin=1.0e-5,vmax=1.0e-2)
+vNorm = LogNorm(vmin=1.0e-6,vmax=1.0e-3)
 
 fig = plt.figure(figsize=figSize)
-gs = gridspec.GridSpec(1,3,width_ratios=[5,5,1])
+gs = gridspec.GridSpec(2,2,height_ratios=[10,1])
 
 for n in range(2):
-	Ax = fig.add_subplot(gs[n])
+	Ax = fig.add_subplot(gs[0,n])
 	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
 	plt.axis('scaled')
 
-Ax = fig.add_subplot(gs[n+1])
-cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='vertical')
+Ax = fig.add_subplot(gs[1,:])
+cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 
 plt.savefig("piVdp.png",dpi=figQ)
 plt.close('all')
