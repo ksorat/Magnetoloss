@@ -97,5 +97,10 @@ for n in range(2):
 	Ax = fig.add_subplot(gs[n])
 	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,cmap=cMap)
 
+Ax = fig.add_subplot(gs[n])
+cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='vertical')
+
+plt.axis('scaled')
+
 plt.savefig("piVdp.png",dpi=figQ)
 plt.close('all')
