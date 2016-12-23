@@ -103,7 +103,7 @@ PhiF = np.linspace(pfB[0],pfB[1],Np)
 
 vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
-figSize = (8,4)
+figSize = (8,4.5)
 fig = plt.figure(figsize=figSize)
 
 gs = gridspec.GridSpec(2,2,height_ratios=[20,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
