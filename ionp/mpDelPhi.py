@@ -85,7 +85,11 @@ plt.savefig("msDelP.png",dpi=figQ)
 plt.close('all')
 
 #Do Phi_Init vs. DelPhi histogram panel
-cMap = "seismic"
+cMap = "viridis"
+import colormaps as cmaps
+plt.register_cmap(name='viridis', cmap=cmaps.viridis)
+plt.set_cmap(cmaps.viridis)
+
 PhiI = np.linspace(-120,120,100)
 DelPhi = np.linspace(-90,150,100)
 vNorm = LogNorm(vmin=5.0e-7,vmax=1.0e-3)
