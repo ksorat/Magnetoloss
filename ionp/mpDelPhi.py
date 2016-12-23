@@ -95,13 +95,13 @@ piB = [-120,120]
 Np = 100
 dpB = [-90,150]
 pfB = [-120,120]
-mTks = [-90,-60,-30,-45,0,30,60,90]
+mTks = [-90,-60,-30,0,30,60,90]
 Ndp = 100
 PhiI = np.linspace(piB[0],piB[1],Np)
 DelPhi = np.linspace(dpB[0],dpB[1],Np)
 PhiF = np.linspace(pfB[0],pfB[1],Np)
 
-vNorm = LogNorm(vmin=5.0e-6,vmax=2.5e-4)
+vNorm = LogNorm(vmin=1.0e-6,vmax=3e-4)
 
 figSize = (8,4.5)
 fig = plt.figure(figsize=figSize)
