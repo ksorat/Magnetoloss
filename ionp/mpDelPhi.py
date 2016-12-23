@@ -127,7 +127,7 @@ for n in range(2):
 		plt.ylabel("Last Position [MLT]")
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)
-	plt.tick_params(axis='both', which='major', labelsize=6)	
+	plt.tick_params(axis='both', which='major', labelsize="small")	
 	plt.title(Leg[n])
 
 Ax = fig.add_subplot(gs[1,:])
