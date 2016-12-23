@@ -93,7 +93,7 @@ vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
 #fig = plt.figure(figsize=figSize)
 fig = plt.figure(tight_layout=True)
-gs = gridspec.GridSpec(2,2,height_ratios=[10,1],wspace=0.1,hspace=0.05)
+gs = gridspec.GridSpec(2,2,height_ratios=[50,1],bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
