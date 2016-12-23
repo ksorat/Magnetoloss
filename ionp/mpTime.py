@@ -80,7 +80,7 @@ else:
 pMax = 2.0e-2
 pMin = 1.0e-5
 alph = 0.75
-Nb = 30
+Nb = 75
 T0 = 0; Tf = 900.0
 LW = 2
 doNorm = True
@@ -91,7 +91,7 @@ fig = plt.figure(figsize=figSize)
 #plt.hist(aTms[0],bins,alpha=alph,normed=doNorm,log=doLog)
 #plt.hist(aTms[1],bins,alpha=alph,normed=doNorm,log=doLog)
 #plt.hist(aTms,bins,normed=doNorm,log=doLog)
-lfmv.showDualHist(aTms[0],aTms[1],bins,alph=0.4,Norm=True,Cum=False,LogH=True)
+lfmv.showDualHist(aTms[0],aTms[1],bins,alph=0.75,Norm=True,Cum=False,LogH=True)
 plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")
