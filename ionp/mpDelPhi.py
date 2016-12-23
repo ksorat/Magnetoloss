@@ -8,6 +8,8 @@ import lfmPostproc as lfmpp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import cPickle as pickle
+import matplotlib.gridspec as gridspec
+from matplotlib.colors import LogNorm
 
 def lastPhi(fIn):
 	isOut = lfmpp.getOut(fIn)
@@ -15,6 +17,9 @@ def lastPhi(fIn):
 	ids,y = lfmpp.getH5pFin(fIn,"y",Mask=isOut)
 	pBX = np.arctan2(y,x)*180.0/np.pi
 	return pBX
+
+figSize = (8,8)
+figQ = 300 #DPI
 
 lfmv.initLatex()
 msDataFile = "msIonDP.pkl"
@@ -68,13 +73,28 @@ bins = np.linspace(N0,N1,Nb)
 doNorm = True
 doLog = True
 
-dpFig = plt.hist(aDPms,bins,normed=doNorm,log=doLog)
+fig = plt.figure(figsize=figSize)
+plt.hist(aDPms,bins,normed=doNorm,log=doLog)
 plt.legend(Leg)
 plt.xlabel("Azimuthal Transit in Magnetosheath [$^{\circ}$]")
 plt.ylabel("Density")
 plt.xlim(N0,N1)
 plt.ylim(pMin,pMax)
 
-plt.savefig("msDelP.png")
+plt.savefig("msDelP.png",dpi=figQ)
 plt.close()
 
+#Do Phi_Init vs. DelPhi histogram panel
+cMap = "viridis"
+PhiI = np.linspace(-180,180,100)
+DelPhi = np.linspace(-90,160,100)
+vNorm = LogNorm(vmin=1.0e-5,vmax=1.0e-2)
+
+fig = plt.figure(figsize=figSize)
+gs = gridspec.GridSpec(1,3,width_ratios=[5,5,1])
+
+for n in range(2):
+	Ax = fig.add_subplot(gs[n])
+	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,cmap=cMap)
+
+plt.savefig("piVdp.png",dpi=figQ)
