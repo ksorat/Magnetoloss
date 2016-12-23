@@ -89,11 +89,11 @@ cMap = "viridis"
 
 PhiI = np.linspace(-120,120,100)
 DelPhi = np.linspace(-90,150,100)
-vNorm = LogNorm(vmin=5.0e-6,vmax=1.0e-3)
+vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
 #fig = plt.figure(figsize=figSize)
-fig = plt.figure()
-gs = gridspec.GridSpec(2,2,height_ratios=[20,1],wspace=0.05,hspace=0.05)
+fig = plt.figure(tight_layout=True)
+gs = gridspec.GridSpec(2,2,height_ratios=[10,1],wspace=0.1,hspace=0.05)
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
