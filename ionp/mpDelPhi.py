@@ -103,7 +103,7 @@ PhiF = np.linspace(pfB[0],pfB[1],Np)
 
 vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
-figSize = (8,6)
+figSize = (8,4)
 fig = plt.figure(figsize=figSize)
 
 gs = gridspec.GridSpec(2,2,height_ratios=[20,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
@@ -126,7 +126,7 @@ for n in range(2):
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)		
 	plt.title(Leg[n])
-plot.tick_params(axis='both', which='major', labelsize=6)
+plt.tick_params(axis='both', which='major', labelsize=6)
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density")
