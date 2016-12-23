@@ -94,8 +94,10 @@ PhiI = np.linspace(piB[0],piB[1],100)
 DelPhi = np.linspace(dpB[0],dpB[1],100)
 vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
-#fig = plt.figure(figsize=figSize)
 fig = plt.figure(tight_layout=True)
+figSize = (4,8)
+fig = plt.figure(figsize=figSize)
+
 gs = gridspec.GridSpec(2,2,height_ratios=[30,1],bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(2):
@@ -104,14 +106,15 @@ for n in range(2):
 	plt.xlim(piB[0],piB[1])
 	plt.ylim(dpB[0],dpB[1])
 	plt.axis('scaled')
-	plt.xlabel('\Phi_{I}')
+	plt.xlabel('\phi_{mp}')
 	if (n == 0):
-		plt.ylabel('$\Delta \phi$')
+		plt.ylabel('$\Delta \phi_{ms}$')
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)		
 	plt.title(Leg[n])
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
+cb.set_label("Density")
 
 plt.savefig("piVdp.png",dpi=figQ)
 plt.close('all')
