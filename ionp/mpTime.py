@@ -80,7 +80,7 @@ else:
 pMax = 2.0e-2
 pMin = 1.0e-5
 alph = 0.75
-Nb = 55
+Nb = 35
 T0 = 0; Tf = 900.0
 LW = 2
 doNorm = True
