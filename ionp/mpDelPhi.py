@@ -127,12 +127,12 @@ for n in range(2):
 		plt.ylabel("Last Position [MLT]",fontsize="small")
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)
-	plt.tick_params(axis='both', which='major', labelsize="x-small")	
+	plt.tick_params(axis='both', which='major', labelsize="xx-small")	
 	plt.title(Leg[n])
 
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
-cb.set_label("Density")
+cb.set_label("Density",fontsize="small")
 
 plt.savefig("piVdp.png",dpi=figQ)
 plt.close('all')
