@@ -93,14 +93,18 @@ vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
 #fig = plt.figure(figsize=figSize)
 fig = plt.figure(tight_layout=True)
-gs = gridspec.GridSpec(2,2,height_ratios=[50,1],bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
+gs = gridspec.GridSpec(2,2,height_ratios=[30,1],bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
 	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
 	plt.axis('scaled')
-
-plt.setp(plt.gca().get_yticklabels(),visible=False)
+	plt.xlabel('\Phi_{I}')
+	if (n == 0):
+		plt.ylabel('\Delta \phi')
+	else:
+		plt.setp(plt.gca().get_yticklabels(),visible=False)		
+	plt.title(Leg[n])
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 
