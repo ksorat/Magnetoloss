@@ -101,12 +101,12 @@ PhiI = np.linspace(piB[0],piB[1],Np)
 DelPhi = np.linspace(dpB[0],dpB[1],Np)
 PhiF = np.linspace(pfB[0],pfB[1],Np)
 
-vNorm = LogNorm(vmin=1.0e-5,vmax=1e-3)
+vNorm = LogNorm(vmin=1.0e-5,vmax=7.5e-4)
 
 figSize = (8,4.5)
 fig = plt.figure(figsize=figSize)
 
-gs = gridspec.GridSpec(2,2,height_ratios=[20,1],wspace=0.1)#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
+gs = gridspec.GridSpec(2,2,height_ratios=[20,1],wspace=0.05)#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
