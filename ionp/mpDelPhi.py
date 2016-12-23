@@ -86,9 +86,12 @@ plt.close('all')
 
 #Do Phi_Init vs. DelPhi histogram panel
 cMap = "viridis"
-
-PhiI = np.linspace(-120,120,100)
-DelPhi = np.linspace(-90,150,100)
+piB = [-120,120]
+Np = 100
+dpB = [-90,150]
+Ndp = 100
+PhiI = np.linspace(piB[0],piB[1],100)
+DelPhi = np.linspace(dpB[0],dpB[1],100)
 vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
 #fig = plt.figure(figsize=figSize)
@@ -98,10 +101,12 @@ gs = gridspec.GridSpec(2,2,height_ratios=[30,1],bottom=0.05,top=0.99,wspace=0.2,
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
 	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
+	plt.xlim(piB[0],piB[1])
+	plt.ylim(dpB[0],dpB[1])
 	plt.axis('scaled')
 	plt.xlabel('\Phi_{I}')
 	if (n == 0):
-		plt.ylabel('\Delta \phi')
+		plt.ylabel('$\Delta \phi$')
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)		
 	plt.title(Leg[n])
