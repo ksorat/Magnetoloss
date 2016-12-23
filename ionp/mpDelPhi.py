@@ -117,15 +117,16 @@ for n in range(2):
 	plt.ylim(pfB[0],pfB[1])
 	#plt.ylim(dpB[0],dpB[1])
 	plt.axis('scaled')
-	lfmv.ax2mlt(Ax,np.arange(-120,120,60),doX=True)
+	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	if (n == 0):
 		#plt.ylabel('$\Delta \phi_{ms}$')
 		#plt.ylabel('$\phi_{F} [^{\circ}]$')
-		lfmv.ax2mlt(Ax,np.arange(-120,120,60),doX=False)
+		lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)		
 	plt.title(Leg[n])
+plot.tick_params(axis='both', which='major', labelsize=6)
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density")
