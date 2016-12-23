@@ -119,6 +119,7 @@ for n in range(2):
 	
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
+	plt.plot(PhiI,PhiI,'r')
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="small")
 	if (n == 0):
