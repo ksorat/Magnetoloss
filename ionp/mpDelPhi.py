@@ -95,7 +95,7 @@ piB = [-120,120]
 Np = 100
 dpB = [-90,150]
 pfB = [-120,120]
-mTks = [-105,-90,-45,0,45,90,105]
+mTks = [-90,-60,-30,-45,0,30,60,90]
 Ndp = 100
 PhiI = np.linspace(piB[0],piB[1],Np)
 DelPhi = np.linspace(dpB[0],dpB[1],Np)
@@ -106,7 +106,7 @@ vNorm = LogNorm(vmin=5.0e-6,vmax=2.5e-4)
 figSize = (8,4.5)
 fig = plt.figure(figsize=figSize)
 
-gs = gridspec.GridSpec(2,2,height_ratios=[20,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
+gs = gridspec.GridSpec(2,2,height_ratios=[20,1],hspace=0.1)#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
