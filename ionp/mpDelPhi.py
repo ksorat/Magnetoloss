@@ -117,8 +117,8 @@ for n in range(2):
 	plt.ylim(pfB[0],pfB[1])
 	#plt.ylim(dpB[0],dpB[1])
 	
-	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
-	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
+	lfmv.ax2mlt(Ax,mTks,doX=True)
+	lfmv.ax2mlt(Ax,mTks,doX=False)
 	plt.plot(PhiI,PhiI,'k--',linewidth=0.5)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="small")
