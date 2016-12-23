@@ -91,10 +91,10 @@ plt.close('all')
 
 #Do Phi_Init vs. DelPhi histogram panel
 cMap = "viridis"
-piB = [-150,150]
+piB = [-120,120]
 Np = 100
 dpB = [-90,150]
-pfB = [-150,150]
+pfB = [-120,120]
 
 Ndp = 100
 PhiI = np.linspace(piB[0],piB[1],Np)
@@ -113,13 +113,16 @@ for n in range(2):
 	#plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
 	plt.hist2d(aP0[n],aPF[n],[PhiI,PhiF],normed=True,norm=vNorm,cmap=cMap)
 
-	#plt.xlim(piB[0],piB[1])
+	plt.xlim(piB[0],piB[1])
+	plt.ylim(pfB[0],pfB[1])
 	#plt.ylim(dpB[0],dpB[1])
-	plt.axis('equal')
-	plt.xlabel('$\phi_{mp} [^{\circ}]$')
+	plt.axis('scaled')
+	lfmv.ax2mlt(Ax,np.arange(-120,120,60),doX=True)
+	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	if (n == 0):
 		#plt.ylabel('$\Delta \phi_{ms}$')
-		plt.ylabel('$\phi_{F} [^{\circ}]$')
+		#plt.ylabel('$\phi_{F} [^{\circ}]$')
+		lfmv.ax2mlt(Ax,np.arange(-120,120,60),doX=False)
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)		
 	plt.title(Leg[n])
