@@ -103,7 +103,6 @@ PhiF = np.linspace(pfB[0],pfB[1],Np)
 
 vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
-fig = plt.figure(tight_layout=True)
 figSize = (8,4)
 fig = plt.figure(figsize=figSize)
 
