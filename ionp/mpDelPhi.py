@@ -119,14 +119,17 @@ for n in range(2):
 	plt.axis('scaled')
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
+	plt.xlabel("Magnetosheath First Contact [MLT]")
 	if (n == 0):
 		#plt.ylabel('$\Delta \phi_{ms}$')
 		#plt.ylabel('$\phi_{F} [^{\circ}]$')
+		plt.ylabel("Last Position [MLT]")
 		lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
 	else:
-		plt.setp(plt.gca().get_yticklabels(),visible=False)		
+		plt.setp(plt.gca().get_yticklabels(),visible=False)
+	plt.tick_params(axis='both', which='major', labelsize=6)	
 	plt.title(Leg[n])
-plt.tick_params(axis='both', which='major', labelsize=6)
+
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density")
