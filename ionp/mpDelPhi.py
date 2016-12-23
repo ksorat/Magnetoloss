@@ -120,14 +120,14 @@ for n in range(2):
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
-	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="medium")
+	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="small")
 	if (n == 0):
 		#plt.ylabel('$\Delta \phi_{ms}$')
 		#plt.ylabel('$\phi_{F} [^{\circ}]$')
-		plt.ylabel("Last Position [MLT]",fontsize="medium")
+		plt.ylabel("Last Position [MLT]",fontsize="small")
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)
-	plt.tick_params(axis='both', which='major', labelsize="small")	
+	plt.tick_params(axis='both', which='major', labelsize="x-small")	
 	plt.title(Leg[n])
 
 Ax = fig.add_subplot(gs[1,:])
