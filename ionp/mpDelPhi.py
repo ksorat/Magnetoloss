@@ -33,11 +33,14 @@ Ns = len(spcs)
 
 aDPms = []
 aP0 = []
+aPF = []
+
 if (os.path.isfile(msDataFile)):
 	print("Loading data")
 	with open(msDataFile, "rb") as f:
 		aDPms = pickle.load(f)
 		aP0 = pickle.load(f)
+		aPF = pickle.load(f)
 else:
 	print("No data file found, calculating")
 
@@ -52,12 +55,14 @@ else:
 		DelP = PhiBX-PhiMP0
 		aDPms.append(DelP)
 		aP0.append(PhiMP0)
+		aPF.append(PhiBX)
 		
 	#Save to pickle
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
 		pickle.dump(aDPms,f)
 		pickle.dump(aP0,f)
+		pickle.dump(aPF,f)
 
 # pMax = 0.025
 # Nb = 40
@@ -98,14 +103,16 @@ fig = plt.figure(tight_layout=True)
 figSize = (8,4)
 fig = plt.figure(figsize=figSize)
 
-gs = gridspec.GridSpec(2,2,height_ratios=[30,1],bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
+gs = gridspec.GridSpec(2,2,height_ratios=[30,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
-	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
+	#plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
+	plt.hist2d(aP0[n],aPF[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
+
 	plt.xlim(piB[0],piB[1])
 	plt.ylim(dpB[0],dpB[1])
-	plt.axis('scaled')
+	plt.axis('image')
 	plt.xlabel('$\phi_{mp}$')
 	if (n == 0):
 		plt.ylabel('$\Delta \phi_{ms}$')
