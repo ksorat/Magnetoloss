@@ -95,7 +95,7 @@ gs = gridspec.GridSpec(1,3,width_ratios=[5,5,1])
 
 for n in range(2):
 	Ax = fig.add_subplot(gs[n])
-	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,log=True,cmap=cMap)
+	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
 	plt.axis('scaled')
 
 Ax = fig.add_subplot(gs[n+1])
