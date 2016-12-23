@@ -82,10 +82,10 @@ plt.xlim(N0,N1)
 plt.ylim(pMin,pMax)
 
 plt.savefig("msDelP.png",dpi=figQ)
-plt.close()
+plt.close('all')
 
 #Do Phi_Init vs. DelPhi histogram panel
-cMap = "viridis"
+cMap = "summer"
 PhiI = np.linspace(-180,180,100)
 DelPhi = np.linspace(-90,160,100)
 vNorm = LogNorm(vmin=1.0e-5,vmax=1.0e-2)
@@ -98,3 +98,4 @@ for n in range(2):
 	plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,cmap=cMap)
 
 plt.savefig("piVdp.png",dpi=figQ)
+plt.close('all')
