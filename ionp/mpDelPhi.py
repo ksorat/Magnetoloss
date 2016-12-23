@@ -91,6 +91,7 @@ DelPhi = np.linspace(-90,150,100)
 vNorm = LogNorm(vmin=5.0e-5,vmax=1.0e-3)
 
 #fig = plt.figure(figsize=figSize)
+fig = plt.figure()
 gs = gridspec.GridSpec(2,2,height_ratios=[10,1])
 
 for n in range(2):
