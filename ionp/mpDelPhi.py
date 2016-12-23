@@ -101,7 +101,7 @@ PhiI = np.linspace(piB[0],piB[1],Np)
 DelPhi = np.linspace(dpB[0],dpB[1],Np)
 PhiF = np.linspace(pfB[0],pfB[1],Np)
 
-vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
+vNorm = LogNorm(vmin=5.0e-6,vmax=2.5e-4)
 
 figSize = (8,4.5)
 fig = plt.figure(figsize=figSize)
@@ -119,7 +119,7 @@ for n in range(2):
 	
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
-	plt.plot(PhiI,PhiI,'r')
+	plt.plot(PhiI,PhiI,'k--',linewidth=0.5)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="small")
 	if (n == 0):
