@@ -112,11 +112,11 @@ for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
 	#plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
 	plt.hist2d(aP0[n],aPF[n],[PhiI,PhiF],normed=True,norm=vNorm,cmap=cMap)
-
+	plt.axis('scaled')
 	plt.xlim(piB[0],piB[1])
 	plt.ylim(pfB[0],pfB[1])
 	#plt.ylim(dpB[0],dpB[1])
-	plt.axis('scaled')
+	
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=True)
 	lfmv.ax2mlt(Ax,np.arange(-120,121,60),doX=False)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
