@@ -106,7 +106,7 @@ for n in range(2):
 	plt.xlim(piB[0],piB[1])
 	plt.ylim(dpB[0],dpB[1])
 	plt.axis('scaled')
-	plt.xlabel('\phi_{mp}')
+	plt.xlabel('$\phi_{mp}$')
 	if (n == 0):
 		plt.ylabel('$\Delta \phi_{ms}$')
 	else:
