@@ -103,7 +103,7 @@ PhiF = np.linspace(pfB[0],pfB[1],Np)
 
 vNorm = LogNorm(vmin=1.0e-5,vmax=5e-4)
 
-figSize = (8,4.5)
+figSize = (8,6)
 fig = plt.figure(figsize=figSize)
 
 gs = gridspec.GridSpec(2,2,height_ratios=[25,1],wspace=0.05)#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
@@ -119,7 +119,7 @@ for n in range(2):
 	
 	lfmv.ax2mlt(Ax,mTks,doX=True)
 	lfmv.ax2mlt(Ax,mTks,doX=False)
-	plt.plot(PhiI,PhiI,'k--',linewidth=0.5)
+	plt.plot(PhiI,PhiI,'w--',linewidth=0.5)
 	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="small")
 	if (n == 0):
