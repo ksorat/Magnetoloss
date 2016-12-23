@@ -94,9 +94,13 @@ cMap = "viridis"
 piB = [-120,120]
 Np = 100
 dpB = [-90,150]
+pfB = [-150,150]
+
 Ndp = 100
-PhiI = np.linspace(piB[0],piB[1],100)
-DelPhi = np.linspace(dpB[0],dpB[1],100)
+PhiI = np.linspace(piB[0],piB[1],Np)
+DelPhi = np.linspace(dpB[0],dpB[1],Np)
+PhiF = np.linspace(pfB[0],pfB[1],Np)
+
 vNorm = LogNorm(vmin=5.0e-6,vmax=5.0e-4)
 
 fig = plt.figure(tight_layout=True)
@@ -108,14 +112,15 @@ gs = gridspec.GridSpec(2,2,height_ratios=[30,1])#,bottom=0.05,top=0.99,wspace=0.
 for n in range(2):
 	Ax = fig.add_subplot(gs[0,n])
 	#plt.hist2d(aP0[n],aDPms[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
-	plt.hist2d(aP0[n],aPF[n],[PhiI,DelPhi],normed=True,norm=vNorm,cmap=cMap)
+	plt.hist2d(aP0[n],aPF[n],[PhiI,PhiF],normed=True,norm=vNorm,cmap=cMap)
 
-	plt.xlim(piB[0],piB[1])
-	plt.ylim(dpB[0],dpB[1])
-	plt.axis('image')
-	plt.xlabel('$\phi_{mp}$')
+	#plt.xlim(piB[0],piB[1])
+	#plt.ylim(dpB[0],dpB[1])
+	plt.axis('equal')
+	plt.xlabel('$\phi_{mp} [^{\circ}]$')
 	if (n == 0):
-		plt.ylabel('$\Delta \phi_{ms}$')
+		#plt.ylabel('$\Delta \phi_{ms}$')
+		plt.ylabel('$\phi_{F} [^{\circ}]$')
 	else:
 		plt.setp(plt.gca().get_yticklabels(),visible=False)		
 	plt.title(Leg[n])
