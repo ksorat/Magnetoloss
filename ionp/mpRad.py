@@ -47,9 +47,6 @@ def getEQXs(fIn):
 				P.append(phi[i])
 	return np.array(R),np.array(P)
 
-figSize = (8,8)
-figQ = 300 #DPI
-
 lfmv.ppInit()
 msDataFile = "msIonR.pkl"
 
@@ -96,9 +93,12 @@ else:
 d2rad = np.pi/180.0
 
 #Make polar histograms
+figSize = (8,4)
+figQ = 300 #DPI
 
 Np = 105
 Nr = 100
+vNorm = LogNorm(vmin=1.0e-5,vmax=5e-4)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-120,120,Np+1)
 rB = np.linspace(7.5,20,Nr+1)
@@ -123,7 +123,12 @@ for n in range(Ns):
 	N,a,b = np.histogram2d(Rs[n],Phis[n],[rB,phiB])
 	f = N/dV
 	print(f.shape)
-	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat')
+	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
+
+#Do colorbar
+Ax = fig.add_subplot(gs[1,:])
+cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
+cb.set_label("Density",fontsize="small")
 
 plt.savefig("msRad.png",dpi=figQ)
 plt.close('all')
