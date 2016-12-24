@@ -19,7 +19,7 @@ figQ = 300 #DPI
 lfmv.ppInit()
 msDataFile = "msIonR.pkl"
 
-dirStub = "/Users/soratka1/Work/magnetoloss/synth"
+RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 fileStub = "100keV.h5part"
 
 spcs = ["H","O"]
