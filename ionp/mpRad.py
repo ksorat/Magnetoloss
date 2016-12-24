@@ -14,6 +14,39 @@ def getLastEQX(fIn):
 	ids,yeq = lfmpp.getH5pFin(fIn,"yeq",Mask=isOut)
 	return xeq,yeq
 
+#Return list of EQXs for particles in sheath
+def getEQXs(fIn):
+	isOut = lfmpp.getOut(fIn)
+	t,xeq = lfmpp.getH5p(fIn,"xeq",Mask=isOut)
+	t,yeq = lfmpp.getH5p(fIn,"yeq",Mask=isOut)
+	t,tCr = lfmpp.getH5p(fIn,"tCr",Mask=isOut)
+	t,tEq = lfmpp.getH5p(fIn,"Tmp",Mask=isOut)
+
+	R = []
+	P = []
+	Np = xeq.shape[0]
+	print("Working with %d particles"%(Np))
+	for n in range(Np):
+		#Accumulate EQXs for time after first crossing
+		tCrn = tCr[:,n]
+		tSlc1 = tCrn.argmax()
+		teqn = tEq[tSlc1:,n]
+		ts,Ind = np.unique(teqn,return_index=True)
+		#Have unique EQXs
+		Neq = Ind.sum()
+		if (Neq>0):
+			x = xeq[tSlc:,n]
+			y = yeq[tSlc:,n]
+			x = x[Ind]
+			y = y[Ind]
+	
+			r = np.sqrt(x**2.0 + y**2.0)
+			phi = np.arctan2(y,x)
+			for i in range(Neq):
+				R.append(r[i])
+				P.append(phi[i])
+	return np.array(R),np.array(P)
+
 figSize = (8,8)
 figQ = 300 #DPI
 
@@ -44,14 +77,16 @@ else:
 		fIn = RootDir + spcs[i] + "." + fileStub
 		print("Reading %s"%(fIn))
 		print("Species %s"%(Leg[i]))
-		xeq,yeq = getLastEQX(fIn)
-		iXeq.append(xeq)
-		iYeq.append(yeq)
-		p = np.arctan2(yeq,xeq)*180/np.pi
-		R = np.sqrt(xeq**2.0 + yeq**2.0)
+		R,p = getEQXs(fIn)
+		print(R.shape)
+		# xeq,yeq = getLastEQX(fIn)
+		# iXeq.append(xeq)
+		# iYeq.append(yeq)
+		# p = np.arctan2(yeq,xeq)*180/np.pi
+		# R = np.sqrt(xeq**2.0 + yeq**2.0)
 		Phis.append(p)
 		Rs.append(R)
-		
+
 	#Save to pickle
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
@@ -85,7 +120,7 @@ gs = gridspec.GridSpec(2,Ns,height_ratios=[10,1],wspace=0.05)#,bottom=0.05,top=0
 
 for n in range(Ns):
 	Ax = fig.add_subplot(gs[0,n],projection='polar')
-	N,a,b = np.histogram2d(Rs[n],Phis[n],rB,phiB)
+	N,a,b = np.histogram2d(Rs[n],Phis[n],[rB,phiB])
 	f = N/dV
 	print(f.shape)
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat')
