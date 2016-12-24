@@ -24,7 +24,7 @@ def getEQXs(fIn):
 
 	R = []
 	P = []
-	Np = xeq.shape[0]
+	Np = xeq.shape[1]
 	print("Working with %d particles"%(Np))
 	for n in range(Np):
 		#Accumulate EQXs for time after first crossing
