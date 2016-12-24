@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import cPickle as pickle
 import matplotlib.gridspec as gridspec
 from matplotlib.colors import LogNorm
+from matplotlib.patches import Wedge
+
 
 def getLastEQX(fIn):
 	isOut = lfmpp.getOut(fIn)
@@ -124,7 +126,7 @@ for n in range(Ns):
 	f = N/dV
 	print(f.shape)
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
-	lfmv.addEarth2D()
+	Ax.add_artist(Wedge((0,0), 1.0,-90,90, fc='k',transform=ax.transAxes))
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
