@@ -98,7 +98,7 @@ figQ = 300 #DPI
 
 Np = 105
 Nr = 100
-vNorm = LogNorm(vmin=1.0e-5,vmax=5e-4)
+vNorm = LogNorm(vmin=1.0e-4,vmax=1e-1)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-120,120,Np+1)
 rB = np.linspace(7.5,20,Nr+1)
@@ -116,7 +116,7 @@ for i in range(Nr):
 
 fig = plt.figure(figsize=figSize)
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[10,1],wspace=0.05)#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
+gs = gridspec.GridSpec(2,Ns,height_ratios=[10,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(Ns):
 	Ax = fig.add_subplot(gs[0,n],projection='polar')
