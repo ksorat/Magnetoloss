@@ -92,7 +92,7 @@ for k in range(Nphi):
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"Bmag",vBds=(1,10000),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
+	pyv.lfmPCol(db,"Bmag",vBds=(0.1,10000),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
