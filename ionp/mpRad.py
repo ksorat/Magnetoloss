@@ -134,7 +134,7 @@ for n in range(Ns):
 	lfmv.ax2mlt(Ax,mTks,doX=True,Polar=True)
 	#print(Ax.get_xticks())
 	#print(Ax.get_xticklabels())
-	plt.title(Leg[n])
+	plt.xlabel(Leg[n])
 	plt.tick_params(axis='both', which='major', labelsize="x-small")	
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
