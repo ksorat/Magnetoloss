@@ -120,11 +120,11 @@ gs = gridspec.GridSpec(2,Ns,height_ratios=[10,1])#,bottom=0.05,top=0.99,wspace=0
 
 for n in range(Ns):
 	Ax = fig.add_subplot(gs[0,n],projection='polar')
-	N,a,b = np.histogram2d(Rs[n],Phis[n],[rB,phiB])
+	N,a,b = np.histogram2d(Rs[n],Phis[n],[rB,phiB],normed=True)
 	f = N/dV
 	print(f.shape)
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
-
+	lfmv.addEarth()
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
