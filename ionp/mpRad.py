@@ -33,7 +33,7 @@ def getEQXs(fIn):
 		teqn = tEq[tSlc1:,n]
 		ts,Ind = np.unique(teqn,return_index=True)
 		#Have unique EQXs
-		Neq = Ind.sum()
+		Neq = len(Ind)
 		if (Neq>0):
 			x = xeq[tSlc1:,n]
 			y = yeq[tSlc1:,n]
