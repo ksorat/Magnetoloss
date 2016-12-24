@@ -89,17 +89,10 @@ for k in range(Nphi):
 	
 	
 	print("Generating %d streamlines\n"%(Nr*Nl))
-	# pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpac,Light=False)
-	
-	# #Field slice, equatorial
-	# AddOperator("Slice")
-	# sOps = GetOperatorOptions(0); 
-	# sOps.axisType=2; sOps.project2d=0
-	# SetOperatorOptions(sOps)
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"Bmag",vBds=(1,1000),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
+	pyv.lfmPCol(db,"Bmag",vBds=(1,10000),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
