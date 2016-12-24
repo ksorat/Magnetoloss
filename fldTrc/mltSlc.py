@@ -104,7 +104,7 @@ for k in range(Nphi):
 	AddPlot("Contour","RadAll")
 	cOps = GetPlotOptions()
 	cOps.colorType = 0
-	cOp.singleColor = (0, 0, 0, 255)
+	cOps.singleColor = (0, 0, 0, 255)
 	cOps.contourMethod = 1
 	cOps.contourValue = (2.2)
 	cOps.legendFlag = 0
@@ -118,7 +118,7 @@ for k in range(Nphi):
 	cOps.legendFlag = 0
 	cOps.lineWidth = 2
 	cOps.colorType = 0
-	cOp.singleColor = (0, 0, 0, 255)
+	cOps.singleColor = (0, 0, 0, 255)
 	SetPlotOptions(cOps)
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
@@ -129,7 +129,9 @@ for k in range(Nphi):
 	#Do streams
 	if (doProd):
 		#Only do streams for final version
-		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap="Cool",tRad=0.0015,Legend=False)
+		scMap = "RdYlBu"
+		#scMap = "Cool"
+		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap=scMap,tRad=0.0015,Legend=False)
 		icOp = GetOperatorOptions(0)
 		icOp.dataValue = 10
 		icOp.dataVariable = "dPhi" 
