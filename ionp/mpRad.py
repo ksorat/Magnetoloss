@@ -4,6 +4,7 @@ import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import cPickle as pickle
 import matplotlib.gridspec as gridspec
 from matplotlib.colors import LogNorm
 
@@ -50,6 +51,7 @@ else:
 		R = np.sqrt(xeq**2.0 + yeq**2.0)
 		Phis.append(p)
 		Rs.append(R)
+		
 	#Save to pickle
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
