@@ -35,8 +35,8 @@ def getEQXs(fIn):
 		#Have unique EQXs
 		Neq = Ind.sum()
 		if (Neq>0):
-			x = xeq[tSlc:,n]
-			y = yeq[tSlc:,n]
+			x = xeq[tSlc1:,n]
+			y = yeq[tSlc1:,n]
 			x = x[Ind]
 			y = y[Ind]
 	
