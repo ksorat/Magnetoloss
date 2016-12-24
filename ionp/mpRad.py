@@ -104,6 +104,7 @@ vNorm = LogNorm(vmin=1.0e-2,vmax=5e-0)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-160,160,Np+1)
 rB = np.linspace(5,22.5,Nr+1)
+mTks = np.arange(0,360,45)
 
 PP,RR = np.meshgrid(phiB,rB)
 
@@ -129,8 +130,9 @@ for n in range(Ns):
 	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.4)
 	Ax.add_artist(E)
 
-	Ax.set_rlabel_position(225)
+	Ax.set_rlabel_position(210)
 	Ax.grid(True)
+	lfmv.ax2mlt(Ax,mTks,doX=False)
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
