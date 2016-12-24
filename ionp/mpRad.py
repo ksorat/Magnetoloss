@@ -20,7 +20,7 @@ def getEQXs(fIn):
 	t,xeq = lfmpp.getH5p(fIn,"xeq",Mask=isOut)
 	t,yeq = lfmpp.getH5p(fIn,"yeq",Mask=isOut)
 	t,tCr = lfmpp.getH5p(fIn,"tCr",Mask=isOut)
-	t,tEq = lfmpp.getH5p(fIn,"Tmp",Mask=isOut)
+	t,tEq = lfmpp.getH5p(fIn,"Teq",Mask=isOut)
 
 	R = []
 	P = []
