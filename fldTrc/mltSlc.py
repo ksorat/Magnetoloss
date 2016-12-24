@@ -92,7 +92,7 @@ for k in range(Nphi):
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"Bmag",vBds=(0.1,10000),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
+	pyv.lfmPCol(db,"Bmag",vBds=(10,500),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
@@ -103,6 +103,8 @@ for k in range(Nphi):
 	#Block out central cutout
 	AddPlot("Contour","RadAll")
 	cOps = GetPlotOptions()
+	cOps.colorType = 0
+	cOp.singleColor = (0, 0, 0, 255)
 	cOps.contourMethod = 1
 	cOps.contourValue = (2.2)
 	cOps.legendFlag = 0
@@ -116,6 +118,7 @@ for k in range(Nphi):
 	cOps.legendFlag = 0
 	cOps.lineWidth = 2
 	cOps.colorType = 0
+	cOp.singleColor = (0, 0, 0, 255)
 	SetPlotOptions(cOps)
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
