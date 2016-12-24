@@ -40,7 +40,7 @@ else:
 	print("No data file found, calculating")
 
 	for i in range(Ns):
-		fIn = dirStub + "/" + spcs[i] + "." + fileStub
+		fIn = RootDir + spcs[i] + "." + fileStub
 		print("Reading %s"%(fIn))
 		print("Species %s"%(Leg[i]))
 		xeq,yeq = getLastEQX(fIn)
