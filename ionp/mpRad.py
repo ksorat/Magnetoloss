@@ -100,7 +100,7 @@ figQ = 300 #DPI
 
 Np = 105
 Nr = 100
-vNorm = LogNorm(vmin=1.0e-4,vmax=1e-1)
+vNorm = LogNorm(vmin=1.0e-3,vmax=1e+1)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-120,120,Np+1)
 rB = np.linspace(7.5,20,Nr+1)
