@@ -95,7 +95,7 @@ else:
 d2rad = np.pi/180.0
 
 #Make polar histograms
-figSize = (8,6)
+figSize = (8,5)
 figQ = 300 #DPI
 
 Np = 200
@@ -132,9 +132,9 @@ for n in range(Ns):
 
 	Ax.set_rlabel_position(210)
 	Ax.grid(True)
-	#lfmv.ax2mlt(Ax,mTks,doX=True)
-	print(Ax.get_xticks())
-	print(Ax.get_xticklabels())
+	lfmv.ax2mlt(Ax,mTks,doX=True)
+	#print(Ax.get_xticks())
+	#print(Ax.get_xticklabels())
 	plt.title(Leg[n])
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
