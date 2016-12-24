@@ -105,6 +105,7 @@ for k in range(Nphi):
 	cOps = GetPlotOptions()
 	cOps.colorType = 0
 	cOps.singleColor = (0, 0, 0, 255)
+	cOps.singleColor = (192, 192, 192, 255)
 	cOps.contourMethod = 1
 	cOps.contourValue = (2.2)
 	cOps.legendFlag = 0
