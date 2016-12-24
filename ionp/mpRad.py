@@ -134,7 +134,7 @@ for n in range(Ns):
 	Ax.grid(True)
 	#lfmv.ax2mlt(Ax,mTks,doX=True)
 	print(Ax.get_xticks())
-	print(Ax.set_xticklabels())
+	print(Ax.get_xticklabels())
 	plt.title(Leg[n])
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
