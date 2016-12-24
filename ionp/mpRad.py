@@ -124,7 +124,7 @@ for n in range(Ns):
 	f = N/dV
 	print(f.shape)
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
-	lfmv.addEarth(Ax)
+	lfmv.addEarth2D()
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
