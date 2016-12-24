@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
@@ -61,7 +62,7 @@ d2rad = np.pi/180.0
 
 Np = 105
 Nr = 100
-
+cMap = "viridis"
 phiB = d2rad*np.linspace(-120,120,Np+1)
 rB = np.linspace(7.5,20,Nr+1)
 
@@ -85,7 +86,7 @@ for n in range(Ns):
 	N,a,b = np.histogram2d(Rs[n],Phis[n],rB,phiB)
 	f = N/dV
 	print(f.shape)
-	Ax.pcolormesh(PP,RR,f)
+	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat')
 
 plt.savefig("msRad.png",dpi=figQ)
 plt.close('all')
