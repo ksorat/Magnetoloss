@@ -104,7 +104,7 @@ vNorm = LogNorm(vmin=1.0e-2,vmax=5e-0)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-160,160,Np+1)
 rB = np.linspace(5,22.5,Nr+1)
-mTks = np.arange(0,360,45)
+mTks = [-90,-60,-30,0,30,60,90]
 
 PP,RR = np.meshgrid(phiB,rB)
 
@@ -127,7 +127,7 @@ for n in range(Ns):
 	f = N/dV
 	
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
-	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.4)
+	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.85)
 	Ax.add_artist(E)
 
 	Ax.set_rlabel_position(210)
