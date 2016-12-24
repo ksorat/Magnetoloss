@@ -118,7 +118,7 @@ for i in range(Nr):
 
 fig = plt.figure(figsize=figSize)
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[10,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
+gs = gridspec.GridSpec(2,Ns,height_ratios=[25,1])#,bottom=0.05,top=0.99,wspace=0.2,hspace=0.05)
 
 for n in range(Ns):
 	Ax = fig.add_subplot(gs[0,n],projection='polar')
@@ -129,7 +129,8 @@ for n in range(Ns):
 	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.4)
 	Ax.add_artist(E)
 
-	Ax.set_rlabel_position(180)
+	Ax.set_rlabel_position(225)
+	Ax.grid(True)
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
