@@ -132,7 +132,10 @@ for n in range(Ns):
 
 	Ax.set_rlabel_position(210)
 	Ax.grid(True)
-	lfmv.ax2mlt(Ax,mTks,doX=True)
+	#lfmv.ax2mlt(Ax,mTks,doX=True)
+	print(Ax.get_xticks())
+	print(Ax.Ax.set_xticklabels())
+	plt.title(Leg[n])
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
