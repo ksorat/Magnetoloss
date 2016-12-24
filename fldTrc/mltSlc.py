@@ -12,6 +12,7 @@ import pyVisit as pyv
 fIn = "fldDat.vti"
 db = fIn
 Quiet = True
+doProd = True
 
 PhiCs = [0,30,45,60,75]
 LatCs = [25,25,22.5,20,15]
@@ -97,8 +98,9 @@ for k in range(Nphi):
 	# SetOperatorOptions(sOps)
 	
 	#Add phi slice
-	pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	
+	#pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
+	pyv.lfmPCol(db,"Bmag",vBds=(1,1000),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
+
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
 	sOps.axisType=4; sOps.project2d=0
@@ -129,16 +131,18 @@ for k in range(Nphi):
 	SetOperatorOptions(sOps)
 
 	#Do streams
-	pyv.lfmStream(fIn,"Bfld",x,y,z,cMap="Cool",tRad=0.0015,Legend=False)
-	icOp = GetOperatorOptions(0)
-	icOp.dataValue = 10
-	icOp.dataVariable = "dPhi" 
-	SetOperatorOptions(icOp)
-
-	pcOp = GetPlotOptions()
-	pcOp.minFlag=1; pcOp.maxFlag=1
-	pcOp.min = -dpMax; pcOp.max = dpMax
-	SetPlotOptions(pcOp)
+	if (doProd):
+		#Only do streams for final version
+		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap="Cool",tRad=0.0015,Legend=False)
+		icOp = GetOperatorOptions(0)
+		icOp.dataValue = 10
+		icOp.dataVariable = "dPhi" 
+		SetOperatorOptions(icOp)
+	
+		pcOp = GetPlotOptions()
+		pcOp.minFlag=1; pcOp.maxFlag=1
+		pcOp.min = -dpMax; pcOp.max = dpMax
+		SetPlotOptions(pcOp)
 
 	pyv.SetWin3D(Ax=2,Ang=-PhiC)
 	pyv.SetWin3D(Ax=0,Ang=-90)
