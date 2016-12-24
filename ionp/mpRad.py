@@ -104,7 +104,7 @@ vNorm = LogNorm(vmin=1.0e-2,vmax=5e-0)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-160,160,Np+1)
 rB = np.linspace(5,22.5,Nr+1)
-mTks = np.arange(-180,180,45)
+mTks = np.arange(-135,180,45)
 PP,RR = np.meshgrid(phiB,rB)
 
 phiC = 0.5*(phiB[0:-1] + phiB[1:])
