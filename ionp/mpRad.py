@@ -95,14 +95,14 @@ else:
 d2rad = np.pi/180.0
 
 #Make polar histograms
-figSize = (8,4)
+figSize = (8,6)
 figQ = 300 #DPI
 
 Np = 200
 Nr = 200
-vNorm = LogNorm(vmin=1.0e-3,vmax=1e-0)
+vNorm = LogNorm(vmin=1.0e-2,vmax=5e-0)
 cMap = "viridis"
-phiB = d2rad*np.linspace(-120,120,Np+1)
+phiB = d2rad*np.linspace(-160,160,Np+1)
 rB = np.linspace(5,22.5,Nr+1)
 
 PP,RR = np.meshgrid(phiB,rB)
@@ -128,6 +128,8 @@ for n in range(Ns):
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
 	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.4)
 	Ax.add_artist(E)
+
+	Ax.set_rlabel_position(180)
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
@@ -136,27 +138,4 @@ cb.set_label("Density",fontsize="small")
 plt.savefig("msRad.png",dpi=figQ)
 plt.close('all')
 
-# oR = np.zeros(Np)
-# hR = np.zeros(Np)
-
-# phibins = np.linspace(-120,120,Np)
-# for i in range(Np-1):
-# 	p0 = phibins[i]
-# 	p1 = phibins[i+1]
-# 	Ind = (Phis[0] >= p0) & (Phis[0]<p1)
-# 	hR[i] = Rs[0][Ind].mean()
-# 	Ind = (Phis[1] >= p0) & (Phis[1]<p1)
-# 	oR[i] = Rs[1][Ind].mean()
-# oR[Np-1] = oR[Np-2]
-# hR[Np-1] = hR[Np-2]
-
-# oX = oR*np.cos(phibins*np.pi/180)
-# oY = oR*np.sin(phibins*np.pi/180)
-
-# hX = hR*np.cos(phibins*np.pi/180)
-# hY = hR*np.sin(phibins*np.pi/180)
-
-# plt.plot(oX,oY,'g',hX,hY,'b')
-# plt.axis('equal')
-# plt.show()
 
