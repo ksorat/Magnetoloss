@@ -98,12 +98,12 @@ d2rad = np.pi/180.0
 figSize = (8,4)
 figQ = 300 #DPI
 
-Np = 105
-Nr = 100
-vNorm = LogNorm(vmin=1.0e-3,vmax=1e+1)
+Np = 200
+Nr = 200
+vNorm = LogNorm(vmin=1.0e-3,vmax=1e-0)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-120,120,Np+1)
-rB = np.linspace(7.5,30,Nr+1)
+rB = np.linspace(5,22.5,Nr+1)
 
 PP,RR = np.meshgrid(phiB,rB)
 
@@ -124,9 +124,10 @@ for n in range(Ns):
 	Ax = fig.add_subplot(gs[0,n],projection='polar')
 	N,a,b = np.histogram2d(Rs[n],Phis[n],[rB,phiB],normed=True)
 	f = N/dV
-	print(f.shape)
+	
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
-	plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.4)
+	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.4)
+	Ax.add_artist(E)
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
