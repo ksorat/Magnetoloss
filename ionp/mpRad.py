@@ -132,7 +132,7 @@ for n in range(Ns):
 
 	Ax.set_rlabel_position(210)
 	Ax.grid(True)
-	lfmv.ax2mlt(Ax,mTks,doX=False)
+	lfmv.ax2mlt(Ax,mTks,doX=True)
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
