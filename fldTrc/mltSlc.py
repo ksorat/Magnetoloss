@@ -92,7 +92,7 @@ for k in range(Nphi):
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"Bmag",vBds=(1,500),cMap="Greens",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
+	pyv.lfmPCol(db,"Bmag",vBds=(1,500),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
@@ -130,7 +130,7 @@ for k in range(Nphi):
 	#Do streams
 	if (doProd):
 		#Only do streams for final version
-		scMap = "RdYlBu"
+		scMap = "difference"
 		#scMap = "Cool"
 		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap=scMap,tRad=0.0015,Legend=False)
 		icOp = GetOperatorOptions(0)
