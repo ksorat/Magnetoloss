@@ -23,8 +23,8 @@ cMap="viridis"
 Np = 50
 Nl = 50
 
-xTk = [-120,-90,-45,0,45,90,120]
-xTkLab = ["4:00","Dawn","9:00","Noon","15:00","Dusk","20:00"]
+xTk = [-135,-90,-45,0,45,90,135]
+#xTkLab = ["4:00","Dawn","9:00","Noon","15:00","Dusk","20:00"]
 
 
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
@@ -39,7 +39,7 @@ if (doFirst):
 	figSize = (11,4)
 else:
 	Ns = len(spcs)
-	figSize = (16,8)
+	figSize = (16,6)
 
 lfmv.ppInit()
 P0 = -150; P1 = 150
