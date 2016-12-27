@@ -14,7 +14,7 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = False
-doTest = Test
+doTest = True
 
 cAx=[1.0e-6,1.0e-3]
 fMax = 0.015
