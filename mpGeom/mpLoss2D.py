@@ -14,7 +14,7 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = False
-doTest = False
+doTest = True
 
 cAx=[1.0e-6,1.0e-3]
 fMax = 0.015
@@ -111,6 +111,6 @@ cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density",fontsize="small")
 
 #Save
-plt.tight_layout()
+#plt.tight_layout()
 plt.savefig(figName,dpi=figQ)
 plt.close('all')
