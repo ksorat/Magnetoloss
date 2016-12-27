@@ -46,8 +46,8 @@ P0 = -150; P1 = 150
 L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
-fig = plt.figure(figsize=figSize)
-#fig = plt.figure(figsize=figSize,tight_layout=True)
+#fig = plt.figure(figsize=figSize)
+fig = plt.figure(figsize=figSize,tight_layout=True)
 
 gs = gridspec.GridSpec(2+1,Ns,height_ratios=[10,25,1],left=0.05)#,hspace=0.05,wspace=0.05)
 vNorm = LogNorm(vmin=cAx[0],vmax=cAx[1])
