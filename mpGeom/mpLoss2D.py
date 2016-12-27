@@ -19,7 +19,7 @@ doTest = False
 cAx=[1.0e-6,1.0e-3]
 fMax = 0.015
 
-cMap="jet"
+cMap="viridis"
 Np = 50
 Nl = 50
 
@@ -41,7 +41,7 @@ else:
 	Ns = len(spcs)
 	figSize = (16,4)
 
-lfmv.initLatex()
+lfmv.ppInit()
 P0 = -150; P1 = 150
 L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
@@ -49,7 +49,8 @@ lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure(figsize=figSize)
 #fig = plt.figure(figsize=figSize,tight_layout=True)
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[1,2.5])
+gs = gridspec.GridSpec(2+1,Ns,height_ratios=[10,25,1])
+vNorm = LogNorm(vmin=cAx[0],vmax=cAx[1])
 
 for i in range(Ns):
 	
@@ -74,7 +75,7 @@ for i in range(Ns):
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,i])
-	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
+	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=vNorm)
 
 	#Axes
 	plt.axis('scaled')
@@ -92,8 +93,9 @@ for i in range(Ns):
 	Ax2D.set_ylim(L0,L1)
 	Ax2D.set_yticks(np.arange(-40,41,20))
 
-	Ax2D.set_xticks(xTk)
-	Ax2D.set_xticklabels(xTkLab)
+	#Ax2D.set_xticks(xTk)
+	#Ax2D.set_xticklabels(xTkLab)
+	lfmv.ax2mlt(Ax2D,xTk)
 	Ax2D.set_xlabel("Magnetic Local Time")
 	Ax2D.text(-120,40,Leg[i],fontsize="x-large")
 	if (i==0):
@@ -102,6 +104,11 @@ for i in range(Ns):
 	else:
 		plt.setp(Ax2D.get_yticklabels(),visible=False)
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
+
+#Do colorbar
+Ax = fig.add_subplot(gs[-1,:])
+cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
+cb.set_label("Density",fontsize="small")
 
 #Save
 plt.tight_layout()
