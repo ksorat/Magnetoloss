@@ -49,7 +49,7 @@ lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure(figsize=figSize)
 #fig = plt.figure(figsize=figSize,tight_layout=True)
 
-gs = gridspec.GridSpec(2+1,Ns,height_ratios=[10,25,1],hspace=0.05,wspace=0.05)
+gs = gridspec.GridSpec(2+1,Ns,height_ratios=[10,25,1],hspace=0.005,wspace=0.05)
 vNorm = LogNorm(vmin=cAx[0],vmax=cAx[1])
 
 for i in range(Ns):
@@ -111,6 +111,6 @@ cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density",fontsize="small")
 
 #Save
-plt.tight_layout()
+#plt.tight_layout()
 plt.savefig(figName,dpi=figQ)
 plt.close('all')
