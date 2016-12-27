@@ -49,7 +49,7 @@ lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure(figsize=figSize)
 #fig = plt.figure(figsize=figSize,tight_layout=True)
 
-gs = gridspec.GridSpec(2+1,Ns,height_ratios=[15,30,3],wspace=0.05)#,left=0.05)#,hspace=0.05,wspace=0.05)
+gs = gridspec.GridSpec(2+1,Ns,height_ratios=[15,30,2],wspace=0.05,hspace=0.05)#,left=0.05)#,hspace=0.05,wspace=0.05)
 vNorm = LogNorm(vmin=cAx[0],vmax=cAx[1])
 
 for i in range(Ns):
