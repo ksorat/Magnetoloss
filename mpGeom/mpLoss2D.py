@@ -39,7 +39,7 @@ if (doFirst):
 	figSize = (11,4)
 else:
 	Ns = len(spcs)
-	figSize = (11,4.25)
+	figSize = (16,4.5)
 
 lfmv.ppInit()
 P0 = -150; P1 = 150
@@ -111,6 +111,6 @@ cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density",fontsize="small")
 
 #Save
-#plt.tight_layout()
+plt.tight_layout()
 plt.savefig(figName,dpi=figQ)
 plt.close('all')
