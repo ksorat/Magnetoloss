@@ -25,7 +25,7 @@ dLam = 0 #+/ from critical latitude
 Rc0 = 8.0
 Rc1 = 11.0
 
-dpMax = 7.5
+dpMax = 5.0
 dBzMax = 35
 
 Np = 2*Nl*Nr
