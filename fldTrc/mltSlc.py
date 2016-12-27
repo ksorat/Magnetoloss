@@ -83,7 +83,7 @@ for k in range(Nphi):
 
 			n=n+2
 
-	dPhiStr = "Phi-%f"%(PhiC)
+	dPhiStr = "PhiS-%f"%(PhiC)
 	
 	DefineScalarExpression("dPhi",dPhiStr)
 	
