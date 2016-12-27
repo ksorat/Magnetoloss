@@ -39,7 +39,7 @@ if (doFirst):
 	figSize = (11,4)
 else:
 	Ns = len(spcs)
-	figSize = (16,5)
+	figSize = (16,4.5)
 
 lfmv.ppInit()
 P0 = -150; P1 = 150
