@@ -14,9 +14,11 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = True
-doTest = True
+doTest = False
 
 cAx=[1.0e-6,1.0e-3]
+cAx=[1.0e-5,1.0e-3]
+
 fMax = 0.015
 
 cMap="viridis"
