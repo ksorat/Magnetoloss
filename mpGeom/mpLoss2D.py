@@ -13,7 +13,7 @@ figQ = 300 #DPI
 
 
 figStub = "mpLoss"
-doFirst = False
+doFirst = True
 doTest = True
 
 cAx=[1.0e-6,1.0e-3]
