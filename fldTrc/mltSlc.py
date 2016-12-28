@@ -21,9 +21,10 @@ Nl = 3
 Nr = 10
 dLam = 5 #+/ from critical latitude
 
-#Rc = 10.5 #
-Rc0 = 8.0
-Rc1 = 11.0
+#Rc0 = 8.0
+#Rc1 = 11.0
+Rc0 = 8.5
+Rc1 = 10.5
 
 dpMax = 5.0
 dBzMax = 35
