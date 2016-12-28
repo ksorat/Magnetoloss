@@ -154,8 +154,13 @@ for k in range(Nphi):
 	mltStr = "MLT %d:00"%mltHr
 	lcStr = "Critical Latitude = %d"%np.int(LatC)
 
-	mltLab = pyv.genTit(mltStr,Pos=(0.025,0.1) )
-	lcLab = pyv.genTit(lcStr,Pos=(0.025,0.075))
+	#yS = 0.075
+	#dx = 0.025
+	dx = 0.015
+	yS = 0.15
+	dy = 0.025
+	mltLab = pyv.genTit(mltStr,Pos=(dx,yS+dy) )
+	lcLab = pyv.genTit(lcStr,  Pos=(dx,yS))
 	lcLab.height = 0.015
 
 	#Show them all
