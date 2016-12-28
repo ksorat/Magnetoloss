@@ -14,11 +14,11 @@ db = fIn
 Quiet = True
 doProd = True
 
-PhiCs = [0,30,45,60,75]
-LatCs = [25,25,22.5,20,15]
+PhiCs = [0,30,45,60,75,90]
+LatCs = [25,25,22,17,12,7.5]
 
-Nl = 5
-Nr = 15
+Nl = 3
+Nr = 10
 dLam = 5 #+/ from critical latitude
 
 #Rc = 10.5 #
