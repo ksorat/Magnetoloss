@@ -82,8 +82,8 @@ for k in range(Nphi):
 		R = (Q2*DelR + Rc0) #Random rads
 		dTh = (Q1*2*dLam - dLam) #Delta theta
 		Ip = Q3>=0.5; Im = Q3<0.5
-		Theta[Ip] = radScl*(ThCp+dT[Ip])
-		Theta[Im] = radScl*(ThCm+dT[Im])
+		Theta[Ip] = radScl*(ThCp+dTh[Ip])
+		Theta[Im] = radScl*(ThCm+dTh[Im])
 
 		x[:] = (R)*Cp*np.sin(Theta)
 		y[:] = (R)*Sp*np.sin(Theta)
