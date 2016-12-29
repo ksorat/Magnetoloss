@@ -74,10 +74,17 @@ for k in range(Nphi):
 	n=0
 	if (doRand):
 		DelR = Rc1 - Rc0
-		R1 = np.random.rand(Np)
-		R2 = np.random.rand(Np)
-		Theta = radScl*(R1*2*thR - thR) #Theta values
-		R = (R2*DelR - Rc0)
+		Q1 = np.random.rand(Np)
+		Q2 = np.random.rand(Np)
+		Q3 = np.random.rand(Np)
+		Theta = np.zeros(Np)
+
+		R = (Q2*DelR + Rc0) #Random rads
+		dTh = (Q1*2*dLam - dLam) #Delta theta
+		Ip = Q3>=0.5; Im = Q3<0.5
+		Theta[Ip] = radScl*(ThCp+dT[Ip])
+		Theta[Im] = radScl*(ThCm+dT[Im])
+
 		x[:] = (R)*Cp*np.sin(Theta)
 		y[:] = (R)*Sp*np.sin(Theta)
 		z[:] = (R)*   np.cos(Theta)
