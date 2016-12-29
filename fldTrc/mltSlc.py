@@ -13,9 +13,11 @@ fIn = "fldDat.vti"
 db = fIn
 Quiet = True
 doProd = True
+doRand = True
 
 PhiCs = [0,15,30,45,60,75,90]
 LatCs = [25,25,25,22,17,12,7.5]
+thR = 60
 
 Nl = 3
 Nr = 5
@@ -54,11 +56,14 @@ pyv.setAtts() #Some defaults
 
 Nphi = len(PhiCs)
 radScl = np.pi/180.0
+#Create points
+
 for k in range(Nphi):
 	PhiC = PhiCs[k]
 	LatC = LatCs[k]
 
 	fOut = "Slc.P%d.png"%np.int(PhiC)
+
 	#Generate seed points
 	Cp = np.cos(PhiC*radScl)
 	Sp = np.sin(PhiC*radScl)
@@ -67,22 +72,34 @@ for k in range(Nphi):
 
 	x = np.zeros(Np); y = np.zeros(Np); z = np.zeros(Np)
 	n=0
-	for i in range(Nr):
-		for j in range(Nl):
+	if (doRand):
+		DelR = Rc1 - Rc0
+		R1 = np.random.rand(Np)
+		R2 = np.random.rand(Np)
+		Theta = radScl*(R1*2*thR - thR) #Theta values
+		R = (R2*DelR - Rc0)
+		x[:] = (R)*Cp*np.sin(Theta)
+		y[:] = (R)*Sp*np.sin(Theta)
+		z[:] = (R)*   np.cos(Theta)
 
-			thP = (ThCp + Theta[j])*radScl
-			thM = (ThCm + Theta[j])*radScl
-			R = Rad[i]
+	else:
 
-			x[n] = R*Cp*np.sin(thP)
-			y[n] = R*Sp*np.sin(thP)
-			z[n] = R*   np.cos(thP)
-
-			x[n+1] = (R+dR)*Cp*np.sin(thM)
-			y[n+1] = (R+dR)*Sp*np.sin(thM)
-			z[n+1] = (R+dR)*   np.cos(thM)
-
-			n=n+2
+		for i in range(Nr):
+			for j in range(Nl):
+	
+				thP = (ThCp + Theta[j])*radScl
+				thM = (ThCm + Theta[j])*radScl
+				R = Rad[i]
+	
+				x[n] = R*Cp*np.sin(thP)
+				y[n] = R*Sp*np.sin(thP)
+				z[n] = R*   np.cos(thP)
+	
+				x[n+1] = (R+dR)*Cp*np.sin(thM)
+				y[n+1] = (R+dR)*Sp*np.sin(thM)
+				z[n+1] = (R+dR)*   np.cos(thM)
+	
+				n=n+2
 
 	dPhiStr = "Phi-%f"%(PhiC)
 	
