@@ -75,7 +75,7 @@ OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
 #pyv.lfmPCol(fOut,"id",cMap="cpk_jmol",Legend=False)
-pyv.lfmPCol(fOut,"z",cMap="Cool",vBds=[-8,8],Legend=False)
+pyv.lfmPCol(fOut,"z",cMap="Cool",vBds=[-8,8],Legend=False,Light=True)
 pOp = GetPlotOptions()
 # pOp.lineType = 1
 # pOp.tubeResolution = 100
