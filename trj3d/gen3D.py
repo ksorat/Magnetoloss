@@ -66,7 +66,7 @@ SetPlotOptions(cOps)
 OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
-pyv.lfmPCol(fOut,"radius",cMap="viridis")
+pyv.lfmPCol(fOut,"id",cMap="cpk_jmol")
 pOp = GetPlotOptions()
 pOp.lineType = 1
 pOp.tubeResolution = 100
@@ -83,9 +83,15 @@ ppOp.indexVariable = "id"
 print(ppOp)
 SetOperatorOptions(ppOp)
 
+AddOperator("Tube")
+tOp = GetOperatorOptions(1)
+print(tOp)
+SetOperatorOptions(tOp)
+
 pyv.SetWin3D(Ax=1,Ang=+90)
 pyv.SetWin3D(Ax=2,Ang=+90)
 pyv.SetWin3D(Ax=0,Ang=+30)
+pyv.SetWin3D(Zoom=1.5)
 
 DrawPlots()
 #pyv.cleanLegends(plXs,plYs,plTits)
