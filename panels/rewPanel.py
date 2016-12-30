@@ -58,7 +58,7 @@ fldBds = [-35,35]
 fldCMap = "RdGy_r"
 fldOpac = 0.5
 fldDomX = [-15,13]
-fldDomY = [-20,20]
+fldDomY = [0,20]
 
 pBds = [50,150]
 pCMap = "cool"
