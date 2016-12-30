@@ -25,3 +25,5 @@ if (fGen):
 		Mask[n] = (aIDs[n] in cIDs)
 	
 	lfmpp.subH5p(fIn,Mask,len(cIDs),fOut=fOut)
+
+#Now do visit stuff
