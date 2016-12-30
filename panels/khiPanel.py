@@ -83,6 +83,7 @@ for s in range(Ns):
 		fldDomY = [-20,0]
 	else:
 		fldDomY = [0,20]
+
 	fig = plt.figure()
 	Ax = plt.gca()
 	figName = "khiPanel_%d.png"%(s)
@@ -103,8 +104,10 @@ for s in range(Ns):
 
 	#Pretty-ify
 	plt.axis('scaled')
-	plt.xlim(fldDomX); plt.ylim(fldDomY)
+	plt.xlim(fldDomX)
+	plt.ylim(fldDomY)
 	plt.xlabel('GSM-X [Re]')
 	plt.ylabel('GSM-Y [Re]')
 
 	plt.savefig(figName,dpi=figQ)
+	plt.close('all')
