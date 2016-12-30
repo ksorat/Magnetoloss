@@ -44,7 +44,7 @@ Spcs = ["H+","e-"]
 h5ps = ["H.100keV.h5part","e.100keV.h5part"]
 Mrk = [-60,60]
 RMax = 20
-RMin = 1.0
+RMin = 1.05
 
 Ts = 3100
 
@@ -75,7 +75,7 @@ fig = plt.figure(figsize=figSize)
 
 Ns = len(Spcs)
 #Get field data
-#xi,yi,dBz = getFld(vtiDir,Ts)
+xi,yi,dBz = getFld(vtiDir,Ts)
 radScl = np.pi/180.0
 
 for s in range(Ns):
@@ -89,11 +89,11 @@ for s in range(Ns):
 	Ax = plt.gca()
 	figName = "khiPanel_%d.png"%(s)
 	#Fields
-	#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+	fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 	lfmv.addEarth2D()
 	#Now do particles
-	#xs,ys,zs = getPs(h5pDir,h5ps[s],Ts)
-	#pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
+	xs,ys,zs = getPs(h5pDir,h5ps[s],Ts)
+	pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
 	#Now do KHI marker
 	Phi = radScl*Mrk[s]
 	p0 = (RMin*np.cos(Phi),RMin*np.sin(Phi))
