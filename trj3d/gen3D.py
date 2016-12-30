@@ -52,7 +52,7 @@ sOp.project2d = 0
 SetOperatorOptions(sOp)
 
 OpenDatabase(fIn)
-pyv.lfmPCol(fIn,"id",vcMap="viridis")
+pyv.lfmPCol(fIn,"id",cMap="viridis")
 pOp = GetPlotOptions()
 print(pOp)
 SetPlotOptions(pOp)
