@@ -84,6 +84,7 @@ for s in range(Ns):
 	else:
 		fldDomY = [0,20]
 
+	print(fldDomY)
 	fig = plt.figure()
 	Ax = plt.gca()
 	figName = "khiPanel_%d.png"%(s)
