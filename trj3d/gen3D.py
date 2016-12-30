@@ -45,7 +45,7 @@ DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 OpenDatabase(Src0)
 vBds = [-35,35]
 #pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.75,Legend=False)
-pyv.lfmPCol(Src0,"Bmag",vBds=[0.1,500],cMap="viridis",pcOpac=0.5,Legend=True,Log=True)
+pyv.lfmPCol(Src0,"Bmag",vBds=[1,500],cMap="viridis",pcOpac=0.5,Legend=True,Log=True)
 
 AddOperator("Slice")
 sOp = GetOperatorOptions(0)
@@ -54,12 +54,13 @@ sOp.project2d = 0
 print(sOp)
 SetOperatorOptions(sOp)
 
-# pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.35,Legend=False)
-# AddOperator("Slice")
-# sOp = GetOperatorOptions(0)
-# sOp.axisType = 0
-# sOp.project2d = 0
-# SetOperatorOptions(sOp)
+pyv.lfmPCol(Src0,"Bmag",vBds=[1,500],cMap="viridis",pcOpac=0.5,Legend=False,Log=True)
+AddOperator("Slice")
+sOp = GetOperatorOptions(0)
+sOp.axisType = 0
+sOp.project2d = 0
+sOp.originIntercept = 5.0
+SetOperatorOptions(sOp)
 
 
 #Block out central cutout
@@ -78,7 +79,7 @@ OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
 #pyv.lfmPCol(fOut,"id",cMap="cpk_jmol",Legend=False)
-pyv.lfmPCol(fOut,"z",cMap="difference",vBds=[-5,5],Legend=False,Light=True,Inv=True)
+pyv.lfmPCol(fOut,"radius",cMap="Reds",vBds=[3,20],Legend=False,Light=True,Inv=False)
 pOp = GetPlotOptions()
 # pOp.lineType = 1
 # pOp.tubeResolution = 100
