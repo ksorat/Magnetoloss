@@ -45,7 +45,7 @@ DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 OpenDatabase(Src0)
 vBds = [-35,35]
 #pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.75,Legend=False)
-pyv.lfmPCol(Src0,"Bmag",vBds=[1,1000],cMap="viridis",pcOpac=0.75,Legend=True,Log=True)
+pyv.lfmPCol(Src0,"Bmag",vBds=[0.1,500],cMap="viridis",pcOpac=0.5,Legend=True,Log=True)
 
 AddOperator("Slice")
 sOp = GetOperatorOptions(0)
@@ -78,7 +78,7 @@ OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
 #pyv.lfmPCol(fOut,"id",cMap="cpk_jmol",Legend=False)
-pyv.lfmPCol(fOut,"z",cMap="Cool",vBds=[-5,5],Legend=False,Light=True,Inv=True)
+pyv.lfmPCol(fOut,"z",cMap="difference",vBds=[-5,5],Legend=False,Light=True,Inv=True)
 pOp = GetPlotOptions()
 # pOp.lineType = 1
 # pOp.tubeResolution = 100
