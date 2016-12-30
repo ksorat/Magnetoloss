@@ -104,10 +104,13 @@ tOp.capping = 1
 print(tOp)
 SetOperatorOptions(tOp)
 
+#Back and up
 pyv.SetWin3D(Ax=1,Ang=+90)
 pyv.SetWin3D(Ax=2,Ang=+90)
 pyv.SetWin3D(Ax=0,Ang=+45)
 pyv.SetWin3D(Zoom=1.2)
+
+#Front and up
 
 DrawPlots()
 #pyv.cleanLegends(plXs,plYs,plTits)
