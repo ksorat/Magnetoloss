@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.patches import Wedge
 import matplotlib.lines as lines
+ from matplotlib.lines import Line2D
+ 
 
 def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
 	tSlc = np.int(t/dt)
