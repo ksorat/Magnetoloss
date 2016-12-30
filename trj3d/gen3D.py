@@ -41,4 +41,14 @@ pyv.lfmExprsEB()
 pyv.pvInit()
 
 OpenDatabase(Src0)
+vBds = [-35,35]
+pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
+AddOperator("Slice")
+sOp = GetOperatorOptions(0)
+sOp.axisType = ZAxis
+SetOperatorOptions(0)
+
 OpenDatabase(fIn)
+
+DrawPlots()
+SaveWindow()
