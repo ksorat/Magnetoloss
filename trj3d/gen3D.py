@@ -58,10 +58,14 @@ SetPlotOptions(pOp)
 AddOperator("PersistentParticles")
 ppOp = GetOperatorOptions(0)
 print(ppOp)
+ppOp.stopIndex = 450
+ppOp.connectParticles = 1
+ppOp.indexVariable = "id"
+
 SetOperatorOptions(ppOp)
 
 DrawPlots()
-pyv.cleanLegends(plXs,plYs,plTits)
-pyv.setAtts()
+#pyv.cleanLegends(plXs,plYs,plTits)
+#pyv.setAtts()
 
 SaveWindow()
