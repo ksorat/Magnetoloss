@@ -43,7 +43,7 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 Spcs = ["e-"]
 h5ps = ["eRewind.100keV.h5part"]
 
-Ts = np.array([4500,4400,4450,4150])
+Ts = np.array([4500,4450,4400,4300])
 Tslcs = (0.5*(4500-Ts) ).astype(int)
 #Tslcs = [0,75,150,225]
 
