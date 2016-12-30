@@ -94,7 +94,7 @@ for s in range(Ns):
 	khiLine = [p0,p1]
 	(ln_xs, ln_ys) = zip(*khiLine)
 	#Now do KHI marker
-	Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=2,color='silver'))
+	Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=2,color='darkslategrey'))
 	#Fields
 	#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 	fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud')
