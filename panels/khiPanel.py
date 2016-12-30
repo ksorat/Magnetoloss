@@ -79,7 +79,7 @@ Ns = len(Spcs)
 radScl = np.pi/180.0
 
 for s in range(Ns):
-	if (Ns==0):
+	if (s==0):
 		fldDomY = [-20,0]
 	else:
 		fldDomY = [0,20]
