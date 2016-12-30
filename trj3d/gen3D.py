@@ -52,7 +52,7 @@ DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 # SetOperatorOptions(sOp)
 
 OpenDatabase(fIn)
-SetActiveDatabase(fIn)
+ActivateDatabase(fIn)
 
 pyv.lfmPCol(fIn,"id",cMap="viridis")
 pOp = GetPlotOptions()
