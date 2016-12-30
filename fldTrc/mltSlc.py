@@ -20,13 +20,13 @@ LatCs = [25,25,25,22,17,12,7.5]
 thR = 60
 
 Nl = 3
-Nr = 5
+Nr = 10
 dLam = 5 #+/ from critical latitude
 
 #Rc0 = 8.0
 #Rc1 = 11.0
 Rc0 = 8.5
-Rc1 = 10.5
+Rc1 = 11.0
 
 dpMax = 5.0
 dBzMax = 35
