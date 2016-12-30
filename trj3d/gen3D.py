@@ -46,7 +46,7 @@ pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
 AddOperator("Slice")
 sOp = GetOperatorOptions(0)
 sOp.axisType = 2
-SetOperatorOptions(0)
+SetOperatorOptions(sOp)
 
 OpenDatabase(fIn)
 
