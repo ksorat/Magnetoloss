@@ -13,11 +13,15 @@ import lfmPostproc as lfmpp
 Np = 100000
 cIDs = [1335,301,95834,12593,63464,75685]
 h5id = "O.100keV.h5part"
+fGen = True
+
 
 aIDs = np.arange(1,Np+1)
 fIn = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/" + h5id
-Mask = np.zeros(Np,dtype=bool)
-for n in range(Np):
-	Mask[n] = (aIDs[n] in cIDs)
-
-lfmpp.subH5p(fIn,Mask,len(cIDs))
+fOut = o3d.h5p
+if (fGen):
+	Mask = np.zeros(Np,dtype=bool)
+	for n in range(Np):
+		Mask[n] = (aIDs[n] in cIDs)
+	
+	lfmpp.subH5p(fIn,Mask,len(cIDs),fOut=fOut)
