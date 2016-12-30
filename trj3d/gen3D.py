@@ -57,7 +57,11 @@ ActivateDatabase(fOut)
 pyv.lfmPCol(fOut,"radius",cMap="viridis")
 pOp = GetPlotOptions()
 print(pOp)
+pOp.lineType = 1
+pOp.tubeResolution 100
+pOp.tubeRadiusBBox = 0.01
 SetPlotOptions(pOp)
+
 AddOperator("PersistentParticles")
 ppOp = GetOperatorOptions(0)
 print(ppOp)
@@ -66,6 +70,8 @@ ppOp.connectParticles = 1
 ppOp.indexVariable = "id"
 
 SetOperatorOptions(ppOp)
+
+pyv.SetWin3D(Ax=0,Ang=-90)
 
 DrawPlots()
 #pyv.cleanLegends(plXs,plYs,plTits)
