@@ -18,7 +18,7 @@ fGen = True
 
 aIDs = np.arange(1,Np+1)
 fIn = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/" + h5id
-fOut = o3d.h5p
+fOut = "o3d.h5p"
 if (fGen):
 	Mask = np.zeros(Np,dtype=bool)
 	for n in range(Np):
