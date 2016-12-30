@@ -51,12 +51,12 @@ sOp.axisType = 2
 sOp.project2d = 0
 SetOperatorOptions(sOp)
 
-pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.35,Legend=False)
-AddOperator("Slice")
-sOp = GetOperatorOptions(0)
-sOp.axisType = 0
-sOp.project2d = 0
-SetOperatorOptions(sOp)
+# pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.35,Legend=False)
+# AddOperator("Slice")
+# sOp = GetOperatorOptions(0)
+# sOp.axisType = 0
+# sOp.project2d = 0
+# SetOperatorOptions(sOp)
 
 
 #Block out central cutout
@@ -102,7 +102,7 @@ SetOperatorOptions(tOp)
 
 pyv.SetWin3D(Ax=1,Ang=+90)
 pyv.SetWin3D(Ax=2,Ang=+90)
-pyv.SetWin3D(Ax=0,Ang=+30)
+pyv.SetWin3D(Ax=0,Ang=+45)
 pyv.SetWin3D(Zoom=1.2)
 
 DrawPlots()
