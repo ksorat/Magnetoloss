@@ -58,7 +58,7 @@ pyv.lfmPCol(fOut,"radius",cMap="viridis")
 pOp = GetPlotOptions()
 print(pOp)
 pOp.lineType = 1
-pOp.tubeResolution 100
+pOp.tubeResolution = 100
 pOp.tubeRadiusBBox = 0.01
 SetPlotOptions(pOp)
 
