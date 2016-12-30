@@ -46,7 +46,7 @@ Mrk = [-60,60]
 RMax = 20
 RMin = 1.05
 
-Ts = 3500
+Ts = 3200
 
 figSize = (10,10)
 figQ = 300 #DPI
@@ -88,6 +88,13 @@ for s in range(Ns):
 	fig = plt.figure()
 	Ax = plt.gca()
 	figName = "khiPanel_%d.png"%(s)
+	Phi = radScl*Mrk[s]
+	p0 = (RMin*np.cos(Phi),RMin*np.sin(Phi))
+	p1 = (RMax*np.cos(Phi),RMax*np.sin(Phi))
+	khiLine = [p0,p1]
+	(ln_xs, ln_ys) = zip(*khiLine)
+	#Now do KHI marker
+	Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=2,color='silver'))
 	#Fields
 	#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 	fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud')
@@ -95,14 +102,9 @@ for s in range(Ns):
 	#Now do particles
 	xs,ys,zs = getPs(h5pDir,h5ps[s],Ts)
 	pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
-	#Now do KHI marker
-	Phi = radScl*Mrk[s]
-	p0 = (RMin*np.cos(Phi),RMin*np.sin(Phi))
-	p1 = (RMax*np.cos(Phi),RMax*np.sin(Phi))
-	khiLine = [p0,p1]
-	(ln_xs, ln_ys) = zip(*khiLine)
+	
 
-	Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=2,color='steelblue'))
+	
 
 	#Pretty-ify
 	plt.axis('scaled')
