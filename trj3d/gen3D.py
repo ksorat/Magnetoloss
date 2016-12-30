@@ -42,15 +42,27 @@ pyv.pvInit()
 DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 
 #Field data
-# OpenDatabase(Src0)
-# vBds = [-35,35]
-# pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
-# AddOperator("Slice")
-# sOp = GetOperatorOptions(0)
-# sOp.axisType = 2
-# sOp.project2d = 0
-# SetOperatorOptions(sOp)
+OpenDatabase(Src0)
+vBds = [-35,35]
+pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
+AddOperator("Slice")
+sOp = GetOperatorOptions(0)
+sOp.axisType = 2
+sOp.project2d = 0
+SetOperatorOptions(sOp)
 
+#Block out central cutout
+AddPlot("Contour","RadAll")
+cOps = GetPlotOptions()
+cOps.colorType = 0
+cOps.singleColor = (0, 0, 0, 255)
+cOps.singleColor = (192, 192, 192, 255)
+cOps.contourMethod = 1
+cOps.contourValue = (2.2)
+cOps.legendFlag = 0
+SetPlotOptions(cOps)
+
+#Particles
 OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
@@ -71,10 +83,12 @@ ppOp.indexVariable = "id"
 print(ppOp)
 SetOperatorOptions(ppOp)
 
-#pyv.SetWin3D(Ax=1,Ang=-90)
+pyv.SetWin3D(Ax=1,Ang=+90)
+pyv.SetWin3D(Ax=2,Ang=+90)
+pyv.SetWin3D(Ax=0,Ang=+30)
 
 DrawPlots()
 #pyv.cleanLegends(plXs,plYs,plTits)
-#pyv.setAtts()
+pyv.setAtts()
 
 SaveWindow()
