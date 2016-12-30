@@ -44,7 +44,7 @@ Spcs = ["H+","e-"]
 h5ps = ["H.100keV.h5part","e.100keV.h5part"]
 Mrk = [-60,60]
 RMax = 20
-RMin = 2.0
+RMin = 1.0
 
 Ts = 3100
 
@@ -101,7 +101,7 @@ for s in range(Ns):
 	khiLine = [p0,p1]
 	(ln_xs, ln_ys) = zip(*khiLine)
 
-	Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=2,color='blue'))
+	Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=2,color='steelblue'))
 
 	#Pretty-ify
 	plt.axis('scaled')
