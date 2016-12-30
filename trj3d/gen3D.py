@@ -38,20 +38,22 @@ else:
 
 #Do some defaults
 pyv.lfmExprsEB()
-pyv.pvInit()
+#pyv.pvInit()
 DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 
 #Field data
-OpenDatabase(Src0)
-vBds = [-35,35]
-pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
-AddOperator("Slice")
-sOp = GetOperatorOptions(0)
-sOp.axisType = 2
-sOp.project2d = 0
-SetOperatorOptions(sOp)
+# OpenDatabase(Src0)
+# vBds = [-35,35]
+# pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
+# AddOperator("Slice")
+# sOp = GetOperatorOptions(0)
+# sOp.axisType = 2
+# sOp.project2d = 0
+# SetOperatorOptions(sOp)
 
 OpenDatabase(fIn)
+SetActiveDatabase(fIn)
+
 pyv.lfmPCol(fIn,"id",cMap="viridis")
 pOp = GetPlotOptions()
 print(pOp)
