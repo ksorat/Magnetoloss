@@ -46,7 +46,7 @@ Mrk = [-60,60]
 RMax = 20
 RMin = 1.05
 
-Ts = 3200
+Ts = 3100
 
 figSize = (10,10)
 figQ = 300 #DPI
@@ -102,8 +102,6 @@ for s in range(Ns):
 	#Now do particles
 	xs,ys,zs = getPs(h5pDir,h5ps[s],Ts)
 	pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
-	
-
 	
 
 	#Pretty-ify
