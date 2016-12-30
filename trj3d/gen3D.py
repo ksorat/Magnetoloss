@@ -85,13 +85,16 @@ SetOperatorOptions(ppOp)
 
 AddOperator("Tube")
 tOp = GetOperatorOptions(1)
+tOp.radiusFractionBBox = 0.0025
+tOp.fineness = 20
+tOp.capping = 1
 print(tOp)
 SetOperatorOptions(tOp)
 
 pyv.SetWin3D(Ax=1,Ang=+90)
 pyv.SetWin3D(Ax=2,Ang=+90)
 pyv.SetWin3D(Ax=0,Ang=+30)
-pyv.SetWin3D(Zoom=1.5)
+pyv.SetWin3D(Zoom=1.2)
 
 DrawPlots()
 #pyv.cleanLegends(plXs,plYs,plTits)
