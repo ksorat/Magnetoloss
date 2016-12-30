@@ -39,6 +39,7 @@ else:
 #Do some defaults
 pyv.lfmExprsEB()
 pyv.pvInit()
+DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 
 #Field data
 OpenDatabase(Src0)
@@ -51,14 +52,14 @@ sOp.project2d = 0
 SetOperatorOptions(sOp)
 
 OpenDatabase(fIn)
-pyv.lfmPCol(fIn,"z",vBds=[-8,8],cMap="Cool")
+pyv.lfmPCol(fIn,"id",vcMap="viridis")
 pOp = GetPlotOptions()
 print(pOp)
 SetPlotOptions(pOp)
 AddOperator("PersistentParticles")
 ppOp = GetOperatorOptions(0)
 print(ppOp)
-ppOp.stopIndex = 450
+ppOp.stopIndex = 50
 ppOp.connectParticles = 1
 ppOp.indexVariable = "id"
 
