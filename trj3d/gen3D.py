@@ -75,7 +75,7 @@ OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
 #pyv.lfmPCol(fOut,"id",cMap="cpk_jmol",Legend=False)
-pyv.lfmPCol(fOut,"z",cMap="Cool",vBds=[-8,8],Legend=False,Light=True)
+pyv.lfmPCol(fOut,"z",cMap="Cool",vBds=[-5,5],Legend=False,Light=True)
 pOp = GetPlotOptions()
 # pOp.lineType = 1
 # pOp.tubeResolution = 100
@@ -94,8 +94,8 @@ SetOperatorOptions(ppOp)
 
 AddOperator("Tube")
 tOp = GetOperatorOptions(1)
-tOp.radiusFractionBBox = 0.0025
-tOp.fineness = 20
+tOp.radiusFractionBBox = 0.0035
+tOp.fineness = 10
 tOp.capping = 1
 print(tOp)
 SetOperatorOptions(tOp)
