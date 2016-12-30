@@ -61,7 +61,7 @@ SetPlotOptions(pOp)
 AddOperator("PersistentParticles")
 ppOp = GetOperatorOptions(0)
 print(ppOp)
-ppOp.stopIndex = 50
+ppOp.stopIndex = 450
 ppOp.connectParticles = 1
 ppOp.indexVariable = "id"
 
