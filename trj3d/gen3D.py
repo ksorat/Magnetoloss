@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import os
 import datetime
 from visit import *
 from visit_utils import *
