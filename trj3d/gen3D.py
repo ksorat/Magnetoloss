@@ -40,6 +40,7 @@ else:
 pyv.lfmExprsEB()
 pyv.pvInit()
 
+#Field data
 OpenDatabase(Src0)
 vBds = [-35,35]
 pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
@@ -50,6 +51,17 @@ sOp.project2d = 0
 SetOperatorOptions(sOp)
 
 OpenDatabase(fIn)
+pyv.lfmPCol(fIn,"z",vBds=[-8,8],cMap="Cool")
+pOp = GetPlotOptions()
+print(pOp)
+SetPlotOptions(pOp)
+AddOperator("PersistentParticles")
+ppOp = GetOperatorOptions(0)
+print(ppOp)
+SetOperatorOptions(ppOp)
 
 DrawPlots()
+pyv.cleanLegends(plXs,plYs,plTits)
+pyv.setAtts()
+
 SaveWindow()
