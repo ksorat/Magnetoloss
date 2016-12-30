@@ -44,12 +44,20 @@ DefineScalarExpression("radius","sqrt(x*x+y*y+z*z)")
 #Field data
 OpenDatabase(Src0)
 vBds = [-35,35]
-pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.5)
+pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.75,Legend=False)
 AddOperator("Slice")
 sOp = GetOperatorOptions(0)
 sOp.axisType = 2
 sOp.project2d = 0
 SetOperatorOptions(sOp)
+
+pyv.lfmPCol(Src0,"dBz",vBds=vBds,Inv=True,pcOpac=0.35,Legend=False)
+AddOperator("Slice")
+sOp = GetOperatorOptions(0)
+sOp.axisType = 0
+sOp.project2d = 0
+SetOperatorOptions(sOp)
+
 
 #Block out central cutout
 AddPlot("Contour","RadAll")
@@ -66,11 +74,12 @@ SetPlotOptions(cOps)
 OpenDatabase(fOut)
 ActivateDatabase(fOut)
 
-pyv.lfmPCol(fOut,"id",cMap="cpk_jmol")
+#pyv.lfmPCol(fOut,"id",cMap="cpk_jmol",Legend=False)
+pyv.lfmPCol(fOut,"z",cMap="Cool",vBds=[-8,8],Legend=False)
 pOp = GetPlotOptions()
-pOp.lineType = 1
-pOp.tubeResolution = 100
-pOp.tubeRadiusBBox = 0.025
+# pOp.lineType = 1
+# pOp.tubeResolution = 100
+# pOp.tubeRadiusBBox = 0.025
 print(pOp)
 SetPlotOptions(pOp)
 
