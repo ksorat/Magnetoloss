@@ -18,7 +18,7 @@ Quiet = True
 
 aIDs = np.arange(1,Np+1)
 rootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/"
-fIn = rootdir+ "H5p/" + h5id
+fIn = rootDir+ "H5p/" + h5id
 
 fOut = "o3d.h5p"
 if (fGen):
