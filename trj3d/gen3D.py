@@ -14,7 +14,7 @@ Np = 100000
 cIDs = [1335,301,95834,12593,63464,75685]
 h5id = "O.100keV.h5part"
 fGen = False
-
+Quiet = True
 
 aIDs = np.arange(1,Np+1)
 rootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/"
