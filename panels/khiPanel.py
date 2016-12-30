@@ -46,7 +46,7 @@ Mrk = [-60,60]
 RMax = 20
 RMin = 1.05
 
-Ts = 3100
+Ts = 3500
 
 figSize = (10,10)
 figQ = 300 #DPI
@@ -61,7 +61,7 @@ fldDomX = [-5,10]
 
 pBds = [50,150]
 pCMap = "cool"
-pSize = 2; pMark = 'o'; pLW = 0.2
+pSize = 5; pMark = 'o'; pLW = 0.2
 
 #Locations
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data"
@@ -80,16 +80,17 @@ radScl = np.pi/180.0
 
 for s in range(Ns):
 	if (s==0):
-		fldDomY = [-20,0]
+		fldDomY = [-15,0]
 	else:
-		fldDomY = [0,20]
+		fldDomY = [0,15]
 
 	print(fldDomY)
 	fig = plt.figure()
 	Ax = plt.gca()
 	figName = "khiPanel_%d.png"%(s)
 	#Fields
-	fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+	#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+	fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud')
 	lfmv.addEarth2D()
 	#Now do particles
 	xs,ys,zs = getPs(h5pDir,h5ps[s],Ts)
