@@ -58,7 +58,7 @@ pyv.lfmPCol(fOut,"radius",cMap="viridis")
 pOp = GetPlotOptions()
 pOp.lineType = 1
 pOp.tubeResolution = 100
-pOp.tubeRadiusBBox = 0.1
+pOp.tubeRadiusBBox = 0.025
 print(pOp)
 SetPlotOptions(pOp)
 
@@ -71,7 +71,7 @@ ppOp.indexVariable = "id"
 print(ppOp)
 SetOperatorOptions(ppOp)
 
-pyv.SetWin3D(Ax=1,Ang=-90)
+#pyv.SetWin3D(Ax=1,Ang=-90)
 
 DrawPlots()
 #pyv.cleanLegends(plXs,plYs,plTits)
