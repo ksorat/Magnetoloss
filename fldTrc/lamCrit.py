@@ -61,7 +61,7 @@ for n in range(NumSpc):
 			labS = "Phi = %d"%(pS)
 		else:
 			labS = "_ignore"
-		plt.plot(lC,Xs[I,:],pStr,label=labS)
+		plt.plot(lC,X[I,:],pStr,label=labS)
 		Ic = Xs[I,:].argmax()
 		print("\t@ Phi = %d, LamC = %f"%(pS,lC[Ic]))
 
