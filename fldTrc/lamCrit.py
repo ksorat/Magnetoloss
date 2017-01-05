@@ -9,7 +9,7 @@ import matplotlib.gridspec as gridspec
 from scipy import ndimage
 
 #Figure defaults
-#figSize = (8,8)
+figSize = (8,4)
 figQ = 300 #DPI
 
 
@@ -57,11 +57,17 @@ for n in range(NumSpc):
 		dP = np.abs(pC-pS)
 		I = np.abs(pC-pS).argmin()
 		pStr = "%s%s"%(Cols[i],Mrks[n])
-		labS = "Phi = %d (%s)"%(pS,Spcs[n])
+		if (n == 0):
+			labS = "Phi = %d"%(pS)
+		else:
+			labS = "_ignore"
 		plt.plot(lC,Xs[I,:],pStr,label=labS)
 		Ic = Xs[I,:].argmax()
 		print("\t@ Phi = %d, LamC = %f"%(pS,lC[Ic]))
 
+plt.xlabel("Latitude")
+plt.ylabel("Count")
+plt.title("Ion Losses: H+ (solid), O+ (dashed)")
 plt.legend()
 plt.savefig("lamCrit.png")
 plt.close('all')
