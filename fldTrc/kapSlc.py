@@ -11,7 +11,7 @@ import pyVisit as pyv
 #fIn = "fldDatLorez.vti"
 fIn = "fldDat.vti"
 db = fIn
-Quiet = False
+Quiet = True
 doProd = False
 doRand = True
 
@@ -58,7 +58,6 @@ Nphi = len(PhiCs)
 radScl = np.pi/180.0
 #Create points
 
-Nphi = 1
 for k in range(Nphi):
 	PhiC = PhiCs[k]
 	LatC = LatCs[k]
