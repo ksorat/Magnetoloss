@@ -39,6 +39,8 @@ dR = Rad[1]-Rad[0]
 
 pcOpac = 0.75
 pcOpacP = 0.5
+pcOpacP = 1.0
+
 
 if (Quiet):
 	LaunchNowin()
