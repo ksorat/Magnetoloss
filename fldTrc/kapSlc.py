@@ -12,7 +12,7 @@ import pyVisit as pyv
 fIn = "fldDat.vti"
 db = fIn
 Quiet = True
-doProd = True
+doProd = False
 doRand = True
 
 PhiCs = [0,15,30,45,60,75,90]
