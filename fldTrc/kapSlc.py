@@ -117,7 +117,7 @@ for k in range(Nphi):
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"Bmag",vBds=(10,500),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"pKappa",vBds=(1.0e-2,1.0e+2),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
+	pyv.lfmPCol(db,"RadGyro100",vBds=(1.0e-2,1.0e+1),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
@@ -191,6 +191,7 @@ for k in range(Nphi):
 	DrawPlots()
 	print("Writing to %s at Phi=%f"%(fOut,PhiC))
 
+	#OpenGUI()
 	swa = GetSaveWindowAttributes()
 	swa.fileName = fOut
 	SetSaveWindowAttributes(swa)
@@ -203,3 +204,4 @@ for k in range(Nphi):
 	#ComS = 'convert tmpVid/%s'%fOut + ' -trim -border 20x20 -bordercolor "#FFFFFF" P%d.png'%np.int(PhiC)
 	ComS = 'convert tmpVid/%s'%fOut + ' -trim P%d.png'%np.int(PhiC)
 	os.system(ComS)
+
