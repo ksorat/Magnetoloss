@@ -12,7 +12,7 @@ import pyVisit as pyv
 fIn = "fldDat.vti"
 db = fIn
 Quiet = True
-doProd = True
+doProd = False
 doRand = True
 
 PhiCs = [0,15,30,45,60,75,90]
@@ -117,7 +117,7 @@ for k in range(Nphi):
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"Bmag",vBds=(10,500),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"RadGyro100",vBds=(1.0e-2,1.0e+1),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
+	pyv.lfmPCol(db,"RadGyro100",vBds=(1.0e-2,25),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=True)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
