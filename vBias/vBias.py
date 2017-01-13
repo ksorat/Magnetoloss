@@ -6,6 +6,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import cPickle as pickle
+import os
 import phiX as px
 
 Root = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
