@@ -22,7 +22,7 @@ def findCrossings(fIn,PhiC=30.0,DelPhi=5):
 		#Fix for flop
 		phi[phi<0] = phi[phi<0] + 360
 	Np = len(ids)
-	#print("\tFound %d particles\n"%(Np))
+	print("\tFound %d particles\n"%(Np))
 	Vx = []
 	Vy = []
 	Vz = []

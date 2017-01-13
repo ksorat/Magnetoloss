@@ -29,7 +29,7 @@ if (os.path.isfile(vbDataFile)):
 else:
 	s,z,Vx,Vy,Vz = px.findCrossings(fIn,PhiC=PhiC)
 	print("Writing pickle")
-	with open(msDataFile, "wb") as f:
+	with open(vbDataFile, "wb") as f:
 		pickle.dump(s,f)
 		pickle.dump(z,f)
 		pickle.dump(Vx,f)
