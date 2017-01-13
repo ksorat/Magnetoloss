@@ -14,8 +14,10 @@ doSingle = True
 pId = 50
 Nstrd = 4 #What fraction of points to trace
 Nstrd = 30
-tRad=0.002
-tRad=0.001
+#tRadFld=0.002
+tRadFld=0.001
+tRadTrj=0.005
+
 Quiet = True
 User = False
 doProd = True
@@ -83,7 +85,7 @@ if (doProd):
 	scMap = "Blues"
 	scMap = "Reds"
 	scMap = "OrRd"
-	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,Inv=True,tRad=tRad,Legend=False)
+	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,Inv=True,tRad=tRadFld,Legend=False)
 	icOp = GetOperatorOptions(0)
 	#icOp.dataValue = 10
 	#icOp.dataVariable = "dPhi"
@@ -132,7 +134,7 @@ SetOperatorOptions(ppOp)
 
 AddOperator("Tube")
 tOp = GetOperatorOptions(1)
-tOp.radiusFractionBBox = 0.005
+tOp.radiusFractionBBox = tRadTrj
 tOp.fineness = 10
 tOp.capping = 1
 print(tOp)

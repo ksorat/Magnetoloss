@@ -10,11 +10,12 @@ import pyVisit as pyv
 #RootDir = os.path.expanduser('~') + "/Work/Injection/VTIs/"
 #fldSlc = RootDir + "/SNS-Bz-5-Vx400-N5-F200_mhd_1141000.vti"
 fldSlc = "mhd.vti"
-#fldSlc = "testSlc.vti"
 Quiet = True
 doPic = True
+
 # fldSlc = "testSlc.vti"
 # Quiet = False
+# doPic = False
 
 zSlc = 0.15
 
@@ -36,7 +37,7 @@ md0 = GetMetaData(fldSlc)
 
 DefineScalarExpression("Veb","if ( ge(Bmag,1.0e-6), 1000*Emag/Bmag, 0)")
 #BxGrad (in 1/Re, convert to 1/km)
-DefineVectorExpression("BmagC","recenter(Bmag)")
+DefineScalarExpression("BmagC","recenter(Bmag)")
 DefineVectorExpression("GBVec","gradient(BmagC)")
 DefineScalarExpression("GBx","GBVec[0]")
 DefineScalarExpression("GBy","GBVec[1]")
