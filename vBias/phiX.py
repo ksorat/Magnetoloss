@@ -80,3 +80,4 @@ def findCrossings(fIn,PhiC=30.0,DelPhi=5):
 	zM = np.array(zM)
 	print("\tPhi = %5.2f, NumP = %d\n"%(PhiC,len(Vx)))
 	return sM,zM,Vx,Vy,Vz
+

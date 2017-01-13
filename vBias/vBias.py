@@ -8,11 +8,22 @@ import matplotlib.gridspec as gridspec
 import cPickle as pickle
 import os
 import phiX as px
-
+from matplotlib.colors import LogNorm
+from matplotlib.colors import Normalize
 Root = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 
-fIn = Root + "O.100keV.h5part"
-vbDataFile = "vbO.pkl"
+doOxy = False
+if (doOxy):
+	fIn = Root + "O.100keV.h5part"
+	vbDataFile = "vbO.pkl"
+	spcLab = "O+"
+	figName = "vB_O.png"
+else:
+	fIn = Root + "H.100keV.h5part"
+	vbDataFile = "vbH.pkl"
+	spcLab = "H+"
+	figName = "vB_H.png"
+
 
 PhiC = 60
 dAlph = 10
@@ -59,4 +70,40 @@ if (doMask):
 	Vz = Vz[Mask]
 	Vphi = Vphi[Mask]
 
+lfmv.ppInit()
+plt.close(1)
+fig = plt.figure(figsize=(18,4))
+figQ = 300
+gs = gridspec.GridSpec(1,3,width_ratios=[10,10,0.25])
 
+#cMap="viridis"
+cMap="YlGnBu"
+
+#cNorm = LogNorm(vmin=1.0e-2,vmax=1)
+
+zb = np.linspace(-8,8,25)
+Vpb = np.linspace(-0.2,0.2,30)
+Vzb = np.linspace(-0.2,0.2,30)
+
+vMin = 0; vMax = 0.75
+vNorm = mpl.colors.Normalize(vmin=vMin,vmax=vMax)
+
+Axp = fig.add_subplot(gs[0,0])
+Axp.hist2d(Vphi,z,[Vpb,zb],normed=True,vmin=vMin,vmax=vMax,cmap=cMap)
+plt.ylabel("Height [Re]")
+plt.xlabel('$V_{\phi}$ [Re/s]')
+#plt.colorbar(Axp)
+
+Axz = fig.add_subplot(gs[0,1])
+Axz.hist2d(Vz,z,[Vzb,zb],normed=True,vmin=vMin,vmax=vMax,cmap=cMap)
+plt.setp(Axz.get_yticklabels(),visible=False)
+plt.xlabel('Vz [Re/s]')
+#Axz.colorbar()
+
+Axcb = fig.add_subplot(gs[0,2])
+cb = mpl.colorbar.ColorbarBase(Axcb,cmap=cMap,norm=vNorm,orientation='vertical')
+cb.set_label("Density",fontsize="xx-small")
+plt.tight_layout()
+#plt.show()
+
+plt.savefig(figName,dpi=figQ)
