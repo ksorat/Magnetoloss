@@ -13,7 +13,9 @@ import lfmPostproc as lfmpp
 doSingle = True
 pId = 50
 Nstrd = 4 #What fraction of points to trace
-Nstrd = 20
+Nstrd = 30
+tRad=0.002
+tRad=0.001
 Quiet = True
 User = False
 doProd = True
@@ -32,6 +34,7 @@ t,zCr = lfmpp.getH5pid(SrcP,"zCr",pId)
 t,xP  = lfmpp.getH5pid(SrcP,"x",pId)
 t,yP  = lfmpp.getH5pid(SrcP,"y",pId)
 t,zP  = lfmpp.getH5pid(SrcP,"z",pId)
+t,mp  = lfmpp.getH5pid(SrcP,"mp",pId)
 
 #Find unique MP crossings
 mpT,I = np.unique(tCr,return_index=True)
@@ -40,15 +43,19 @@ Ix = I[1::Nstrd] #Remove null point
 
 i0 = Ix[0]
 i1 = t.shape[0]-1
-
+print("Found %d slices after first MP"%(i1-i0))
 I = range(i0,i1,Nstrd)
 
 Ns = len(I) #Number of seeds
-print("Using %d seeds from MP crossings"%(Ns))
+print("Using %d seeds from crossings"%(Ns))
 
-x = xCr[I]
-y = yCr[I]
-z = zCr[I]
+# x = xCr[I]
+# y = yCr[I]
+# z = zCr[I]
+x = xP[I]
+y = yP[I]
+z = zP[I]
+
 
 if (Quiet):
         LaunchNowin()
@@ -76,7 +83,7 @@ if (doProd):
 	scMap = "Blues"
 	scMap = "Reds"
 	scMap = "OrRd"
-	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,Inv=True,tRad=0.002,Legend=False)
+	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,Inv=True,tRad=tRad,Legend=False)
 	icOp = GetOperatorOptions(0)
 	#icOp.dataValue = 10
 	#icOp.dataVariable = "dPhi"
