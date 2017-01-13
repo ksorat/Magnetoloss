@@ -12,7 +12,7 @@ import phiX as px
 Root = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 
 fIn = Root + "O.100keV.h5part"
-msDataFile = "vbO.pkl"
+vbDataFile = "vbO.pkl"
 
 PhiC = 60
 dAlph = 10
