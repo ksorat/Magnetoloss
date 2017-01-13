@@ -1,0 +1,12 @@
+<Params>
+	<particle species="H" K0="100"/>
+	<radius min="5" max="10" N="5"/>
+	<phi min="140" max="220" N="5"/>
+	<psi min="0" max="360" N="1"/>
+	<alpha min="20" max="90" N="2"/>
+	<time tfin="4500" Ns="100" Nf="100"/>
+	<integrator dt="0.1" method="fp"/>
+	<field infile = "mhd_1200k.vti" static="T"/>
+	<output outdir="H100" trace="F"/>
+	<run restart="F" debug="F" pid="25"/>
+</Params>
