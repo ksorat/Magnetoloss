@@ -12,9 +12,10 @@ import lfmPostproc as lfmpp
 
 doSingle = True
 pId = 50
-Nstrd = 1 #What fraction of MP crossings to trace
-Quiet = False
-User = True
+Nstrd = 4 #What fraction of points to trace
+Nstrd = 20
+Quiet = True
+User = False
 doProd = True
 
 SrcF = "fld.vti"
@@ -28,11 +29,20 @@ t,tCr = lfmpp.getH5pid(SrcP,"tCr",pId)
 t,xCr = lfmpp.getH5pid(SrcP,"xCr",pId)
 t,yCr = lfmpp.getH5pid(SrcP,"yCr",pId)
 t,zCr = lfmpp.getH5pid(SrcP,"zCr",pId)
+t,xP  = lfmpp.getH5pid(SrcP,"x",pId)
+t,yP  = lfmpp.getH5pid(SrcP,"y",pId)
+t,zP  = lfmpp.getH5pid(SrcP,"z",pId)
 
 #Find unique MP crossings
 mpT,I = np.unique(tCr,return_index=True)
 print("Found %d MP crossings"%(len(I)-1))
-I = I[1::Nstrd] #Remove null point
+Ix = I[1::Nstrd] #Remove null point
+
+i0 = Ix[0]
+i1 = t.shape[0]-1
+
+I = range(i0,i1,Nstrd)
+
 Ns = len(I) #Number of seeds
 print("Using %d seeds from MP crossings"%(Ns))
 
@@ -65,7 +75,8 @@ if (doProd):
 	#Only do streams for final version
 	scMap = "Blues"
 	scMap = "Reds"
-	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,tRad=0.0025,Legend=False)
+	scMap = "OrRd"
+	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,Inv=True,tRad=0.002,Legend=False)
 	icOp = GetOperatorOptions(0)
 	#icOp.dataValue = 10
 	#icOp.dataVariable = "dPhi"
@@ -131,19 +142,19 @@ if (not doSingle):
 
 
 w3d = GetView3D()
-w3d.viewNormal = (0.878976, -0.138305, 0.45637)
-w3d.focus = (-1.025, 0, 0.000166655)
-w3d.viewUp = (-0.434782, 0.160665, 0.886087)
+w3d.viewNormal = (-0.301776, -0.890932, 0.33937)
+w3d.focus = (-1.025, 0, 3.19481e-05)
+w3d.viewUp = (0.111356, 0.32059, 0.94065)
 w3d.viewAngle = 30
 w3d.parallelScale = 25.6497
-w3d.nearPlane = -51.2994
-w3d.farPlane = 51.2994
-w3d.imagePan = (0, 0)
-w3d.imageZoom = 1.452
+w3d.nearPlane = -51.2993
+w3d.farPlane = 51.2993
+w3d.imagePan = (-0.0608166, 0.00178165)
+w3d.imageZoom = 2.57231
 w3d.perspective = 1
 w3d.eyeAngle = 2
 w3d.centerOfRotationSet = 0
-w3d.centerOfRotation = (-1.025, 0, 0.000166655)
+w3d.centerOfRotation = (-1.025, 0, 3.19481e-05)
 w3d.axis3DScaleFlag = 0
 w3d.axis3DScales = (1, 1, 1)
 w3d.shear = (0, 0, 1)

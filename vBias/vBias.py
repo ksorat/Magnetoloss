@@ -38,6 +38,7 @@ if (os.path.isfile(vbDataFile)):
         	Vy = pickle.load(f)
         	Vz = pickle.load(f)
 else:
+	print("Calculating data for %s"%(spcLab))
 	s,z,Vx,Vy,Vz = px.findCrossings(fIn,PhiC=PhiC)
 	print("Writing pickle")
 	with open(vbDataFile, "wb") as f:
@@ -103,7 +104,8 @@ plt.xlabel('Vz [Re/s]')
 Axcb = fig.add_subplot(gs[0,2])
 cb = mpl.colorbar.ColorbarBase(Axcb,cmap=cMap,norm=vNorm,orientation='vertical')
 cb.set_label("Density",fontsize="xx-small")
-plt.tight_layout()
-#plt.show()
 
-plt.savefig(figName,dpi=figQ)
+plt.tight_layout()
+
+plt.show()
+#plt.savefig(figName,dpi=figQ)
