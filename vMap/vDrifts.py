@@ -17,7 +17,7 @@ doPic = True
 # Quiet = False
 # doPic = False
 
-zSlc = 0.15
+zSlc = 0.1
 
 if (Quiet):
 	LaunchNowin()
@@ -34,7 +34,8 @@ md0 = GetMetaData(fldSlc)
 
 #ExB velocity (in km/s)
 #DefineScalarExpression("Veb","1000*Emag/Bmag")
-
+DefineVectorExpression("BfldC","{Bx,By,Bz}")
+DefineScalarExpression("RadC","recenter(cylindrical_radius(mesh))")
 DefineScalarExpression("Veb","if ( ge(Bmag,1.0e-6), 1000*Emag/Bmag, 0)")
 #BxGrad (in 1/Re, convert to 1/km)
 DefineScalarExpression("BmagC","recenter(Bmag)")
@@ -43,7 +44,7 @@ DefineScalarExpression("GBx","GBVec[0]")
 DefineScalarExpression("GBy","GBVec[1]")
 DefineScalarExpression("GBz","GBVec[2]")
 
-DefineScalarExpression("BxGB","magnitude(cross(Bfld,GBVec))/(BmagC*BmagC*6380.0)")
+DefineScalarExpression("BxGB","magnitude(cross(recenter(BfldC),GBVec))/(BmagC*BmagC*6380.0)")
 
 #Non-energy part of Vd
 q = 1.6021766e-19 #Coulombs
@@ -55,7 +56,7 @@ DefineScalarExpression("VdPkev","%f*BxGB/BmagC"%(Scl))
 
 #Equality energy (in kev), 2/3 from assuming alpha=45o
 DefineScalarExpression("eqKevA","(2/3.0)*Veb/VdPkev")
-DefineScalarExpression("eqKev","if( ge(RadAll,2.0), eqKevA,0.0)")
+DefineScalarExpression("eqKev","if( ge(RadC,2.0), eqKevA,0.0)")
 
 #Create slice of eqKev
 if (doPic):
