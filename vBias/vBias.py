@@ -27,7 +27,7 @@ if (os.path.isfile(vbDataFile)):
         	Vy = pickle.load(f)
         	Vz = pickle.load(f)
 else:
-	s,z,Vx,Vy,Vz = findCrossings(fIn,PhiC=PhiC)
+	s,z,Vx,Vy,Vz = px.findCrossings(fIn,PhiC=PhiC)
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
 		pickle.dump(s,f)
