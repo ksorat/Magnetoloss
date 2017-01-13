@@ -22,6 +22,9 @@ Quiet = True
 User = False
 doProd = True
 
+Quiet = False
+User = True
+
 SrcF = "fld.vti"
 if (doSingle):
 	SrcP = "pZoom.h5part"

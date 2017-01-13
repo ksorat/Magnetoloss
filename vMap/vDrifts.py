@@ -57,10 +57,13 @@ DefineScalarExpression("VdPkev","%f*BxGB/BmagC"%(Scl))
 #Equality energy (in kev), 2/3 from assuming alpha=45o
 DefineScalarExpression("eqKevA","(2/3.0)*Veb/VdPkev")
 DefineScalarExpression("eqKev","if( ge(RadC,2.0), eqKevA,0.0)")
+cMap="viridis"
+cMap = "RdYlBu"
+Kbd = [1,350]
 
 #Create slice of eqKev
 if (doPic):
-	pyv.lfmPCol(fldSlc,"eqKev",cMap="viridis",vBds=[1,500],Log=True)
+	pyv.lfmPCol(fldSlc,"eqKev",cMap=cMap,vBds=Kbd,Log=True)
 	
 	AddOperator("Slice",0)
 	slOp = GetOperatorOptions(0)
@@ -76,7 +79,7 @@ if (doPic):
 	
 	pyv.cleanLegends([0.025],[0.9],["Particle Energy (keV)\nDrift/ExB Equality"])
 	DrawPlots()
-	
+	pyv.SetWin2D([-15,11,-20,20])
 	SaveWindow()
 else:
 	OpenGUI()
