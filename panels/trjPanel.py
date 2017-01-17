@@ -66,7 +66,7 @@ def getPBlk(h5pFile,pC,Np):
 		IndR = np.random.choice(Ntot,Np,replace=False)
 		rIDs = subIDs[IndR]
 		i0 = d*Nd
-		i1 = i0+Np-1
+		i1 = i0+Np
 		pIDs[i0:i1] = rIDs
 		print(rIDs)
 	return np.int(pIDs)
