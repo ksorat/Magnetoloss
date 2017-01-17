@@ -41,7 +41,7 @@ def getPs(h5pFile,pC,Nk):
 	IndR = np.random.choice(Ntot,Nk,replace=False)
 	ids = ids[IndR]
 	return ids
-def getPBlk(h5pF,pC,Np):
+def getPBlk(h5pFile,pC,Np):
 	#Get Np particles for each of 3 types
 	#pI:(0,180), (-15,0),(-180,-15)
 	#And have dPhi>=pC
