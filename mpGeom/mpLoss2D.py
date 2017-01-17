@@ -14,8 +14,8 @@ figQ = 300 #DPI
 
 
 figStub = "mpLoss"
-doFirst = False
-doTest = True
+doFirst = True
+doTest = False
 
 cAx=[1.0e-6,1.0e-3]
 cAx=[1.0e-5,1.0e-3]
@@ -36,6 +36,7 @@ P0 = -150; P1 = 150
 L0 = -60; L1 = 60
 
 BoxS = ["larrow,pad=0.25","larrow,pad=0.25","rarrow,pad=0.25"]
+vNorm = LogNorm(vmin=cAx[0],vmax=cAx[1])
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
 
@@ -84,8 +85,9 @@ else:
 lfmv.ppInit()
 fig = plt.figure(figsize=figSize)
 
-
-gs = gridspec.GridSpec(2,Ns,height_ratios=[1,1.5],hspace=0.05,wspace=0.05)
+wRat = np.ones(Ns+1)
+wRat[-1] = 0.05
+gs = gridspec.GridSpec(2,Ns+1,height_ratios=[1,1.5],hspace=0.05,wspace=0.05,width_ratios=wRat)
 
 figName = figStub + ".png"
 print("Generating %s"%figName)
@@ -102,7 +104,7 @@ for i in range(Ns):
 
 	#2D histogram
 	Ax2D = fig.add_subplot(gs[1,i])
-	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=LogNorm(vmin=cAx[0],vmax=cAx[1]) )
+	Ax2D.hist2d(Phi,Lambda,[pBin,lBin],cmap=cMap,normed=True,norm=vNorm )
 
 	#Axes
 	plt.axis('scaled')
@@ -134,7 +136,12 @@ for i in range(Ns):
 
 	#Add label for drift		
 	bbox_props = dict(boxstyle=BoxS[i], fc="white", ec="k", lw=0.5)
-	dAr = Ax2D.text(60,-40,"   Drift   ",ha="center",va="center",size="xx-small",bbox=bbox_props)
+	dAr = Ax2D.text(120,-45,"   Drift   ",ha="center",va="center",size="xx-small",bbox=bbox_props)
+
+Ax = fig.add_subplot(gs[:,-1])
+cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='vertical')
+cb.set_label("MLT/Latitude Density",fontsize="x-small")
+
 
 #Save
 plt.savefig(figName,dpi=figQ)

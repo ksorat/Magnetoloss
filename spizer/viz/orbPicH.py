@@ -17,7 +17,7 @@ Nstrd = 60
 
 tRadFld=0.001
 tRadTrj=0.005
-FldCmap = "orangehot" #Winter,YlGnBu,YlGn
+FldCmap = "YlGn" #Winter,YlGnBu,YlGn
 doProd = True
 Quiet = True
 User = False

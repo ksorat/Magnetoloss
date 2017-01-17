@@ -140,6 +140,7 @@ gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 #IDs = [1335,301,95834,12593,63464,75685]
 #IDs = getPs(h5p,pC,Nk)
 IDs = getPBlk(h5p,pC,Ny)
+
 print(IDs)
 
 n = 0
