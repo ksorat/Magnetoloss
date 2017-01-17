@@ -139,8 +139,8 @@ gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 #Traj data
 #IDs = [1335,301,95834,12593,63464,75685]
 #IDs = getPs(h5p,pC,Nk)
-IDs = getPBlk(h5p,pC,Ny)
-
+#IDs = getPBlk(h5p,pC,Ny)
+IDs = [47169,58372,88428,59065,38457,28687,36991,14603,99491,82858,92300,85799]
 print(IDs)
 
 n = 0
