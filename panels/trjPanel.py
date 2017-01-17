@@ -107,7 +107,6 @@ fig = plt.figure(figsize=figSize,tight_layout=True)
 gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
 #Traj data
-np.random.seed(seed=31337)
 #IDs = [1335,301,95834,12593,63464,75685]
 IDs = getPs(h5p,pC,Nk)
 print(IDs)
