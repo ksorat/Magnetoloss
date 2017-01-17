@@ -67,7 +67,7 @@ def getPBlk(h5pF,pC,Np):
 		i0 = d*Nd
 		i1 = i0+Np-1
 		pIDs[i0:i1] = rIDs
-		print("\tIDs = %s"%(str(rIDs)))
+		print(rIDs)
 	return np.int(pIDs)
 
 def getPTop(h5pFile,pId):
@@ -162,6 +162,7 @@ for i in range(1,Nx+1):
 		#plt.contour(xi,yi,dBz,Bv,cmap=fldCMap)
 		#Add figure label
 		subLab = chr(ord('a')+n)+")"
+		print(subLab)
 		Ax.text(7.5,15,subLab,fontsize="large")
 		lfmv.addEarth2D()
 
