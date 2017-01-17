@@ -23,12 +23,12 @@ User = False
 doProd = True
 
 Quiet = False
-User = True
+User = False
 
 SrcF = "fld.vti"
 if (doSingle):
 	SrcP = "pZoom.h5part"
-	SrcP = "../H100/H.100keV.ZoomID.000006.h5part"
+	SrcP = "../H100/H.100keV.ZoomID.000039.h5part"
 	pId = 0
 else:
 	SrcP = "prt.h5part"

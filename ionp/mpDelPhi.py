@@ -101,7 +101,7 @@ PhiI = np.linspace(piB[0],piB[1],Np)
 DelPhi = np.linspace(dpB[0],dpB[1],Np)
 PhiF = np.linspace(pfB[0],pfB[1],Np)
 
-vNorm = LogNorm(vmin=1.0e-5,vmax=5e-4)
+vNorm = LogNorm(vmin=1.0e-5,vmax=1.0e-3)
 
 figSize = (8,6)
 fig = plt.figure(figsize=figSize)
@@ -119,8 +119,15 @@ for n in range(2):
 	
 	lfmv.ax2mlt(Ax,mTks,doX=True)
 	lfmv.ax2mlt(Ax,mTks,doX=False)
+
+	#Add several helpful lines
 	plt.plot(PhiI,PhiI,'w--',linewidth=0.5)
-	#plt.xlabel('$\phi_{mp} [^{\circ}]$')
+	plt.hlines(0,piB[0],piB[1],colors='k',linewidth=0.5,linestyles='-')
+	plt.vlines(0,pfB[0],pfB[1],colors='k',linewidth=0.5,linestyles='-')
+
+	#Add label for drift
+	bbox_props = dict(boxstyle="larrow,pad=0.25", fc="white", ec="k", lw=0.5)
+	dAr = Ax.text(60,-105,"   Drift   ",ha="center",va="center",size="xx-small",bbox=bbox_props)
 	plt.xlabel("Magnetosheath First Contact [MLT]",fontsize="small")
 	if (n == 0):
 		#plt.ylabel('$\Delta \phi_{ms}$')

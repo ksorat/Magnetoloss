@@ -17,7 +17,7 @@ doPic = True
 # Quiet = False
 # doPic = False
 
-zSlc = 0.1
+zSlc = 0.0
 
 if (Quiet):
 	LaunchNowin()
@@ -57,14 +57,18 @@ DefineScalarExpression("VdPkev","%f*BxGB/BmagC"%(Scl))
 #Equality energy (in kev), 2/3 from assuming alpha=45o
 DefineScalarExpression("eqKevA","(2/3.0)*Veb/VdPkev")
 DefineScalarExpression("eqKev","if( ge(RadC,2.0), eqKevA,0.0)")
+DefineScalarExpression("eqKevC","recenter(eqKev)")
 cMap="viridis"
 cMap = "RdYlBu"
-Kbd = [1,350]
+Kbd = [1,500]
 
 #Create slice of eqKev
 if (doPic):
-	pyv.lfmPCol(fldSlc,"eqKev",cMap=cMap,vBds=Kbd,Log=True)
-	
+	pyv.lfmPCol(fldSlc,"eqKevC",cMap=cMap,vBds=Kbd,Log=True)
+	pcOp = GetPlotOptions()
+	pcOp.centering = 2
+	SetPlotOptions(pcOp)
+
 	AddOperator("Slice",0)
 	slOp = GetOperatorOptions(0)
 	slOp.axisType = 2
@@ -79,7 +83,7 @@ if (doPic):
 	
 	pyv.cleanLegends([0.025],[0.9],["Particle Energy (keV)\nDrift/ExB Equality"])
 	DrawPlots()
-	pyv.SetWin2D([-15,11,-20,20])
+	pyv.SetWin2D([-15,12,-20,20])
 	SaveWindow()
 else:
 	OpenGUI()
