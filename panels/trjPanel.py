@@ -50,7 +50,7 @@ def getPBlk(h5pFile,pC,Np):
 	pIH = [180,0,-15]
 	Nd = len(pIL)
 
-	pIDs = np.zeros(Np*Nd)
+	pIDs = np.zeros(Np*Nd,dtype=np.int)
 	isOut = lfmpp.getOut(h5pFile)
 	R, PhiMP0, LambdaF, Tmp = lfmpp.getSphLoss1st(h5pFile)
 	ids, PhiBX = lastPhi(h5pFile)
@@ -69,7 +69,7 @@ def getPBlk(h5pFile,pC,Np):
 		i1 = i0+Np
 		pIDs[i0:i1] = rIDs
 		print(rIDs)
-	return np.int(pIDs)
+	return pIDs
 
 def getPTop(h5pFile,pId):
 	

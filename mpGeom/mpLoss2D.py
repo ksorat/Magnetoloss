@@ -15,7 +15,7 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = False
-doTest = False
+doTest = True
 
 cAx=[1.0e-6,1.0e-3]
 cAx=[1.0e-5,1.0e-3]
@@ -34,6 +34,8 @@ spcs = ["H","O","e"]
 Leg = ["H+","O+","e-"]
 P0 = -150; P1 = 150
 L0 = -60; L1 = 60
+
+BoxS = ["larrow,pad=0.25","larrow,pad=0.25","rarrow,pad=0.25"]
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
 
@@ -130,11 +132,9 @@ for i in range(Ns):
 		plt.setp(Ax2D.get_yticklabels(),visible=False)
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
 
-	#Add label for drift
-	if (i < 2):
-		#ion
-		bbox_props = dict(boxstyle="larrow,pad=0.25", fc="white", ec="k", lw=0.5)
-		dAr = Ax2D.text(60,-105,"   Drift   ",ha="center",va="center",size="xx-small",bbox=bbox_props)
+	#Add label for drift		
+	bbox_props = dict(boxstyle=BoxS[i], fc="white", ec="k", lw=0.5)
+	dAr = Ax2D.text(60,-40,"   Drift   ",ha="center",va="center",size="xx-small",bbox=bbox_props)
 
 #Save
 plt.savefig(figName,dpi=figQ)
