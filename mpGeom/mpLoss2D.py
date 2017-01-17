@@ -6,6 +6,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 import matplotlib.gridspec as gridspec
+import cPickle as pickle
 
 #Figure defaults
 #figSize = (8,8)
@@ -26,13 +27,15 @@ Np = 50
 Nl = 50
 
 xTk = [-135,-90,-45,0,45,90,135]
-#xTkLab = ["4:00","Dawn","9:00","Noon","15:00","Dusk","20:00"]
-
 
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 fileStub = "100keV.h5part"
 spcs = ["H","O","e"]
 Leg = ["H+","O+","e-"]
+P0 = -150; P1 = 150
+L0 = -60; L1 = 60
+pBin = np.linspace(P0,P1,Np)
+lBin = np.linspace(L0,L1,Nl)
 
 
 if (doFirst):
@@ -77,10 +80,6 @@ else:
 		pickle.dump(Lambdas,f)
 
 lfmv.ppInit()
-P0 = -150; P1 = 150
-L0 = -60; L1 = 60
-pBin = np.linspace(P0,P1,Np)
-lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure(figsize=figSize)
 
 
@@ -130,6 +129,12 @@ for i in range(Ns):
 	else:
 		plt.setp(Ax2D.get_yticklabels(),visible=False)
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
+
+	#Add label for drift
+	if (i < 2):
+		#ion
+		bbox_props = dict(boxstyle="larrow,pad=0.25", fc="white", ec="k", lw=0.5)
+		dAr = Ax2D.text(60,-105,"   Drift   ",ha="center",va="center",size="xx-small",bbox=bbox_props)
 
 #Save
 plt.savefig(figName,dpi=figQ)
