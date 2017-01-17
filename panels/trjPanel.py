@@ -41,6 +41,34 @@ def getPs(h5pFile,pC,Nk):
 	IndR = np.random.choice(Ntot,Nk,replace=False)
 	ids = ids[IndR]
 	return ids
+def getPBlk(h5pF,pC,Np):
+	#Get Np particles for each of 3 types
+	#pI:(0,180), (-15,0),(-180,-15)
+	#And have dPhi>=pC
+	pIL = [0,-15,-180]
+	pIH = [180,0,-15]
+	Nd = len(pIL)
+
+	pIDs = np.zeros(Np*Nd)
+	isOut = lfmpp.getOut(h5pFile)
+	R, PhiMP0, LambdaF, Tmp = lfmpp.getSphLoss1st(h5pFile)
+	ids, PhiBX = lastPhi(h5pFile)
+	dPhi = PhiBX-PhiMP0
+	IndPC = (abs(dPhi)>=pC)
+	for d in range(Nd):
+		IndPI = (PhiMP0 >= pIL[d] & PhiMP0 <= pIH[d])
+		Ind = IndPC & IndPI
+		subIDs = ids[Ind]
+		#Pick Np randomly
+		Ntot = Ind.sum()
+		print("Found %d values w/ dP >= %f, and pI between %f and %f"%(Ntot,pC,pIL[d],pIH[d]))
+		IndR = np.random.choice(Ntot,Np,replace=False)
+		rIDs = subIDs[IndR]
+		i0 = d*Nd
+		i1 = i0+Np-1
+		pIDs[i0:i1] = rIDs
+		print("\tIDs = %s"%(str(rIDs)))
+	return np.int(pIDs)
 
 def getPTop(h5pFile,pId):
 	
@@ -109,7 +137,8 @@ gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
 #Traj data
 #IDs = [1335,301,95834,12593,63464,75685]
-IDs = getPs(h5p,pC,Nk)
+#IDs = getPs(h5p,pC,Nk)
+IDs = getPBlk(h5p,pC,Ny)
 print(IDs)
 
 n = 0
@@ -132,7 +161,7 @@ for i in range(1,Nx+1):
 		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
 		#plt.contour(xi,yi,dBz,Bv,cmap=fldCMap)
 		#Add figure label
-		subLab = chr(ord('a')+n)
+		subLab = chr(ord('a')+n)+")"
 		Ax.text(7.5,15,subLab,fontsize="large")
 		lfmv.addEarth2D()
 
