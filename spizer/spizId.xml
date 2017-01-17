@@ -8,5 +8,5 @@
 	<integrator dt="0.1" method="fp"/>
 	<field infile = "mhd_1200k.vti" static="T"/>
 	<output outdir="H100" trace="T"/>
-	<run zoom="T" restart="F" debug="F" pid="39"/>
+	<run zoom="T" restart="F" debug="F" pid="10"/>
 </Params>

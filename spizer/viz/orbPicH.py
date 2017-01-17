@@ -11,24 +11,21 @@ import pyVisit as pyv
 import lfmPostproc as lfmpp
 
 doSingle = True
-pId = 50
+#pId = 50
 Nstrd = 4 #What fraction of points to trace
-Nstrd = 30
-#tRadFld=0.002
+Nstrd = 60
+
 tRadFld=0.001
 tRadTrj=0.005
-
-Quiet = True
-User = False
+FldCmap = "Winter" #YlGnBu,YlGn
 doProd = True
-
-Quiet = False
+Quiet = True
 User = False
 
 SrcF = "fld.vti"
 if (doSingle):
 	SrcP = "pZoom.h5part"
-	SrcP = "../H100/H.100keV.ZoomID.000039.h5part"
+	SrcP = "../H100/H.100keV.ZoomID.000010.h5part"
 	pId = 0
 else:
 	SrcP = "prt.h5part"
@@ -87,17 +84,10 @@ SetOperatorOptions(sOp)
 #Do streams
 if (doProd):
 	#Only do streams for final version
-	scMap = "Blues"
-	scMap = "Reds"
-	scMap = "OrRd"
-	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=scMap,Inv=True,tRad=tRadFld,Legend=False)
+	pyv.lfmStream(SrcF,"Bfld",x,y,z,cMap=FldCmap,tRad=tRadFld,Legend=False)
 	icOp = GetOperatorOptions(0)
-	#icOp.dataValue = 10
-	#icOp.dataVariable = "dPhi"
 	SetOperatorOptions(icOp)
 	pcOp = GetPlotOptions()
-	#pcOp.minFlag=1; pcOp.maxFlag=1
-	#pcOp.min = -dpMax; pcOp.max = dpMax
 	SetPlotOptions(pcOp)
 
 
@@ -156,19 +146,19 @@ if (not doSingle):
 
 
 w3d = GetView3D()
-w3d.viewNormal = (-0.301776, -0.890932, 0.33937)
-w3d.focus = (-1.025, 0, 3.19481e-05)
-w3d.viewUp = (0.111356, 0.32059, 0.94065)
+w3d.viewNormal = (0.995442, -0.0559352, 0.0772398)
+w3d.focus = (-1.025, 0, 0.00223994)
+w3d.viewUp = (-0.0764053, 0.0169112, 0.996933)
 w3d.viewAngle = 30
-w3d.parallelScale = 25.6497
-w3d.nearPlane = -51.2993
-w3d.farPlane = 51.2993
-w3d.imagePan = (-0.0608166, 0.00178165)
-w3d.imageZoom = 2.57231
+w3d.parallelScale = 25.6503
+w3d.nearPlane = -51.3007
+w3d.farPlane = 51.3007
+w3d.imagePan = (-0.0450417, -0.0198424)
+w3d.imageZoom = 3.76612
 w3d.perspective = 1
 w3d.eyeAngle = 2
 w3d.centerOfRotationSet = 0
-w3d.centerOfRotation = (-1.025, 0, 3.19481e-05)
+w3d.centerOfRotation = (-1.025, 0, 0.00223994)
 w3d.axis3DScaleFlag = 0
 w3d.axis3DScales = (1, 1, 1)
 w3d.shear = (0, 0, 1)
