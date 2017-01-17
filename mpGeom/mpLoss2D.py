@@ -14,7 +14,7 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = False
-doTest = False
+doTest = True
 
 cAx=[1.0e-6,1.0e-3]
 cAx=[1.0e-5,1.0e-3]
@@ -38,7 +38,7 @@ Leg = ["H+","O+","e-"]
 if (doFirst):
 	Ns = len(spcs)-1
 	figStub = figStub + ".1st"
-	figSize = (11,4)
+	figSize = (12,4)
 else:
 	Ns = len(spcs)
 	figSize = (16,4)
@@ -49,15 +49,16 @@ L0 = -60; L1 = 60
 pBin = np.linspace(P0,P1,Np)
 lBin = np.linspace(L0,L1,Nl)
 fig = plt.figure(figsize=figSize)
-#fig = plt.figure(figsize=figSize,tight_layout=True)
 
-gs = gridspec.GridSpec(2,Ns,height_ratios=[1,2.5])
+
+gs = gridspec.GridSpec(2,Ns,height_ratios=[1,1.5],hspace=0.05,wspace=0.05)
+
+figName = figStub + ".png"
+print("Generating %s"%figName)
 
 for i in range(Ns):
 	
 	fIn = RootDir + spcs[i] + "." + fileStub
-	figName = figStub + ".png"
-	print("Generating %s"%figName)
 	if (doTest):
 		Phi = np.random.rand(Np)*P1
 		Lambda = np.random.rand(Np)*L1
@@ -98,7 +99,7 @@ for i in range(Ns):
 	#Ax2D.set_xticklabels(xTkLab)
 	lfmv.ax2mlt(Ax2D,xTk)
 	Ax2D.set_xlabel("Magnetic Local Time")
-	Ax2D.text(-120,40,Leg[i],fontsize="x-large")
+	Ax2D.text(-120,40,Leg[i],fontsize="large")
 	if (i==0):
 		Ax1D.set_ylabel("Density")
 		Ax2D.set_ylabel("Magnetic Latitude [$^{\circ}$]")
@@ -107,6 +108,5 @@ for i in range(Ns):
 		plt.setp(Ax1D.get_yticklabels(),visible=False)
 
 #Save
-plt.tight_layout()
 plt.savefig(figName,dpi=figQ)
 plt.close('all')

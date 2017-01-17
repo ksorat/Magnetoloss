@@ -41,6 +41,7 @@ def getPs(h5pFile,pC,Nk):
 	IndR = np.random.choice(Ntot,Nk,replace=False)
 	ids = ids[IndR]
 	return ids
+
 def getPBlk(h5pFile,pC,Np):
 	#Get Np particles for each of 3 types
 	#pI:(0,180), (-15,0),(-180,-15)
@@ -56,7 +57,7 @@ def getPBlk(h5pFile,pC,Np):
 	dPhi = PhiBX-PhiMP0
 	IndPC = (abs(dPhi)>=pC)
 	for d in range(Nd):
-		IndPI = (PhiMP0 >= pIL[d] & PhiMP0 <= pIH[d])
+		IndPI = (PhiMP0 >= pIL[d]) & (PhiMP0 <= pIH[d])
 		Ind = IndPC & IndPI
 		subIDs = ids[Ind]
 		#Pick Np randomly
