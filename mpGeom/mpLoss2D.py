@@ -14,7 +14,7 @@ figQ = 300 #DPI
 
 figStub = "mpLoss"
 doFirst = False
-doTest = True
+doTest = False
 
 cAx=[1.0e-6,1.0e-3]
 cAx=[1.0e-5,1.0e-3]
@@ -39,9 +39,42 @@ if (doFirst):
 	Ns = len(spcs)-1
 	figStub = figStub + ".1st"
 	figSize = (12,4)
+	fSz = "large"
 else:
 	Ns = len(spcs)
-	figSize = (16,4)
+	figSize = (18,4)
+	fSz = "x-large"
+mpDF = figStub+".pkl"
+
+if (os.path.isfile(mpDF)):
+	print("Loading data")
+	with open(mpDF, "rb") as f:
+		Phis = pickle.load(f)
+		Lambdas = pickle.load(f)
+
+else:
+	print("No data file found, calculating")
+	Phis = []
+	Lambdas = []
+
+	for i in range(Ns):
+		
+		fIn = RootDir + spcs[i] + "." + fileStub
+		if (doTest):
+			Phi = np.random.rand(Np)*P1
+			Lambda = np.random.rand(Np)*L1
+		else:
+			if (doFirst):
+				R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
+			else:
+				R,Phi,Lambda = lfmpp.getSphLoss(fIn)
+		Phis.append(Phi)
+		Lambdas.append(Lambda)
+
+	print("Writing pickle")
+	with open(mpDF, "wb") as f:
+		pickle.dump(Phis,f)
+		pickle.dump(Lambdas,f)
 
 lfmv.ppInit()
 P0 = -150; P1 = 150
@@ -58,17 +91,8 @@ print("Generating %s"%figName)
 
 for i in range(Ns):
 	
-	fIn = RootDir + spcs[i] + "." + fileStub
-	if (doTest):
-		Phi = np.random.rand(Np)*P1
-		Lambda = np.random.rand(Np)*L1
-	else:
-		if (doFirst):
-			R,Phi,Lambda,Tl = lfmpp.getSphLoss1st(fIn)
-		else:
-			R,Phi,Lambda = lfmpp.getSphLoss(fIn)
-
-	
+	Phi = Phis[i]
+	Lambda = Lambdas[i]
 	
 	#1D histogram
 	Ax1D = fig.add_subplot(gs[0,i])
@@ -99,7 +123,7 @@ for i in range(Ns):
 	#Ax2D.set_xticklabels(xTkLab)
 	lfmv.ax2mlt(Ax2D,xTk)
 	Ax2D.set_xlabel("Magnetic Local Time")
-	Ax2D.text(-120,40,Leg[i],fontsize="large")
+	Ax2D.text(-120,40,Leg[i],fontsize=fSz)
 	if (i==0):
 		Ax1D.set_ylabel("Density")
 		Ax2D.set_ylabel("Magnetic Latitude [$^{\circ}$]")
