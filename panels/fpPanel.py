@@ -95,7 +95,7 @@ for t in range(Nt):
 
 		if (s==0 and t==0):
 			#Add initial condition wedge
-			icW = Wedge(0,10,140,220,width=5,ec='blue',linewidth=1)
+			icW = Wedge(0,10,140,220,width=5,fill=False,ec='blue',linewidth=1)
 			Ax.add_artist(icW)
 
 		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
