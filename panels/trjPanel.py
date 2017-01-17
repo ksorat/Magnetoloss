@@ -41,6 +41,7 @@ def getPs(h5pFile,pC,Nk):
 	IndR = np.random.choice(Ntot,Nk,replace=False)
 	ids = ids[IndR]
 	return ids
+
 def getPTop(h5pFile,pId):
 	
 	t,x = lfmpp.getH5pid(h5pFile,"x",pId)
@@ -110,6 +111,7 @@ gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 #IDs = [1335,301,95834,12593,63464,75685]
 IDs = getPs(h5p,pC,Nk)
 print(IDs)
+
 n = 0
 for i in range(1,Nx+1):
 	for j in range(Ny):
@@ -129,6 +131,9 @@ for i in range(1,Nx+1):
 		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
 		#plt.contour(xi,yi,dBz,Bv,cmap=fldCMap)
+		#Add figure label
+		subLab = chr(ord('a')+n)
+		Ax.text(7.5,15,subLab,fontsize="large")
 		lfmv.addEarth2D()
 
 		#Now do particles
