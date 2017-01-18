@@ -182,7 +182,7 @@ if (doKev):
 	eqKevSlc = eqKev[:,:,1].squeeze()
 	eqKevSlc[IndS] = 0.0
 
-	K0 = 0.1; K1 = 1.0e+3
+	K0 = 1; K1 = 500
 	vNorm = LogNorm(K0,K1)
 	cMap = "inferno"
 

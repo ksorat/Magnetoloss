@@ -47,7 +47,7 @@ h5ps = ["eRewind.100keV.h5part"]
 #Tslcs = (0.5*(4500-Ts) ).astype(int)
 
 #Ts = np.array([3750,3600,3500,3400])
-Ts = np.array([3750,3550,3250,3100])
+Ts = np.array([3750,3600,3400,3250])
 
 Tslcs = (0.5*(3750-Ts) ).astype(int)
 
