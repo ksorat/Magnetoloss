@@ -41,7 +41,8 @@ Spcs = ["H+","O+","e-"]
 h5ps = ["H.100keV.h5part","O.100keV.h5part","e.100keV.h5part"]
 Ts = [500,1000,2500,3500]
 
-figSize = (10,10)
+figSize = (11,12)
+
 figQ = 300 #DPI
 figName = "fpPanel.png"
 
@@ -63,13 +64,12 @@ h5pDir = RootDir + "/" "H5p"
 
 #Do figures
 lfmv.initLatex()
-fig = plt.figure(figsize=figSize,tight_layout=True)
-#fig = plt.figure()
+fig = plt.figure(figsize=figSize)#,tight_layout=True)
 
 Ns = len(Spcs)
 Nt = len(Ts)
 
-gs = gridspec.GridSpec(Ns,Nt)
+gs = gridspec.GridSpec(Ns+2,Nt,height_ratios=[1,1,1,0.1,0.075],hspace=0.1,wspace=0.1)#,bottom=0.05)
 
 for t in range(Nt):
 	xi,yi,dBz = getFld(vtiDir,Ts[t])
@@ -99,7 +99,7 @@ for t in range(Nt):
 			Ax.add_artist(icW)
 
 		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
-		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
+		
 		lfmv.addEarth2D()
 
 		#Now do particles
@@ -108,6 +108,15 @@ for t in range(Nt):
 		plt.axis('scaled')
 		plt.xlim(fldDomX); plt.ylim(fldDomY)
 		
-#gs.tight_layout(fig)
+AxC1 = fig.add_subplot(gs[-1,0:2])
+vNorm1 = mpl.colors.Normalize(vmin=fldBds[0],vmax=fldBds[1])
+cb1 = mpl.colorbar.ColorbarBase(AxC1,cmap=fldCMap,norm=vNorm1,orientation='horizontal')
+cb1.set_label("Residual Vertical Field [nT]",fontsize='small')
+
+AxC2 = fig.add_subplot(gs[-1,2:4])
+vNorm2 = mpl.colors.Normalize(vmin=pBds[0],vmax=pBds[1])
+cb2 = mpl.colorbar.ColorbarBase(AxC2,cmap=pCMap,norm=vNorm2,orientation='horizontal')
+cb2.set_label("Particle Energy [keV]",fontsize='small')
+
 plt.savefig(figName,dpi=figQ)
 
