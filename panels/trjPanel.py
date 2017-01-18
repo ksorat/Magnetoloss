@@ -16,9 +16,11 @@ def lastPhi(fIn):
 	pBX = np.arctan2(y,x)*180.0/np.pi
 	return ids,pBX
 
-def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
-	tSlc = np.int(t/dt)
+#def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
+def getFld(vtiDir,tSlc,eqStub="eqSlc"):
+	#tSlc = np.int(t/dt)
 	vtiFile = vtiDir + "/" + eqStub + ".%04d.vti"%(tSlc)
+	print("Reading field from %s"%(vtiFile))
 
 	dBz = lfmv.getVTI_SlcSclr(vtiFile).T
 	ori,dx,ex = lfmv.getVTI_Eq(vtiFile)
