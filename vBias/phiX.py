@@ -31,10 +31,16 @@ def findCrossings(fIn,PhiC=30.0,DelPhi=5):
 
 	for n in range(Np):
 		
-		#Find last MP xing
+		#Find last or first MP xing
 		mpn = mp[:,n]
 		tCrn = tCr[:,n]
-		tSlc1 = tCrn.argmax()
+		tSlc1L = tCrn.argmax() #Last crossing
+		tSlc1F = (tCrn>0).argmax() #First
+		#print(tSlc1L,tSlc1F)
+
+		#tSlc1 = tSlc1F
+		tSlc1 = tSlc1L
+		
 		#Find box xing
 		tSlc2 = np.argmax(mpn>0)
 		pn = phi[tSlc1:tSlc2,n]

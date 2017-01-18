@@ -13,8 +13,8 @@ from matplotlib.colors import Normalize
 
 Root = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 
-PhiC = 30
-dAlph = 10
+PhiC = 60
+dAlph = 15
 doMask = False
 
 
@@ -67,7 +67,7 @@ alphP = np.arccos(CAlp)*180/np.pi
 Vphi = -np.sin(ph)*Vx + np.cos(ph)*Vy
 
 if (doMask):
-	printf("Masking pitch angles, +/- %f"%(dAlph))
+	print("Masking pitch angles, +/- %f"%(dAlph))
 	Mask = (alph>=90-dAlph) & (alph<=90+dAlph)
 	s = s[Mask]
 	z = z[Mask]
@@ -84,12 +84,14 @@ gs = gridspec.GridSpec(1,3,width_ratios=[10,10,0.25])
 cMap="YlGnBu"
 
 #cNorm = LogNorm(vmin=1.0e-2,vmax=1)
+Nz = 25
+Nv = 30
+Nz = 60; Nv = 80
+zb = np.linspace(-8,8,Nz)
+Vpb = np.linspace(-0.2,0.2,Nv)
+Vzb = np.linspace(-0.2,0.2,Nv)
 
-zb = np.linspace(-8,8,25)
-Vpb = np.linspace(-0.2,0.2,30)
-Vzb = np.linspace(-0.2,0.2,30)
-
-vMin = 0; vMax = 0.75
+vMin = 0; vMax = 0.65
 vNorm = mpl.colors.Normalize(vmin=vMin,vmax=vMax)
 
 Axp = fig.add_subplot(gs[0,0])
@@ -106,7 +108,7 @@ plt.xlabel('Vz [Re/s]')
 
 Axcb = fig.add_subplot(gs[0,2])
 cb = mpl.colorbar.ColorbarBase(Axcb,cmap=cMap,norm=vNorm,orientation='vertical')
-cb.set_label("Density",fontsize="xx-small")
+cb.set_label("Density",fontsize="x-small")
 
 plt.tight_layout()
 
