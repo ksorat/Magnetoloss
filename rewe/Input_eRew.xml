@@ -3,7 +3,7 @@
 	<radius min="19.25" max="20.25" N="10"/>
 	<phi min="110" max="112.5" N="10"/>
 	<psi min="0" max="360" N="1"/>
-	<alpha min="20" max="90" N="10"/>
+	<alpha min="20" max="90" N="50"/>
 	<time T0="3750.0" tfin="3000" Ns="20" Nf="20"/>
 	<integrator dt="0.1" method="fp"/>
 	<field infile = "ebtab.txt" static="F"/>
