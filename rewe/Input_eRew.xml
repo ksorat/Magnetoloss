@@ -1,0 +1,12 @@
+<Params>
+	<particle species="e" K0="100"/>
+	<radius min="15" max="16.5" N="50"/>
+	<phi min="100" max="108" N="50"/>
+	<psi min="0" max="360" N="1"/>
+	<alpha min="20" max="90" N="2"/>
+	<time T0="4500" tfin="3000" Ns="20" Nf="20"/>
+	<integrator dt="0.1" method="dynamic"/>
+	<field infile = "ebtab.txt" static="F"/>
+	<output outdir="rewe100" trace="F"/>
+	<run restart="F" debug="F" pid="25"/>
+</Params>
