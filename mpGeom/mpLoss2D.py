@@ -17,12 +17,16 @@ figStub = "mpLoss"
 doFirst = True
 doTest = False
 
-cAx=[1.0e-6,1.0e-3]
-cAx=[1.0e-5,1.0e-3]
+#cAx=[1.0e-6,1.0e-3]
+#cAx=[1.0e-5,1.0e-3]
+cAx=[2.5e-5,1.0e-3]
 
 fMax = 0.015
 
-cMap="viridis"
+#cMap="viridis"
+#cMap="hot"
+cMap="inferno"
+
 Np = 50
 Nl = 50
 

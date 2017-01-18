@@ -27,6 +27,16 @@ def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
 
 	return xi,yi,dBz
 
+def getMPX(h5pFile,IDs):
+	Np = len(IDs)
+	tSlcs = np.zeros(Np,dtype=np.int)
+	for n in range(Np):
+		pID = IDs[n]
+		t,tCr = lfmpp.getH5pid(h5pFile,"tCr",pID)
+		I = (tCr>0).argmax()
+		tSlcs[n] = I
+	return tSlcs
+
 def getPs(h5pFile,pC,Nk):
 	isOut = lfmpp.getOut(h5pFile)
 	R, PhiMP0, LambdaF, Tmp = lfmpp.getSphLoss1st(h5pFile)
@@ -46,8 +56,8 @@ def getPBlk(h5pFile,pC,Np):
 	#Get Np particles for each of 3 types
 	#pI:(0,180), (-15,0),(-180,-15)
 	#And have dPhi>=pC
-	pIL = [0,-15,-180]
-	pIH = [180,0,-15]
+	pIL = [0,-45,-180]
+	pIH = [180,0.0,-45]
 	Nd = len(pIL)
 
 	pIDs = np.zeros(Np*Nd,dtype=np.int)
@@ -55,20 +65,31 @@ def getPBlk(h5pFile,pC,Np):
 	R, PhiMP0, LambdaF, Tmp = lfmpp.getSphLoss1st(h5pFile)
 	ids, PhiBX = lastPhi(h5pFile)
 	dPhi = PhiBX-PhiMP0
-	IndPC = (abs(dPhi)>=pC)
+	
+
+	print(PhiMP0.min(),PhiMP0.max())
+	print(dPhi.min(),dPhi.max())
 	for d in range(Nd):
+		pcd = pC[d]
+		if (pC[d]>=0):
+			IndPC = (dPhi>=pC[d])
+		else:
+			IndPC = (dPhi<=pC[d])
+		
 		IndPI = (PhiMP0 >= pIL[d]) & (PhiMP0 <= pIH[d])
 		Ind = IndPC & IndPI
 		subIDs = ids[Ind]
+		subDP = dPhi[Ind]
 		#Pick Np randomly
 		Ntot = Ind.sum()
-		print("Found %d values w/ dP >= %f, and pI between %f and %f"%(Ntot,pC,pIL[d],pIH[d]))
+		print("Found %d values w/ dP >= %f, and pI between %f and %f"%(Ntot,pC[d],pIL[d],pIH[d]))
 		IndR = np.random.choice(Ntot,Np,replace=False)
 		rIDs = subIDs[IndR]
-		i0 = d*Nd
+		i0 = d*Np
 		i1 = i0+Np
 		pIDs[i0:i1] = rIDs
 		print(rIDs)
+		print(subDP[IndR])
 	return pIDs
 
 def getPTop(h5pFile,pId):
@@ -87,7 +108,7 @@ s0 = 0
 np.random.seed(seed=31337)
 SpcsStub = ["O.100keV"]
 SpcsLab = ["O+ 100 keV"]
-pC = 80.0
+pC = [90,120,-45.0]
 
 #Nx = 6; Ny = 5
 #Nx = 2; Ny = 3
@@ -96,9 +117,6 @@ Nx = 3; Ny = 4
 Nk = Nx*Ny
 DomX = [-15,12]
 DomY = [-20,20]
-
-#Field data
-tSlc = 250
 
 #Figure defaults
 figSize = (8,8)
@@ -110,7 +128,7 @@ Nc = 5
 fldCMap = "RdGy_r"
 fldOpac = 0.5
 pCMap = "cool"
-pSize = 10; pMark = 'o'; pLW = 1
+pSize = 10; pMark = 'o'; pLW = 0.5
 
 
 #Gridspec defaults
@@ -127,7 +145,6 @@ h5pDir = RootDir + "/" "H5p"
 #h5ps = ["Inj10.All.h5part"]
 
 lfmv.initLatex()
-xi,yi,dBz = getFld(vtiDir,tSlc)
 
 h5p = h5pDir + "/" + SpcsStub[s0] + ".h5part"
 figName = SpcsStub[s0] + ".Trjs.png"
@@ -140,8 +157,12 @@ gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 #IDs = [1335,301,95834,12593,63464,75685]
 #IDs = getPs(h5p,pC,Nk)
 #IDs = getPBlk(h5p,pC,Ny)
-IDs = [47169,58372,88428,59065,38457,28687,36991,14603,99491,82858,92300,85799]
+IDs = [88748,18090,9935,50193,77676,98578,72886,71222,13845,50715,11522,11530]
+tSlcs = getMPX(h5p,IDs)
+
 print(IDs)
+print(tSlcs)
+
 
 n = 0
 for i in range(1,Nx+1):
@@ -158,10 +179,10 @@ for i in range(1,Nx+1):
 		else:
 			plt.setp(Ax.get_yticklabels(),visible=False)
 
-
+		xi,yi,dBz = getFld(vtiDir,tSlcs[n])
 		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
-		#plt.contour(xi,yi,dBz,Bv,cmap=fldCMap)
+		
 		#Add figure label
 		subLab = chr(ord('a')+n)+")"
 		print(subLab)
