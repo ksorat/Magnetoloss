@@ -202,7 +202,7 @@ for i in range(1,Nx+1):
 		
 		n=n+1
 	
-plt.suptitle(titS,fontsize="large")
+#plt.suptitle(titS,fontsize="large")
 #gs.tight_layout(fig)
 plt.savefig(figName,dpi=figQ)
 plt.close('all')
