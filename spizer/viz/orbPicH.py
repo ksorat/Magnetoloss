@@ -13,13 +13,13 @@ import lfmPostproc as lfmpp
 doSingle = True
 #pId = 50
 Nstrd = 4 #What fraction of points to trace
-Nstrd = 60
+Nstrd = 50
 
-tRadFld=0.001
-tRadTrj=0.005
-FldCmap = "YlGn" #Winter,YlGnBu,YlGn
+tRadFld=0.0025
+tRadTrj=0.0025
+FldCmap = "Summer" #Winter,YlGnBu,YlGn
 doProd = True
-Quiet = True
+Quiet = False
 User = False
 
 SrcF = "fld.vti"
@@ -46,8 +46,12 @@ print("Found %d MP crossings"%(len(I)-1))
 Ix = I[1::Nstrd] #Remove null point
 
 i0 = Ix[0]
-i1 = t.shape[0]-1
-print("Found %d slices after first MP"%(i1-i0))
+#i1 = t.shape[0]-1
+i0 = 0
+i1 = mp.argmax()
+print("I0 = %d, I1 = %d, Stride = %d"%(i0,i1,Nstrd))
+
+#print("Found %d slices after first MP"%(i1-i0))
 I = range(i0,i1,Nstrd)
 
 Ns = len(I) #Number of seeds
