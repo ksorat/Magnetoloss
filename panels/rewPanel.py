@@ -43,8 +43,12 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 Spcs = ["e-"]
 h5ps = ["eRewind.100keV.h5part"]
 
-Ts = np.array([4500,4450,4400,4300])
-Tslcs = (0.5*(4500-Ts) ).astype(int)
+#Ts = np.array([4500,4450,4400,4300])
+#Tslcs = (0.5*(4500-Ts) ).astype(int)
+
+Ts = np.array([3750,3700,3600,3500])
+Tslcs = (0.5*(3750-Ts) ).astype(int)
+
 #Tslcs = [0,75,150,225]
 
 #Ts = 4500 - 2*np.array(Tslcs)
@@ -65,7 +69,7 @@ pCMap = "cool"
 pSize = 2; pMark = 'o'; pLW = 0.2
 
 #Locations
-RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data"
+RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/rewe" #Data
 vtiDir = RootDir + "/" + "eqSlc"
 h5pDir = RootDir + "/" "H5p"
 

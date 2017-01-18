@@ -10,24 +10,27 @@ import os
 import phiX as px
 from matplotlib.colors import LogNorm
 from matplotlib.colors import Normalize
+
 Root = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
 
-doOxy = False
+PhiC = 30
+dAlph = 10
+doMask = False
+
+
+doOxy = True
 if (doOxy):
 	fIn = Root + "O.100keV.h5part"
-	vbDataFile = "vbO.pkl"
-	spcLab = "O+"
-	figName = "vB_O.png"
+	spcLab = "O"
 else:
 	fIn = Root + "H.100keV.h5part"
 	vbDataFile = "vbH.pkl"
-	spcLab = "H+"
+	spcLab = "H"
 	figName = "vB_H.png"
 
+vbDataFile = "vb"+spcLab+str(PhiC)+".pkl"
+figName = "vb"+spcLab+str(PhiC)+".png"
 
-PhiC = 60
-dAlph = 10
-doMask = False
 
 if (os.path.isfile(vbDataFile)):
         print("Loading data")

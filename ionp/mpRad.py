@@ -100,7 +100,7 @@ figQ = 300 #DPI
 
 Np = 200
 Nr = 200
-vNorm = LogNorm(vmin=1.0e-2,vmax=5e-0)
+vNorm = LogNorm(vmin=1.0e-2,vmax=5.0e+0)
 cMap = "viridis"
 phiB = d2rad*np.linspace(-160,160,Np+1)
 rB = np.linspace(5,22.5,Nr+1)
@@ -126,7 +126,7 @@ for n in range(Ns):
 	f = N/dV
 	
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
-	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="blue", alpha=0.85)
+	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="black", alpha=1)
 	Ax.add_artist(E)
 
 	Ax.set_rlabel_position(210)
@@ -135,7 +135,7 @@ for n in range(Ns):
 	#print(Ax.get_xticks())
 	#print(Ax.get_xticklabels())
 	plt.xlabel(Leg[n])
-	plt.tick_params(axis='both', which='major', labelsize="x-small")	
+	plt.tick_params(axis='both', which='major', labelsize="xx-small")	
 #Do colorbar
 Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
