@@ -250,8 +250,8 @@ if (doKev):
 	#Nk = 80
 	Kc = 50
 	#KcM = 1000
-	KcM = 750
-	Nv = 2000
+	KcM = 500
+	Nv = 2500
 	#Scl = 2
 	Scl = 0.375
 	Tiny=0.025
@@ -277,13 +277,6 @@ if (doKev):
 	Ax.quiver(xxV,yyV,Vx,Vy,scale=Scl,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25,minlength=TINY)
 	#Ax.quiver(xxV,yyV,Vx,Vy,xyF,cmap="winter",vmin=0,vmax=1,scale=2,alpha=0.5,units='xy',pivot='mid',edgecolor='k',linewidth=0.25)
 
-	# Vx[Ind]=np.nan;Vy[Ind]=np.nan
-
-	# xxV = xx[::Nk,::Nk]
-	# yyV = yy[::Nk,::Nk]
-	# Vx = Vx[::Nk,::Nk]
-	# Vy = Vy[::Nk,::Nk]
-	# Ax.quiver(xxV,yyV,Vx,Vy,scale=2,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25)
 
 	plt.axis('scaled')
 	plt.xlim(-14.5,12)
