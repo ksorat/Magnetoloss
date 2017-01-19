@@ -43,18 +43,10 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 Spcs = ["e-"]
 h5ps = ["eRewind.100keV.h5part"]
 
-#Ts = np.array([4500,4450,4400,4300])
-#Tslcs = (0.5*(4500-Ts) ).astype(int)
-
-
-#Ts = np.array([3750,3700,3600,3500])
-Ts = np.array([3750,3600,3450,3300])
-
-Tslcs = (0.5*(3750-Ts) ).astype(int)
-
-#Tslcs = [0,75,150,225]
-
-#Ts = 4500 - 2*np.array(Tslcs)
+T0 = 3750
+T1 = 3250
+Ts = np.linspace(T0,T1,5,dtype=np.int)
+Tslcs = (0.5*(T0-Ts) ).astype(int)
 
 figSize = (10,10)
 figQ = 300 #DPI
@@ -66,8 +58,8 @@ figName = "rewePanel.png"
 fldBds = [-35,35]
 fldCMap = "RdGy_r"
 fldOpac = 0.5
-fldDomX = [-15,13]
-fldDomY = [0,20]
+fldDomX = [-10,10]
+fldDomY = [5,20]
 
 pBds = [50,150]
 pCMap = "cool"
@@ -108,7 +100,7 @@ for t in range(Nt):
 		else:
 			plt.xlabel('GSM-X [Re]')
 		if (s == 0):
-			plt.title("T = %d [s]"%Ts[t])
+			plt.title("T = %d [s]"%(T0-Ts[t]))
 
 		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
 		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
