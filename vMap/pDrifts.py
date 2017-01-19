@@ -12,13 +12,28 @@ from matplotlib.colors import LogNorm
 import vtk
 from vtk.util import numpy_support as npvtk
 
+def SmoothOp(A):
+	import scipy
+	import scipy.ndimage
+
+	from scipy.ndimage.filters import gaussian_filter
+	N = A.shape
+	Ny = N[1]
+	y0 = Ny/2
+	iR = 4
+	#Asub = A[:,y0-iR:y0+iR+1,:]
+	#AsubS = gaussian_filter(Asub,1)
+	#A[:,y0-iR:y0+iR+1,:] = AsubS
+	A = gaussian_filter(A,1)
+	return A
+
 def sclMag(Bx,By,Bz):
         #Incoming data is in dim-less units (EB from LFMTP)
         #Scale to nT
         eb2cgs = 1/lfm.EBscl #Convert EB to CGS
         G2nT = 10**5.0 #Convert Gauss to nT
         scl = (eb2cgs*G2nT)
-        return scl*Bx,scl*By,scl*Bz
+        return SmoothOp(scl*Bx),SmoothOp(scl*By),SmoothOp(scl*Bz)
 
 def sclElec(Ex,Ey,Ez):
         #Incoming data is in dim-less units (EB from LFMTP)
@@ -30,7 +45,7 @@ def sclElec(Ex,Ey,Ez):
         clight = 2.9979e+8 #Speed of light, [m/s]
         #Convert E -> "Gauss" then Tesla, xC_light to V/m then mV/m
         scl = eb2cgs*G2T*clight*V2mV
-        return scl*Ex,scl*Ey,scl*Ez
+        return SmoothOp(scl*Ex),SmoothOp(scl*Ey),SmoothOp(scl*Ez)
 
 def getMidplane(fname,fldStr='B'):
 	data = lfmv.getVTI_Data(fname)
@@ -106,6 +121,7 @@ Re = 6380.0 #Earth Radius [km]
 q = 1.6021766e-19 #Coulombs
 Scl = (1.0e+6)/( q*6.242e+15*1.0e+3)
 TINY = 1.0e-8
+
 fldSlc = "mhd.vti"
 #fldSlc = "testSlc.vti"
 
@@ -113,7 +129,15 @@ lfmv.ppInit()
 
 #Get grid
 xc,yc,dx,dy = getGrid(fldSlc)
+Nx = len(xc)
+Ny = len(yc)
+xi = np.linspace(xc[0]-0.5*dx,xc[-1]+0.5*dx,Nx+1)
+yi = np.linspace(yc[0]-0.5*dy,yc[-1]+0.5*dy,Ny+1)
+
+xxi,yyi = np.meshgrid(xi,yi,indexing='ij')
 xx,yy = np.meshgrid(xc,yc,indexing='ij')
+
+
 dz = dx #Assume isotropic
 Nk = 3
 zc = np.linspace(-dz,dz,Nk)
@@ -160,6 +184,7 @@ GBz = GBz/Re
 BxGBx = By*GBz - Bz*GBy
 BxGBy = Bz*GBx - Bx*GBz
 BxGBz = Bx*GBy - By*GBx
+
 BxGBMag = np.sqrt(BxGBx**2.0+BxGBy**2.0+BxGBz**2.0)
 
 VdPkev = Scl*BxGBMag/(Bmag**3.0)
@@ -173,6 +198,15 @@ eqKev = (2*Veb/VdPkev) #Only gradient, alpha=45o
 RcSlc = np.sqrt(xx**2.0+yy**2.0)
 IndS = RcSlc<=2.01
 
+#Get vector components ExB drift
+EBx,EBy,EBz = Cross(Ex,Ey,Ez,Bx,By,Bz)
+B2 = Bmag*Bmag
+Vebx = EBx/B2
+Veby = EBy/B2
+Vebz = EBz/B2
+VebxS = Vebx[:,:,1].squeeze()
+VebyS = Veby[:,:,1].squeeze()
+VebzS = Vebz[:,:,1].squeeze()
 
 if (doKev):
 	fig = plt.figure(figsize=(6,8))
@@ -187,11 +221,50 @@ if (doKev):
 	cMap = "inferno"
 
 	Ax = fig.add_subplot(gs[0,0])
-	Ax.pcolormesh(xx,yy,eqKevSlc,norm=vNorm,vmin=K0,vmax=K1,cmap=cMap,shading='gourand')
+	Ax.pcolormesh(xxi,yyi,eqKevSlc,norm=vNorm,vmin=K0,vmax=K1,cmap=cMap,shading='gourand')
 
 	lfmv.addEarth2D()
+
+	#Add directions
+	ebVmag = np.sqrt(VebxS**2.0+VebyS**2.0)
+	ebV = np.sqrt(VebxS**2.0+VebyS**2.0+VebzS)
+
+	Nk = 80
+	Kc = 50
+	KcM = 1500
+	Ind = (eqKevSlc<Kc) | (eqKevSlc>KcM)
+	IndG = (eqKevSlc>Kc) & (eqKevSlc<KcM)
+	Vx = VebxS/ebVmag
+	Vy = VebyS/ebVmag
+	Vz = VebzS/ebVmag
+	xyF = ebVmag/ebV
+
+	Vx = Vx[IndG]
+	Vy = Vy[IndG]
+	xxV = xx[IndG]
+	yyV = yy[IndG]
+	xyF = xyF[IndG]
+
+	xxV = xxV[::Nk]
+	yyV = yyV[::Nk]
+	Vx = Vx[::Nk]
+	Vy = Vy[::Nk]
+	xyF = xyF[::Nk]
+	print(len(xxV))
+	
+	Ax.quiver(xxV,yyV,Vx,Vy,scale=2,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25)
+	#Ax.quiver(xxV,yyV,Vx,Vy,xyF,cmap="winter",vmin=0,vmax=1,scale=2,alpha=0.5,units='xy',pivot='mid',edgecolor='k',linewidth=0.25)
+
+	# Vx[Ind]=np.nan;Vy[Ind]=np.nan
+
+	# xxV = xx[::Nk,::Nk]
+	# yyV = yy[::Nk,::Nk]
+	# Vx = Vx[::Nk,::Nk]
+	# Vy = Vy[::Nk,::Nk]
+	# Ax.quiver(xxV,yyV,Vx,Vy,scale=2,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25)
+
 	plt.axis('scaled')
-	plt.xlim(-15,11.6)
+	plt.xlim(-14.5,11.6)
 	plt.ylim(-20,20)
 	plt.xlabel('GSM-X [Re]')
 	plt.ylabel("GSM-Y [Re]")
@@ -206,6 +279,6 @@ if (doExB):
 	cMap = "inferno"
 	Vu,Vnu = ExBs(Ex,Ey,Ez,Bx,By,Bz,dx,dy,dz)
 	dVeb = Vnu/Vu
-	plt.pcolormesh(xx,yy,dVeb,norm=vNorm,vmin=f0,vmax=f1,cmap=cMap,shading='gourand')
+	plt.pcolormesh(xx,yy,dVeb,norm=vNorm,vmin=f0,vmax=f1,cmap=cMap,shading='flat')
 	plt.colorbar()
 
