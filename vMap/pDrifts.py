@@ -248,8 +248,7 @@ if (doKev):
 	ebV = np.sqrt(VebxS**2.0+VebyS**2.0+VebzS)
 
 	#Nk = 80
-	Kc = 50
-	#KcM = 1000
+	Kc = 10
 	KcM = 500
 	Nv = 2500
 	#Scl = 2
