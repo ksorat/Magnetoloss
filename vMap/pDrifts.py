@@ -12,7 +12,25 @@ from matplotlib.colors import LogNorm
 import vtk
 from vtk.util import numpy_support as npvtk
 
-def SmoothOp(A):
+
+def Cull(xx,yy,Vx,Vy,IndK,Nk,Tiny=0.025):
+	nV = np.sqrt(Vx**2.0+Vy**2.0)
+	IndT = (nV >= Tiny)
+	IndG = IndK & IndT
+
+	Vx = Vx[IndG]
+	Vy = Vy[IndG]
+	xxV = xx[IndG]
+	yyV = yy[IndG]
+
+	xxV = xxV[::Nk]
+	yyV = yyV[::Nk]
+	Vx = Vx[::Nk]
+	Vy = Vy[::Nk]
+	
+	return xxV,yyV,Vx,Vy
+
+def SmoothOp(A,sig=1.5):
 	import scipy
 	import scipy.ndimage
 
@@ -24,7 +42,7 @@ def SmoothOp(A):
 	#Asub = A[:,y0-iR:y0+iR+1,:]
 	#AsubS = gaussian_filter(Asub,1)
 	#A[:,y0-iR:y0+iR+1,:] = AsubS
-	A = gaussian_filter(A,1)
+	A = gaussian_filter(A,sig)
 	return A
 
 def sclMag(Bx,By,Bz):
@@ -232,27 +250,29 @@ if (doKev):
 	Nk = 80
 	Kc = 50
 	KcM = 1500
+	#Scl = 2
+	Scl = 0.375
+	Tiny=0.025
+	doUnit = False
+
 	Ind = (eqKevSlc<Kc) | (eqKevSlc>KcM)
 	IndG = (eqKevSlc>Kc) & (eqKevSlc<KcM)
-	Vx = VebxS/ebVmag
-	Vy = VebyS/ebVmag
-	Vz = VebzS/ebVmag
+	if (doUnit):
+		Vx = VebxS/ebVmag
+		Vy = VebyS/ebVmag
+		Vz = VebzS/ebVmag
+	else:
+		Vx = VebxS
+		Vy = VebyS
+		Vz = VebzS
+
 	xyF = ebVmag/ebV
+	xxV,yyV,Vx,Vy = Cull(xx,yy,Vx,Vy,IndG,Nk,Tiny)
 
-	Vx = Vx[IndG]
-	Vy = Vy[IndG]
-	xxV = xx[IndG]
-	yyV = yy[IndG]
-	xyF = xyF[IndG]
 
-	xxV = xxV[::Nk]
-	yyV = yyV[::Nk]
-	Vx = Vx[::Nk]
-	Vy = Vy[::Nk]
-	xyF = xyF[::Nk]
 	print(len(xxV))
 	
-	Ax.quiver(xxV,yyV,Vx,Vy,scale=2,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25)
+	Ax.quiver(xxV,yyV,Vx,Vy,scale=Scl,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25,minlength=TINY)
 	#Ax.quiver(xxV,yyV,Vx,Vy,xyF,cmap="winter",vmin=0,vmax=1,scale=2,alpha=0.5,units='xy',pivot='mid',edgecolor='k',linewidth=0.25)
 
 	# Vx[Ind]=np.nan;Vy[Ind]=np.nan
