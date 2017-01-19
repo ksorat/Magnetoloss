@@ -58,7 +58,7 @@ Tslcs = (0.5*(3750-Ts) ).astype(int)
 
 figSize = (10,10)
 figQ = 300 #DPI
-figQ = 60 #DPI
+#figQ = 60 #DPI
 
 figName = "rewePanel.png"
 
