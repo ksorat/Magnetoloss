@@ -13,16 +13,19 @@ import lfmPostproc as lfmpp
 doSingle = True
 #pId = 50
 Nstrd = 4 #What fraction of points to trace
-Nstrd = 50
+Nstrd = 60
 
-tRadFld=0.0025
-tRadTrj=0.0025
+tRadFld=0.00125
+tRadTrj=0.0015
 FldCmap = "Summer" #Winter,YlGnBu,YlGn
+
 doProd = True
 Quiet = False
 User = False
 
 SrcF = "fld.vti"
+#SrcF = "fldLorez.vti"
+
 if (doSingle):
 	SrcP = "pZoom.h5part"
 	SrcP = "../H100/H.100keV.ZoomID.000010.h5part"
@@ -47,7 +50,7 @@ Ix = I[1::Nstrd] #Remove null point
 
 i0 = Ix[0]
 #i1 = t.shape[0]-1
-i0 = 0
+#i0 = 0
 i1 = mp.argmax()
 print("I0 = %d, I1 = %d, Stride = %d"%(i0,i1,Nstrd))
 
@@ -76,7 +79,7 @@ pyv.pvInit()
 
 #Field data
 OpenDatabase(SrcF)
-pyv.lfmPCol(SrcF,"Bmag",vBds=[1,500],cMap="viridis",pcOpac=0.85,Legend=False,Log=True)
+pyv.lfmPCol(SrcF,"Bmag",vBds=[1,500],cMap="magma",pcOpac=0.85,Legend=False,Log=True)
 
 AddOperator("Slice")
 sOp = GetOperatorOptions(0)
@@ -94,6 +97,12 @@ if (doProd):
 	pcOp = GetPlotOptions()
 	SetPlotOptions(pcOp)
 
+	AddOperator("Tube")
+	tOp = GetOperatorOptions(1)
+	tOp.radiusFractionBBox = tRadFld
+	tOp.fineness = 10
+	tOp.capping = 1
+	SetOperatorOptions(tOp)
 
 #Block out central cutout
 AddPlot("Contour","RadAll")
