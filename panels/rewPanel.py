@@ -42,18 +42,18 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 
 Spcs = ["e-"]
 h5ps = ["eRewind.100keV.h5part"]
-
-T0 = 3750
-T1 = 3250
-Ts = np.arange(T0,T1-1,-125,dtype=np.int)
-
-Tslcs = (0.5*(T0-Ts) ).astype(int)
-
-figSize = (10,10)
-figQ = 300 #DPI
-
-
 figName = "rewePanel.png"
+doFig = True
+
+Nt = 5
+T0 = 3750
+dT = 75
+
+Ts = np.zeros(Nt,dtype=np.int)
+Ts = T0-dT*np.arange(Nt)
+
+figSize = (10,2.5)
+figQ = 300 #DPI
 
 #Plot bounds fields/particles (nT/keV), plot details
 fldBds = [-35,35]
@@ -66,6 +66,9 @@ pBds = [50,150]
 pCMap = "cool"
 pSize = 2; pMark = 'o'; pLW = 0.2
 
+#Slices
+Tslcs = (0.5*(T0-Ts) ).astype(int)
+
 #Locations
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/rewe" #Data
 vtiDir = RootDir + "/" + "eqSlc"
@@ -73,16 +76,14 @@ h5pDir = RootDir + "/" "H5p"
 
 #Do figures
 lfmv.initLatex()
-fig = plt.figure(figsize=figSize,tight_layout=True)
-#fig = plt.figure()
+fig = plt.figure(figsize=figSize)
 
 Ns = len(Spcs)
-Nt = len(Ts)
 
-gs = gridspec.GridSpec(Ns,Nt)
+gs = gridspec.GridSpec(Ns,Nt,left=0.05,right=0.95)
 
 for t in range(Nt):
-	xi,yi,dBz = getFld(vtiDir,Ts[t],tSlc=Tslcs[t])
+	if (doFig): xi,yi,dBz = getFld(vtiDir,Ts[t],tSlc=Tslcs[t])
 	for s in range(Ns):
 		
 		Ax = fig.add_subplot(gs[s,t])
@@ -101,18 +102,18 @@ for t in range(Nt):
 		else:
 			plt.xlabel('GSM-X [Re]')
 		if (s == 0):
-			plt.title("T = %d [s]"%(T0-Ts[t]))
+			plt.title("T = %d [s]"%(Ts[t]-T0))
 
-		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
-		#fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap)
+		if (doFig): fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+		
 		lfmv.addEarth2D()
 
 		#Now do particles
-		xs,ys,zs = getPs(h5pDir,h5ps[s],Ts[t],tSlc=Tslcs[t])
-		pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
+		if (doFig):
+			xs,ys,zs = getPs(h5pDir,h5ps[s],Ts[t],tSlc=Tslcs[t])
+			pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
 		plt.axis('scaled')
 		plt.xlim(fldDomX); plt.ylim(fldDomY)
 		
-#gs.tight_layout(fig)
 plt.savefig(figName,dpi=figQ)
 
