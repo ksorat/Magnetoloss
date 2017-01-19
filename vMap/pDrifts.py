@@ -284,7 +284,7 @@ if (doKev):
 	# Ax.quiver(xxV,yyV,Vx,Vy,scale=2,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25)
 
 	plt.axis('scaled')
-	plt.xlim(-14.5,11.6)
+	plt.xlim(-14.5,12)
 	plt.ylim(-20,20)
 	plt.xlabel('GSM-X [Re]')
 	plt.ylabel("GSM-Y [Re]")
@@ -292,6 +292,7 @@ if (doKev):
 	cb = mpl.colorbar.ColorbarBase(Axc,cmap=cMap,norm=vNorm,orientation='vertical')
 	cb.set_label("Energy [keV]\n$V_{E \\times B} = V_{\\nabla}$",fontsize="small")
 	plt.savefig("vMap.png",dpi=figQ)
+	
 if (doExB):
 	f0 = 1.0e-4
 	f1 = 1.0e+1
