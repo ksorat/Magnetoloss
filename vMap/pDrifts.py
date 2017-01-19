@@ -13,7 +13,9 @@ import vtk
 from vtk.util import numpy_support as npvtk
 
 
-def Cull(xx,yy,Vx,Vy,IndK,Nk,Tiny=0.025):
+def Cull(xx,yy,Vx,Vy,IndK,Nv,Tiny=0.025):
+	np.random.seed(seed=31337)
+
 	nV = np.sqrt(Vx**2.0+Vy**2.0)
 	IndT = (nV >= Tiny)
 	IndG = IndK & IndT
@@ -23,26 +25,24 @@ def Cull(xx,yy,Vx,Vy,IndK,Nk,Tiny=0.025):
 	xxV = xx[IndG]
 	yyV = yy[IndG]
 
-	xxV = xxV[::Nk]
-	yyV = yyV[::Nk]
-	Vx = Vx[::Nk]
-	Vy = Vy[::Nk]
+	Ng = len(Vx)
+	
+	IndS = np.random.choice(Ng,size=Nv,replace=False)
+
+	xxV = xxV[IndS]
+	yyV = yyV[IndS]
+	Vx  = Vx [IndS]
+	Vy  = Vy [IndS]
 	
 	return xxV,yyV,Vx,Vy
 
-def SmoothOp(A,sig=1.5):
+def SmoothOp(A,sig=1):
 	import scipy
 	import scipy.ndimage
 
 	from scipy.ndimage.filters import gaussian_filter
-	N = A.shape
-	Ny = N[1]
-	y0 = Ny/2
-	iR = 4
-	#Asub = A[:,y0-iR:y0+iR+1,:]
-	#AsubS = gaussian_filter(Asub,1)
-	#A[:,y0-iR:y0+iR+1,:] = AsubS
 	A = gaussian_filter(A,sig)
+
 	return A
 
 def sclMag(Bx,By,Bz):
@@ -247,9 +247,11 @@ if (doKev):
 	ebVmag = np.sqrt(VebxS**2.0+VebyS**2.0)
 	ebV = np.sqrt(VebxS**2.0+VebyS**2.0+VebzS)
 
-	Nk = 80
+	#Nk = 80
 	Kc = 50
-	KcM = 1500
+	#KcM = 1000
+	KcM = 750
+	Nv = 2000
 	#Scl = 2
 	Scl = 0.375
 	Tiny=0.025
@@ -267,7 +269,7 @@ if (doKev):
 		Vz = VebzS
 
 	xyF = ebVmag/ebV
-	xxV,yyV,Vx,Vy = Cull(xx,yy,Vx,Vy,IndG,Nk,Tiny)
+	xxV,yyV,Vx,Vy = Cull(xx,yy,Vx,Vy,IndG,Nv,Tiny)
 
 
 	print(len(xxV))
@@ -292,7 +294,7 @@ if (doKev):
 	cb = mpl.colorbar.ColorbarBase(Axc,cmap=cMap,norm=vNorm,orientation='vertical')
 	cb.set_label("Energy [keV]\n$V_{E \\times B} = V_{\\nabla}$",fontsize="small")
 	plt.savefig("vMap.png",dpi=figQ)
-	
+
 if (doExB):
 	f0 = 1.0e-4
 	f1 = 1.0e+1
