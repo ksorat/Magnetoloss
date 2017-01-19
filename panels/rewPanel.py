@@ -45,12 +45,13 @@ h5ps = ["eRewind.100keV.h5part"]
 
 T0 = 3750
 T1 = 3250
-Ts = np.linspace(T0,T1,5,dtype=np.int)
+Ts = np.arange(T0,T1-1,-125,dtype=np.int)
+
 Tslcs = (0.5*(T0-Ts) ).astype(int)
 
 figSize = (10,10)
 figQ = 300 #DPI
-#figQ = 60 #DPI
+
 
 figName = "rewePanel.png"
 
