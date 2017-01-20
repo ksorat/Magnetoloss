@@ -46,10 +46,10 @@ h5ps = ["eRewind.50keV.h5part"]
 
 figName = "rewePanel.png"
 doFig = True
-
 Nt = 5
 T0 = 3750
 dT = 75
+dT = 125
 
 Ts = np.zeros(Nt,dtype=np.int)
 Ts = T0-dT*np.arange(Nt)
