@@ -42,6 +42,8 @@ def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
 
 Spcs = ["e-"]
 h5ps = ["eRewind.100keV.h5part"]
+h5ps = ["eRewind.50keV.h5part"]
+
 figName = "rewePanel.png"
 doFig = True
 
