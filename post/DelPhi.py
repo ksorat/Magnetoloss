@@ -18,7 +18,7 @@ def lastPhi(fIn):
 mpl.rcParams['mathtext.fontset'] = 'stix'
 mpl.rcParams['font.family'] = 'STIXGeneral'
 
-dirStub = "~/Work/Magnetoloss/Data/H5p/"
+dirStub = "/glade/u/home/skareem/Work/Magnetoloss/Data/H5p/"
 fileStub = "100keV.h5part"
 
 spcs = ["H","O"]
