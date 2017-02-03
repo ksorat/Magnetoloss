@@ -63,45 +63,7 @@ doNorm = True
 doLog = False
 
 pMax = 0.05
-#Delta-phi MP
-fig = plt.figure(1, figsize=(15,10))
-bins = np.linspace(N0,N1,Nb)
-nxFig = plt.hist(mpDp,bins,normed=doNorm,log=doLog)
-plt.legend(Leg)
-plt.xlim((N0,N1))
-plt.ylim((0,pMax))
-#plt.xlabel(r"$\Delta \phi = \phi_{L} - \phi_{F}$" + "\nAzimuthal Transit Between First/Last MPX",fontsize="x-large")
-plt.xlabel("Azimuthal Transit Between First/Last MPX",fontsize="x-large")
-plt.ylabel('Population',fontsize="x-large")
-plt.savefig("DelPMP.png")
-plt.close('all')
 
-#Delta-phi MS
-fig = plt.figure(1, figsize=(15,10))
-bins = np.linspace(N0,N1,Nb)
-nxFig = plt.hist(msDp,bins,normed=doNorm,log=doLog)
-plt.legend(Leg)
-plt.xlim((N0,N1))
-plt.ylim((0,pMax))
-plt.xlabel("Azimuthal Transit in Magnetosheath",fontsize="x-large")
-plt.ylabel('Population',fontsize="x-large")
-plt.savefig("DelPMS.png")
-plt.close('all')
-
-#Delta-phi total
-pMax = 0.03
-#fig = plt.figure(1, figsize=(10,10))
-bins = np.linspace(N0,N1,Nb)
-nxFig = plt.hist(mDp,bins,normed=doNorm,log=doLog)
-plt.legend(Leg)
-plt.xlim((N0,N1))
-plt.ylim((0,pMax))
-plt.xlabel("Azimuthal Transit After First MPX",fontsize="x-large")
-plt.ylabel('Population',fontsize="x-large")
-plt.savefig("TotDelP.png")
-plt.close('all')
-
-#plt.savefig("MPxDelP.png")
 
 
 Nx = 200
