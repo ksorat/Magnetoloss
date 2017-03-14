@@ -33,7 +33,7 @@ pi0 = (180/np.pi)*ppi[:,0]
 pc0 = 0.5*(pi0[0:-2] + pi0[1:-1])
 mltJ = np.abs(pc0-pMLT).argmin()
 
-BxCC,ByCC,BzCC = lfm.getHDFVec(hdffile,b)
+BxCC,ByCC,BzCC = lfm.getHDFVec(hdffile,'b')
 
 Bx0 = BxCC[ks,mltJ,:]
 By0 = BxCC[ks,mltJ,:]
