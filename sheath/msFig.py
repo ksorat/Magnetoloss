@@ -47,6 +47,7 @@ B0 = np.sqrt(Bx0**2.0 + By0**2.0 + Bz0**2.0)
 print("Field maxes = ", np.abs(Bx0).max(),np.abs(By0).max(),np.abs(Bz0).max())
 
 #Do pic
+figName = "mSheath.png"
 figSize = (8,8)
 figQ = 300 #DPI
 
@@ -57,4 +58,4 @@ plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
 plt.legend(Leg)
 plt.xlabel('Distance [Re]')
 plt.ylabel('Field Strength [nT]')
-
+plt.savefig(figName,dpi=figQ)
