@@ -11,6 +11,7 @@ from pyhdf.SD import SD, SDC
 
 fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_2000000.hdf"
 Re = 6.38e+8 #Earth radius [cm]
+iRe = 1/Re
 
 hdffile = SD(fIn)
 #Grab x/y/z arrays from HDF file.  Scale by Re
