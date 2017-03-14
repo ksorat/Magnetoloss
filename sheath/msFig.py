@@ -51,8 +51,8 @@ else:
 	BxCC,ByCC,BzCC = lfm.getHDFVec(hdffile,'b')
 	
 	Bx0 = bScl*BxCC[ks,mltJ,:]
-	By0 = bScl*BxCC[ks,mltJ,:]
-	Bz0 = bScl*BxCC[ks,mltJ,:]
+	By0 = bScl*ByCC[ks,mltJ,:]
+	Bz0 = bScl*BzCC[ks,mltJ,:]
 	B0 = np.sqrt(Bx0**2.0 + By0**2.0 + Bz0**2.0)
 	#Save to pickle
 	print("Writing pickle")
@@ -77,4 +77,6 @@ plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
 plt.legend(Leg)
 plt.xlabel('Distance [Re]')
 plt.ylabel('Field Strength [nT]')
-plt.savefig(figName,dpi=figQ)
+plt.xlim([5,40])
+plt.show()
+#plt.savefig(figName,dpi=figQ)
