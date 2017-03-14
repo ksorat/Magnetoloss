@@ -42,5 +42,19 @@ BxCC,ByCC,BzCC = lfm.getHDFVec(hdffile,'b')
 Bx0 = bScl*BxCC[ks,mltJ,:]
 By0 = bScl*BxCC[ks,mltJ,:]
 Bz0 = bScl*BxCC[ks,mltJ,:]
+B0 = np.sqrt(Bx0**2.0 + By0**2.0 + Bz0**2.0)
 
 print("Field maxes = ", np.abs(Bx0).max(),np.abs(By0).max(),np.abs(Bz0).max())
+
+#Do pic
+figSize = (8,8)
+figQ = 300 #DPI
+
+lfmv.initLatex()
+
+Leg = ['|B|','Bx','By','Bz']
+plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
+plt.legend(Leg)
+plt.xlabel('Distance [Re]')
+plt.ylabel('Field Strength [nT]')
+
