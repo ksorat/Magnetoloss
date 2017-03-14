@@ -57,13 +57,17 @@ fileStub = "100keV.h5part"
 
 spcs = ["H","O"]
 Leg = ["H+","O+"]
+doScl = False
 
 Ns = len(spcs)
 iXeq = []
 iYeq = []
 Phis = []
 Rs = []
-
+if (doScl):
+	fOut = "msRadScl.png"
+else:
+	fOut = "msRad.png" 
 if (os.path.isfile(msDataFile)):
 	print("Loading data")
 	with open(msDataFile, "rb") as f:
@@ -101,6 +105,8 @@ figQ = 300 #DPI
 Np = 200
 Nr = 200
 vNorm = LogNorm(vmin=1.0e-2,vmax=5.0e+0)
+vNormScl = LogNorm(vmin=1.0e-3,vmax=5.0e-1)
+
 cMap = "viridis"
 phiB = d2rad*np.linspace(-160,160,Np+1)
 rB = np.linspace(5,22.5,Nr+1)
@@ -124,7 +130,13 @@ for n in range(Ns):
 	Ax = fig.add_subplot(gs[0,n],projection='polar')
 	N,a,b = np.histogram2d(Rs[n],Phis[n],[rB,phiB],normed=True)
 	f = N/dV
-	
+	if (doScl):
+		vNorm = vNormScl
+		for i in range(Np):
+			Fp = f[:,i].sum()
+			if (Fp>0):
+				f[:,i] = f[:,i]/Fp
+				
 	Ax.pcolormesh(PP,RR,f,cmap=cMap,shading='flat',norm=vNorm)
 	E = plt.Circle((0, 0), 1.0, transform=Ax.transData._b, color="black", alpha=1)
 	Ax.add_artist(E)
@@ -141,7 +153,7 @@ Ax = fig.add_subplot(gs[1,:])
 cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
 cb.set_label("Density",fontsize="small")
 
-plt.savefig("msRad.png",dpi=figQ)
+plt.savefig(fOut,dpi=figQ)
 plt.close('all')
 
 

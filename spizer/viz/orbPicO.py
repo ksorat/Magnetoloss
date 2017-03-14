@@ -12,14 +12,14 @@ import lfmPostproc as lfmpp
 
 doSingle = True
 #pId = 50
-Nstrd = 20 #What fraction of points to trace
+Nstrd = 10 #What fraction of points to trace
 
 tRadFld=0.00125
 tRadTrj=0.0015
 FldCmap = "Summer" #Winter,YlGnBu,YlGn
 
 doProd = True
-Quiet = True
+Quiet = False
 User = False
 
 SrcF = "fld.vti"
@@ -157,15 +157,15 @@ if (not doSingle):
 
 
 w3d = GetView3D()
-w3d.viewNormal = (0.292517, 0.954452, 0.0587728)
+w3d.viewNormal = (-0.388782, -0.892782, 0.22757)
 w3d.focus = (-1.025, 0, 0.000166655)
-w3d.viewUp = (-0.00963149, -0.0585173, 0.99824)
+w3d.viewUp = (0.0477825, 0.227131, 0.972691)
 w3d.viewAngle = 30
 w3d.parallelScale = 25.6497
 w3d.nearPlane = -51.2994
 w3d.farPlane = 51.2994
-w3d.imagePan = (-0.0124171, -0.000784234)
-w3d.imageZoom = 3.1125
+w3d.imagePan = (-0.0394332, 0.0145531)
+w3d.imageZoom = 3.76613
 w3d.perspective = 1
 w3d.eyeAngle = 2
 w3d.centerOfRotationSet = 0

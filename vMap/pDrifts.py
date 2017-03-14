@@ -1,7 +1,6 @@
 #Calculate various particle drift velocities
 import numpy as np
 import os
-import lfmGrids as lfm
 import lfmViz as lfmv
 import lfmPostproc as lfmpp
 import matplotlib as mpl
@@ -12,6 +11,13 @@ from matplotlib.colors import LogNorm
 import vtk
 from vtk.util import numpy_support as npvtk
 
+#Various constants
+Qe = 4.8032e-10 #Electron charge [CGS]
+Me = 9.1094e-28 #Electron mass [g]
+Re = 6.38e+8 #Earth radius [cm]
+clightCMS = 2.9979e+10 #Speed of light [cm/s]
+
+EBscl = (Qe*Re/Me)/(clightCMS**2.0)
 
 def Cull(xx,yy,Vx,Vy,IndK,Nv,Tiny=0.025):
 	np.random.seed(seed=31337)
@@ -48,7 +54,7 @@ def SmoothOp(A,sig=1):
 def sclMag(Bx,By,Bz):
         #Incoming data is in dim-less units (EB from LFMTP)
         #Scale to nT
-        eb2cgs = 1/lfm.EBscl #Convert EB to CGS
+        eb2cgs = 1/EBscl #Convert EB to CGS
         G2nT = 10**5.0 #Convert Gauss to nT
         scl = (eb2cgs*G2nT)
         return SmoothOp(scl*Bx),SmoothOp(scl*By),SmoothOp(scl*Bz)
@@ -57,7 +63,7 @@ def sclElec(Ex,Ey,Ez):
         #Incoming data is in dim-less units (EB from LFMTP)
         #Scale to mili-Volts over meters [mV/m]
 
-        eb2cgs = 1/lfm.EBscl #Convert EB to CGS
+        eb2cgs = 1/EBscl #Convert EB to CGS
         G2T = 10**(-4.0)
         V2mV = 10**3.0
         clight = 2.9979e+8 #Speed of light, [m/s]
@@ -246,15 +252,29 @@ if (doKev):
 	#Add directions
 	ebVmag = np.sqrt(VebxS**2.0+VebyS**2.0)
 	ebV = np.sqrt(VebxS**2.0+VebyS**2.0+VebzS)
+	plt.axis('scaled')
 
-	#Nk = 80
+	#Config #1
 	Kc = 10
 	KcM = 500
 	Nv = 2500
-	#Scl = 2
 	Scl = 0.375
 	Tiny=0.025
 	doUnit = False
+	doColor = False	
+	plt.xlim(-14.5,12)
+	plt.ylim(-20,20)
+
+	#Config #2
+	# Kc = 10
+	# KcM = 10000
+	# Nv = 10000
+	# Scl = 0.375
+	# Tiny=0.025
+	# doUnit = False
+	# doColor = False
+	# plt.xlim(-3,5)
+	# plt.ylim(8,16)
 
 	Ind = (eqKevSlc<Kc) | (eqKevSlc>KcM)
 	IndG = (eqKevSlc>Kc) & (eqKevSlc<KcM)
@@ -272,14 +292,14 @@ if (doKev):
 
 
 	print(len(xxV))
-	
-	Ax.quiver(xxV,yyV,Vx,Vy,scale=Scl,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25,minlength=TINY)
-	#Ax.quiver(xxV,yyV,Vx,Vy,xyF,cmap="winter",vmin=0,vmax=1,scale=2,alpha=0.5,units='xy',pivot='mid',edgecolor='k',linewidth=0.25)
+	if (doColor):
+		Ax.quiver(xxV,yyV,Vx,Vy,xyF,cmap="winter",vmin=0,vmax=1,scale=2,alpha=0.5,units='xy',pivot='mid',edgecolor='k',linewidth=0.25)
+	else:	
+		Ax.quiver(xxV,yyV,Vx,Vy,scale=Scl,alpha=0.5,units='xy',pivot='mid',color='dodgerblue',edgecolor='k',linewidth=0.25,minlength=TINY)
+	#
 
 
-	plt.axis('scaled')
-	plt.xlim(-14.5,12)
-	plt.ylim(-20,20)
+
 	plt.xlabel('GSM-X [Re]')
 	plt.ylabel("GSM-Y [Re]")
 	Axc = fig.add_subplot(gs[0,1])

@@ -77,21 +77,41 @@ else:
 		pickle.dump(aTms,f)
 		pickle.dump(aTbar,f)
 
-pMax = 2.0e-2
-pMin = 1.0e-5
+#Add noise for figure rounding
+dT = 2.5
+for i in range(2):
+	Np = aTms[i].shape[0]
+	X = np.random.rand(Np)
+	dTms = 2*dT*(X-0.5)
+	aTms[i] = aTms[i]+dTms
+
+#Log configuration
+pMax = 1.0e-2
+pMin = 5.0e-6
 alph = 0.75
 Nb = 35
-T0 = 0; Tf = 900.0
+T0 = 0; Tf = 1000.0
 LW = 2
 doNorm = True
 doLog = True
+
+#Non-Log
+# pMax = 1.0e-2
+# pMin = 0
+# alph = 0.75
+# Nb = 75
+# T0 = 0; Tf = 450.0
+# LW = 2
+# doNorm = True
+# doLog = False
+
 bins = np.linspace(T0,Tf,Nb)
 
 fig = plt.figure(figsize=figSize)
 #plt.hist(aTms[0],bins,alpha=alph,normed=doNorm,log=doLog)
 #plt.hist(aTms[1],bins,alpha=alph,normed=doNorm,log=doLog)
 #plt.hist(aTms,bins,normed=doNorm,log=doLog)
-lfmv.showDualHist(aTms[0],aTms[1],bins,alph=0.75,Norm=True,Cum=False,LogH=True)
+lfmv.showDualHist(aTms[0],aTms[1],bins,alph=0.75,Norm=True,Cum=False,LogH=doLog)
 plt.legend(Leg)
 plt.xlabel("Time in Magnetosheath [s]")
 plt.ylabel("Density")

@@ -10,17 +10,25 @@ from visit_utils.common import lsearch #lsearch(dir(),"blah")
 import pyVisit as pyv
 import lfmPostproc as lfmpp
 
+#Config 1
 doSingle = True
-#pId = 50
-Nstrd = 4 #What fraction of points to trace
+pId = 10
 Nstrd = 60
+
+#Config 2
+doSingle = True
+pId = 50
+Nstrd = 60
+
+#Nstrd = 4 #What fraction of points to trace
+
 
 tRadFld=0.00125
 tRadTrj=0.0015
 FldCmap = "Summer" #Winter,YlGnBu,YlGn
 
 doProd = True
-Quiet = False
+Quiet = True
 User = False
 
 SrcF = "fld.vti"
@@ -28,7 +36,8 @@ SrcF = "fld.vti"
 
 if (doSingle):
 	SrcP = "pZoom.h5part"
-	SrcP = "../H100/H.100keV.ZoomID.000010.h5part"
+	#SrcP = "../H100/H.100keV.ZoomID.000010.h5part"
+	SrcP = "../H100/H.100keV.ZoomID." + "%06d"%pId + ".h5part"
 	pId = 0
 else:
 	SrcP = "prt.h5part"
@@ -159,6 +168,7 @@ if (not doSingle):
 
 
 w3d = GetView3D()
+#Config 1
 w3d.viewNormal = (0.995442, -0.0559352, 0.0772398)
 w3d.focus = (-1.025, 0, 0.00223994)
 w3d.viewUp = (-0.0764053, 0.0169112, 0.996933)
@@ -172,6 +182,25 @@ w3d.perspective = 1
 w3d.eyeAngle = 2
 w3d.centerOfRotationSet = 0
 w3d.centerOfRotation = (-1.025, 0, 0.00223994)
+w3d.axis3DScaleFlag = 0
+w3d.axis3DScales = (1, 1, 1)
+w3d.shear = (0, 0, 1)
+w3d.windowValid = 0
+
+#Config 2
+w3d.viewNormal = (0.25179, 0.965079, 0.0722824)
+w3d.focus = (-1.025, 0, 3.19481e-05)
+w3d.viewUp = (-0.0166425, -0.0703598, 0.997383)
+w3d.viewAngle = 30
+w3d.parallelScale = 25.6497
+w3d.nearPlane = -51.2993
+w3d.farPlane = 51.2993
+w3d.imagePan = (0.103121, -0.0140319)
+w3d.imageZoom = 3.1125
+w3d.perspective = 1
+w3d.eyeAngle = 2
+w3d.centerOfRotationSet = 0
+w3d.centerOfRotation = (-1.025, 0, 3.19481e-05)
 w3d.axis3DScaleFlag = 0
 w3d.axis3DScales = (1, 1, 1)
 w3d.shear = (0, 0, 1)

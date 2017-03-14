@@ -7,6 +7,8 @@ import lfmPostproc as lfmpp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import cPickle as pickle
+import matplotlib.gridspec as gridspec
+from matplotlib.colors import LogNorm
 
 def getXKA(fIn):
 	isOut = lfmpp.getOut(fIn,mp=True)
@@ -42,10 +44,8 @@ def getXKA(fIn):
 	mlt = Phi
 	return mlt,K,A
 
-figSize = (8,8)
-figQ = 300 #DPI
 
-lfmv.initLatex()
+lfmv.ppInit()
 msDataFile = "mpKA.pkl"
 
 RootDir = os.path.expanduser('~') + "/Work/Magnetoloss/Data/H5p/"
@@ -85,3 +85,51 @@ else:
 		pickle.dump(mpK,f)
 		pickle.dump(mpA,f)
 
+
+Nplt = 2
+fSz = 14
+figSize = (10,10)
+figQ = 300 #DPI
+
+Nxb = 100
+mTks = [-120,-90,-60,-30,0,30,60,90,120]
+
+Xb = np.linspace(-135,135,Nxb)
+Xlab = "Last OCB MLT"
+cMap = "viridis"
+doNorm = False
+
+for i in range(Nplt):
+	fig = plt.figure(1,figsize=figSize)
+	if (i==0):
+		#Do K plot
+		Nk = 40
+		Ylab = "Energy [keV]"
+		titS = "Energy at Last OCB"
+		fOut = "mltK.png"
+		Yb = np.linspace(1,200,Nk)
+		mpY = mpK
+		vNorm = LogNorm(1.0,5.0e+2)
+	if (i==1):
+		#Do alpha plot
+		Na = 40
+		Ylab = "Pitch Angle"
+		titS = "Pitch Angle at Last OCB"
+		fOut = "mltA.png"
+		Yb = np.linspace(0,180,Na)
+		mpY = mpA
+		vNorm = LogNorm(1.0,1.0e+2)
+	gs = gridspec.GridSpec(3, 1,height_ratios=[15,15,1])
+	for s in range(Ns):
+		Ax = fig.add_subplot(gs[s,0])
+		plt.hist2d(mpMLT[s],mpY[s],[Xb,Yb],norm=vNorm,cmap=cMap)
+		lfmv.ax2mlt(Ax,mTks,doX=True)
+
+		plt.ylabel(Ylab)
+		Ax.text(-120,150,Leg[s],fontsize=fSz)
+	Ax = fig.add_subplot(gs[-1,0])
+	cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
+	cb.set_label("Counts",fontsize="small")
+	plt.suptitle(titS)
+	plt.savefig(fOut)
+	plt.close('all')
