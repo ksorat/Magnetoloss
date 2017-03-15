@@ -39,12 +39,13 @@ def getEQXs(fIn):
 			y = yeq[tSlc1:,n]
 			x = x[Ind]
 			y = y[Ind]
-			Vmag = Vmag[tSlc1:,n]
-			Vmag = Vmag[Ind]
-			Vz = Vz[tSlc1:,n]
-			Vz = Vz[Ind]
+			vm = Vmag[tSlc:,n]
+			vm = vm[Ind]
+			vzn = Vz[tSlc:,n]
+			vzn = vzn[Ind]
 
-			als = np.arccos(Vz/Vmag)*180.0/np.pi
+
+			als = np.arccos(vzn/vm)*180.0/np.pi
 			r = np.sqrt(x**2.0 + y**2.0)
 			phi = np.arctan2(y,x)
 			for i in range(Neq):
