@@ -79,7 +79,7 @@ else:
 		print("Reading %s"%(fIn))
 		print("Species %s"%(Leg[i]))
 		Al,p = getEQXs(fIn)
-		print(A.shape)
+		print(Al.shape)
 
 		Phis.append(p)
 		As.append(Al)
