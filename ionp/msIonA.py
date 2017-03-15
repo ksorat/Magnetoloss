@@ -77,8 +77,8 @@ else:
 		fIn = RootDir + spcs[i] + "." + fileStub
 		print("Reading %s"%(fIn))
 		print("Species %s"%(Leg[i]))
-		p,A = getEQXs(fIn)
+		Al,p = getEQXs(fIn)
 		print(A.shape)
 
 		Phis.append(p)
-		Rs.append(R)
+		As.append(Al)
