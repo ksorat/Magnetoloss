@@ -39,9 +39,9 @@ def getEQXs(fIn):
 			y = yeq[tSlc1:,n]
 			x = x[Ind]
 			y = y[Ind]
-			vm = Vmag[tSlc:,n]
+			vm = Vmag[tSlc1:,n]
 			vm = vm[Ind]
-			vzn = Vz[tSlc:,n]
+			vzn = Vz[tSlc1:,n]
 			vzn = vzn[Ind]
 
 

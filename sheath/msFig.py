@@ -10,7 +10,7 @@ import cPickle as pickle
 from pyhdf.SD import SD, SDC
 import lfmInterp as lfm
 
-fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1076000.hdf"
+fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_2000000.hdf"
 msDataFile = "mSheath.pkl"
 Re = 6.38e+8 #Earth radius [cm]
 iRe = 1/Re
@@ -74,8 +74,8 @@ lfmv.initLatex()
 
 Leg = ['Bx','By','Bz']
 #plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
-plt.plot(Rc,1*Bx0,'bo-')
-plt.plot(Rc,1*By0,'go-')
+plt.plot(Rc,Bx0,'bo-')
+plt.plot(Rc,By0,'go-')
 plt.plot(Rc,Bz0,'ro-')
 
 
@@ -83,6 +83,6 @@ plt.legend(Leg)
 plt.xlabel('Distance [Re]')
 plt.ylabel('Field Strength [nT]')
 plt.xlim([9,14])
-plt.ylim([-40,60])
+plt.ylim([-75,75])
 plt.show()
 #plt.savefig(figName,dpi=figQ)
