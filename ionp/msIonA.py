@@ -88,4 +88,46 @@ else:
 		print("Writing pickle")
 		with open(msDataFile, "wb") as f:
 			pickle.dump(Phis,f)
-			pickle.dump(As,f)	
+			pickle.dump(As,f)
+
+
+#Make figure
+titS = "Pitch Angle at Magnetosheath Equatorial Crossings"
+fOut = "msIonA.png"
+
+figSize = (10,10)
+figQ = 300 #DPI
+
+Nxb = 100
+mTks = [-120,-90,-60,-30,0,30,60,90,120]
+fSz = 14
+
+Xb = np.linspace(-135,135,Nxb)
+Na = 40
+Yb = np.linspace(0,180,Na)
+Xlab = "Equatorial Crossing [MLT]"
+Ylab = "Pitch Angle"
+cMap = "viridis"
+vNorm = LogNorm(1,1.0e+2)
+
+fig = plt.figure(1,figsize=figSize)
+gs = gridspec.GridSpec(4, 1,height_ratios=[8,8,1,1])
+for s in range(Ns):
+	#Convert MLT to degrees
+	mltS = Phis[s]*180.0/np.pi
+	Ax = fig.add_subplot(gs[s,0])
+	plt.hist2d(mltS,As[s],[Xb,Yb],norm=vNorm,cmap=cMap)
+	if (s == 0):
+		plt.setp(Ax.get_xticklabels(),visible=False)
+	else:
+		plt.xlabel(Xlab)
+	Ax.text(-120,160,Leg[s],fontsize=fSz)
+	plt.ylabel(Ylab)
+lfmv.ax2mlt(Ax,mTks,doX=True)
+Ax = fig.add_subplot(gs[-1,0])
+cb = mpl.colorbar.ColorbarBase(Ax,cmap=cMap,norm=vNorm,orientation='horizontal')
+cb.set_label("Counts",fontsize="small")
+plt.suptitle(titS)
+plt.savefig(fOut)
+plt.close('all')
+

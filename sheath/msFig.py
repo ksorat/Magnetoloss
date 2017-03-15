@@ -10,11 +10,18 @@ import cPickle as pickle
 from pyhdf.SD import SD, SDC
 import lfmInterp as lfm
 
+#Grab line of constant j, average k=0/k=-1
+#Assuming k,j,i ordering
+def getLine(X3,jS,xScl=1.0):
+	xR = 0.5*xScl*(X3[0,jS,:] + X3[-1,jS,:])
+	return xR
+
 fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1070000.hdf"
 msDataFile = "mSheath.pkl"
 Re = 6.38e+8 #Earth radius [cm]
 iRe = 1/Re
 bScl = 1.0e+5 #Gauss->nT
+gamma = 5.0/3.0
 
 if (os.path.isfile(msDataFile)):
 	print("Loading data")
@@ -22,7 +29,10 @@ if (os.path.isfile(msDataFile)):
 		B0  = pickle.load(f)
 		Bx0 = pickle.load(f)
 		By0 = pickle.load(f)
-		Bz0 = pickle.load(f)
+		Bz0 = pickle.load(f)		
+		d0  = pickle.load(f)
+		Cs0 = pickle.load(f)
+		kT0 = pickle.load(f)
 		Rc  = pickle.load(f)
 
 else:
@@ -43,17 +53,31 @@ else:
 	pMLT = 45.0
 	pi0 = (180/np.pi)*ppi[:,0]
 	pc0 = 0.5*(pi0[0:-1] + pi0[1:])
-	
-	
 	mltJ = np.abs(pc0-pMLT).argmin()
+
+	#Find radial cell centers at this slice
 	Rci = rri[mltJ,:]
 	Rc = 0.5*(Rci[0:-1] + Rci[1:])
+
 	BxCC,ByCC,BzCC = lfm.getHDFVec(hdffile,'b')
+	#Get soundspeed [km/s]
+	C3 = lfm.getHDFScl(hdffile,"c",Scl=1.0e-5)
+	#Get rho [kg/m3]
+	D3 = lfm.getHDFScl(hdffile,"rho",Scl=1.0e+3)
 	
-	Bx0 = bScl*BxCC[ks,mltJ,:]
-	By0 = bScl*ByCC[ks,mltJ,:]
-	Bz0 = bScl*BzCC[ks,mltJ,:]
+	#Field lines/scaling
+	Bx0 = getLine(BxCC,mltJ,bScl)
+	By0 = getLine(ByCC,mltJ,bScl)
+	Bz0 = getLine(BzCC,mltJ,bScl)
+
 	B0 = np.sqrt(Bx0**2.0 + By0**2.0 + Bz0**2.0)
+
+	#Density/temperature + scaling
+	d0 = getLine(D3,mltJ)
+	Cs0 = getLine(C3,mltJ)
+
+	kT0 = (1.0/gamma)*(0.1*Cs0)**2.0 #eV
+
 	#Save to pickle
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
@@ -61,6 +85,9 @@ else:
 		pickle.dump(Bx0,f)
 		pickle.dump(By0,f)
 		pickle.dump(Bz0,f)
+		pickle.dump(d0,f)
+		pickle.dump(Cs0,f)
+		pickle.dump(kT0,f)
 		pickle.dump(Rc ,f)		
 
 print("Field maxes = ", np.abs(Bx0).max(),np.abs(By0).max(),np.abs(Bz0).max())
@@ -84,5 +111,5 @@ plt.xlabel('Distance [Re]')
 plt.ylabel('Field Strength [nT]')
 plt.xlim([9,14])
 plt.ylim([-75,75])
-#plt.show()
-plt.savefig(figName,dpi=figQ)
+plt.show()
+#plt.savefig(figName,dpi=figQ)
