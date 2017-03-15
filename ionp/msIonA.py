@@ -83,3 +83,9 @@ else:
 
 		Phis.append(p)
 		As.append(Al)
+
+		#Save to pickle
+		print("Writing pickle")
+		with open(msDataFile, "wb") as f:
+			pickle.dump(Phis,f)
+			pickle.dump(As,f)	
