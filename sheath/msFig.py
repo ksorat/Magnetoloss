@@ -69,6 +69,7 @@ else:
 	#Get rho [kg/m3]
 	D3 = lfm.getHDFScl(hdffile,"rho",Scl=1.0e+3)
 	
+	#Get velocities [m/s]
 	Vx3,Vy3,Vz3 = lfm.getHDFVec(hdffile,"v",Scl=1.0e-3)
 
 	#Field lines/scaling
