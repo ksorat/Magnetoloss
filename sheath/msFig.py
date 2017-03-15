@@ -22,6 +22,7 @@ Re = 6.38e+8 #Earth radius [cm]
 iRe = 1/Re
 bScl = 1.0e+5 #Gauss->nT
 gamma = 5.0/3.0
+Mp = 1.6726219e-27 #kg
 
 if (os.path.isfile(msDataFile)):
 	print("Loading data")
@@ -33,6 +34,9 @@ if (os.path.isfile(msDataFile)):
 		d0  = pickle.load(f)
 		Cs0 = pickle.load(f)
 		kT0 = pickle.load(f)
+		Vx0 = pickle.load(f)
+		Vy0 = pickle.load(f)
+		Vz0 = pickle.load(f)		
 		Rc  = pickle.load(f)
 
 else:
@@ -65,6 +69,8 @@ else:
 	#Get rho [kg/m3]
 	D3 = lfm.getHDFScl(hdffile,"rho",Scl=1.0e+3)
 	
+	Vx3,Vy3,Vz3 = lfm.getHDFVec(hdffile,"v",Scl=1.0e-3)
+
 	#Field lines/scaling
 	Bx0 = getLine(BxCC,mltJ,bScl)
 	By0 = getLine(ByCC,mltJ,bScl)
@@ -78,6 +84,10 @@ else:
 
 	kT0 = (1.0/gamma)*(0.1*Cs0)**2.0 #eV
 
+	Vx0 = getLine(Vx3,mltJ)
+	Vy0 = getLine(Vy3,mltJ)
+	Vz0 = getLine(Vz3,mltJ)
+
 	#Save to pickle
 	print("Writing pickle")
 	with open(msDataFile, "wb") as f:
@@ -88,28 +98,37 @@ else:
 		pickle.dump(d0,f)
 		pickle.dump(Cs0,f)
 		pickle.dump(kT0,f)
-		pickle.dump(Rc ,f)		
+		pickle.dump(Vx0,f)
+		pickle.dump(Vy0,f)
+		pickle.dump(Vz0,f)
+		pickle.dump(Rc ,f)
+
 
 print("Field maxes = ", np.abs(Bx0).max(),np.abs(By0).max(),np.abs(Bz0).max())
 
+#Scale density to number density
+n0 = d0/Mp #Number/m3
+n0 = 1.0e-6*n0 #Number/cm3
+
 #Do pic
 figName = "mSheath.png"
-figSize = (8,8)
+figSize = (12,8)
 figQ = 300 #DPI
 
 lfmv.initLatex()
-
-Leg = ['Bx','By','Bz']
+plt.figure(1,figsize=figSize)
+Leg = ['$5 \\times B_{x}$ [nT]','$5 \\times B_{y}$ [nT]','$B_{z}$ [nT]','$0.05 \\times kT$ [eV]','$N_{i}$ [$cm^{-3}$]']
 #plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
-plt.plot(Rc,Bx0,'bo-')
-plt.plot(Rc,By0,'go-')
+plt.plot(Rc,5*Bx0,'b-')
+plt.plot(Rc,5*By0,'g-')
 plt.plot(Rc,Bz0,'ro-')
+plt.plot(Rc,kT0/20,'c-')
+plt.plot(Rc,n0,'k')
 
-
-plt.legend(Leg)
+plt.legend(Leg,fontsize="large")
 plt.xlabel('Distance [Re]')
-plt.ylabel('Field Strength [nT]')
-plt.xlim([9,14])
-plt.ylim([-75,75])
+plt.ylabel('MHD Quantity')
+plt.xlim([9,13.5])
+plt.ylim([-50,75])
 #plt.show()
-#plt.savefig(figName,dpi=figQ)
+plt.savefig(figName,dpi=figQ)
