@@ -74,8 +74,8 @@ lfmv.initLatex()
 
 Leg = ['Bx','By','Bz']
 #plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
-plt.plot(Rc,Bx0,'bo-')
-plt.plot(Rc,By0,'go-')
+plt.plot(Rc,1*Bx0,'bo-')
+plt.plot(Rc,1*By0,'go-')
 plt.plot(Rc,Bz0,'ro-')
 
 
@@ -83,6 +83,6 @@ plt.legend(Leg)
 plt.xlabel('Distance [Re]')
 plt.ylabel('Field Strength [nT]')
 plt.xlim([9,14])
-plt.ylim([-75,75])
-#plt.show()
+plt.ylim([-40,60])
+plt.show()
 #plt.savefig(figName,dpi=figQ)
