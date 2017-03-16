@@ -49,7 +49,8 @@ for n in range(NumI):
 	fIn = Stub + str(id0+n*dI) + ".hdf"
 	fIns.append(fIn)
 	#Get data from file
-
+	hdffile = SD(fIn)
+	
 	#Do special things for first
 	if (n == 0):
 		x3 = iRe*np.double(hdffile.select('X_grid').get())
