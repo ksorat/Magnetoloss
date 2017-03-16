@@ -15,7 +15,7 @@ import lfmInterp as lfm
 def getLine(X3,jS,xScl=1.0):
 	k0 = 0
 	k1 = -1
-	k0 = -1
+	
 	xR = 0.5*xScl*(X3[k0,jS,:] + X3[k1,jS,:])
 	return xR
 
