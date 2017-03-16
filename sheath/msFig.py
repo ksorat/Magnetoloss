@@ -13,7 +13,10 @@ import lfmInterp as lfm
 #Grab line of constant j, average k=0/k=-1
 #Assuming k,j,i ordering
 def getLine(X3,jS,xScl=1.0):
-	xR = 0.5*xScl*(X3[0,jS,:] + X3[-1,jS,:])
+	k0 = 0
+	k1 = -1
+	k0 = -1
+	xR = 0.5*xScl*(X3[k0,jS,:] + X3[k1,jS,:])
 	return xR
 
 #fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1070000.hdf"
