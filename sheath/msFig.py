@@ -17,7 +17,7 @@ def getLine(X3,jS,xScl=1.0):
 	return xR
 
 #fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1070000.hdf"
-fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1100000.hdf"
+fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1500000.hdf"
 msDataFile = "mSheath.pkl"
 Re = 6.38e+8 #Earth radius [cm]
 iRe = 1/Re
