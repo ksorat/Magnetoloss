@@ -16,7 +16,8 @@ def getLine(X3,jS,xScl=1.0):
 	xR = 0.5*xScl*(X3[0,jS,:] + X3[-1,jS,:])
 	return xR
 
-fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1070000.hdf"
+#fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1070000.hdf"
+fIn = "/glade/p/hao/wiltbemj/SNS/ION/SNS-Bz-5-Vx400-N5-F200/SNS-Bz-5-Vx400-N5-F200_mhd_1100000.hdf"
 msDataFile = "mSheath.pkl"
 Re = 6.38e+8 #Earth radius [cm]
 iRe = 1/Re
@@ -111,6 +112,8 @@ print("Field maxes = ", np.abs(Bx0).max(),np.abs(By0).max(),np.abs(Bz0).max())
 n0 = d0/Mp #Number/m3
 n0 = 1.0e-6*n0 #Number/cm3
 
+#Scale velocity to km/s
+Vx0 = 1.0e-3*Vx0
 #Do pic
 figName = "mSheath.png"
 figSize = (12,8)
@@ -118,13 +121,14 @@ figQ = 300 #DPI
 
 lfmv.initLatex()
 plt.figure(1,figsize=figSize)
-Leg = ['$5 \\times B_{x}$ [nT]','$5 \\times B_{y}$ [nT]','$B_{z}$ [nT]','$0.05 \\times kT$ [eV]','$N_{i}$ [$cm^{-3}$]']
+Leg = ['$5 \\times B_{x}$ [nT]','$5 \\times B_{y}$ [nT]','$B_{z}$ [nT]','$0.05 \\times kT$ [eV]','$N_{i}$ [cm$^{-3}$]','$V_{x}$ [km/s]']
 #plt.plot(Rc,B0,'ko-',Rc,Bx0,'bo-',Rc,By0,'go-',Bz0,'ro-')
 plt.plot(Rc,5*Bx0,'b-')
 plt.plot(Rc,5*By0,'g-')
 plt.plot(Rc,Bz0,'ro-')
 plt.plot(Rc,kT0/20,'c-')
 plt.plot(Rc,n0,'k')
+plt.plot(Rc,Vx0,'m')
 
 plt.legend(Leg,fontsize="large")
 plt.xlabel('Distance [Re]')
