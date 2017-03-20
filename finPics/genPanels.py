@@ -370,7 +370,7 @@ if (doFig4):
 			plt.axis('scaled')
 			plt.xlim(DomX); plt.ylim(DomY)
 
-
+			n = n+1
 	#Finish up
 	plt.savefig(fOut,dpi=figQ)
 	plt.close('all')
