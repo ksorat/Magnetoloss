@@ -64,8 +64,9 @@ def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc",tSlc=None):
         return xi,yi,dBz
 
 
-def getPs(h5pDir,h5pStub,t,dt=10.0):
-	tSlc = np.int(t/dt)
+def getPs(h5pDir,h5pStub,t,dt=10.0,tSlc=None):
+	if (tSlc is None):
+		tSlc = np.int(t/dt)
 	h5pFile = h5pDir + "/" + h5pStub
 	t,xeq = lfmpp.getH5pT(h5pFile,"xeq",tSlc)
 	t,yeq = lfmpp.getH5pT(h5pFile,"yeq",tSlc)
@@ -80,8 +81,8 @@ def getPs(h5pDir,h5pStub,t,dt=10.0):
 	yeq = yeq[In]
 	kev = kev[In]
 	
-
 	return xeq,yeq,kev
+
 
 #Start figure making!
 #-------------------------------------------
