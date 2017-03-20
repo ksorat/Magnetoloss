@@ -15,7 +15,7 @@ from matplotlib.patches import Wedge
 #3: Rewind Panel
 #4: O+ trajectories
 
-doFig1 = False
+doFig1 = True
 doFig2 = False
 doFig3 = False
 doFig4 = False
