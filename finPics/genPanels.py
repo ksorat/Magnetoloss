@@ -156,6 +156,7 @@ if (doFig1):
 	plt.close('all')
 	lfmv.trimFig(fOut)
 
+#-------------------------------------------
 #Figure 2 (KHI panel figure)
 if (doFig2):
 	fOut = fOuts[1]
@@ -221,7 +222,7 @@ if (doFig2):
 	plt.savefig(fOut,dpi=figQ)
 	plt.close('all')
 	lfmv.trimFig(fOut)
-
+#-------------------------------------------
 #Figure 3 (Rewind panel figure)
 if (doFig3):
 	fOut = fOuts[2]
@@ -284,3 +285,78 @@ if (doFig3):
 	plt.savefig(fOut,dpi=figQ)
 	plt.close('all')
 	lfmv.trimFig(fOut)
+#-------------------------------------------
+#Figure 4 (O+ trajectory figures)
+def getPTop(h5pFile,pId):
+	
+	t,x = lfmpp.getH5pid(h5pFile,"x",pId)
+	t,y = lfmpp.getH5pid(h5pFile,"y",pId)
+	
+	t,Om = lfmpp.getH5pid(h5pFile,"Om",pId)
+	t,Op = lfmpp.getH5pid(h5pFile,"Op",pId)
+	Omp = (Om+Op)
+
+	return x,y,Omp
+
+def getMPX(h5pFile,IDs):
+	Np = len(IDs)
+	tSlcs = np.zeros(Np,dtype=np.int)
+	for n in range(Np):
+		pID = IDs[n]
+		t,tCr = lfmpp.getH5pid(h5pFile,"tCr",pID)
+		I = (tCr>0).argmax()
+		tSlcs[n] = I
+	return tSlcs
+
+if (doFig4):
+	fOut = fOuts[3]
+	h5pFile = h5pDir + "/" + "O.100keV.h5part"
+	lLw = 0.25
+	Nx = 3; Ny = 4
+	Nk = Nx*Ny
+	DomX = [-15,12]
+	DomY = [-20,20]
+
+	#IDs calculated elsewhere
+	IDs = [88748,18090,9935,50193,77676,98578,72886,71222,13845,50715,11522,11530]
+	tSlcs = getMPX(h5p,IDs)
+
+	n = 0
+	for i in range(1,Nx+1):
+		for j in range(Ny):
+			
+			Ax = fig.add_subplot(gs[i,j])
+	
+			if (i == Nx):
+				plt.xlabel("GSM-X [Re]",fontsize=LabFS)
+			else:
+				plt.setp(Ax.get_xticklabels(),visible=False)
+			if (j == 0):
+				plt.ylabel("GSM-Y [Re]",fontsize=LabFS)
+			else:
+				plt.setp(Ax.get_yticklabels(),visible=False)
+	
+			xi,yi,dBz = getFld(vtiDir,tSlcs[n])
+			fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+
+			#Add figure label
+			subLab = chr(ord('a')+n)+")"
+			print(subLab)
+			Ax.text(7.5,15,subLab,fontsize=LabFS)
+			lfmv.addEarth2D()
+	
+			#Now do particles
+			xs,ys,zs = getPTop(h5pFile,IDs[n])
+	
+			pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=0,vmax=1,cmap=pCMap,linewidth=pLW)
+			
+			plt.plot(xs,ys,'w-',linewidth=lLw)
+			plt.axis('scaled')
+			plt.xlim(DomX); plt.ylim(DomY)
+
+
+	#Finish up
+	plt.savefig(fOut,dpi=figQ)
+	plt.close('all')
+	lfmv.trimFig(fOut)
+
