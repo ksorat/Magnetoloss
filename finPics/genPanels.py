@@ -263,7 +263,7 @@ if (doFig3):
 			else:
 				plt.xlabel('GSM-X [Re]',fontsize=LabFS)
 			if (s == 0):
-				plt.title("T = %d [s]"%(Ts[t]-T0),,fontsize=TitFS)
+				plt.title("T = %d [s]"%(Ts[t]-T0),fontsize=TitFS)
 
 			#Now do plots
 			fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
@@ -280,4 +280,4 @@ if (doFig3):
 	#Finish up
 	plt.savefig(fOut,dpi=figQ)
 	plt.close('all')
-	lfmv.trimFig(fOut)	
+	lfmv.trimFig(fOut)
