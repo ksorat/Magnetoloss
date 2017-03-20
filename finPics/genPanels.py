@@ -50,17 +50,19 @@ h5pDir = RootDir + "/" "H5p"
 
 #Global initialization
 lfmv.ppInit()
+def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc",tSlc=None):
+        if (tSlc is None):
+                tSlc = np.int(t/dt)
 
-def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc"):
-	tSlc = np.int(t/dt)
-	vtiFile = vtiDir + "/" + eqStub + ".%04d.vti"%(tSlc)
+        vtiFile = vtiDir + "/" + eqStub + ".%04d.vti"%(tSlc)
 
-	dBz = lfmv.getVTI_SlcSclr(vtiFile).T
-	ori,dx,ex = lfmv.getVTI_Eq(vtiFile)
-	xi = ori[0] + np.arange(ex[0],ex[1]+1)*dx[0]
-	yi = ori[1] + np.arange(ex[2],ex[3]+1)*dx[1]
+        dBz = lfmv.getVTI_SlcSclr(vtiFile).T
+        ori,dx,ex = lfmv.getVTI_Eq(vtiFile)
+        xi = ori[0] + np.arange(ex[0],ex[1]+1)*dx[0]
+        yi = ori[1] + np.arange(ex[2],ex[3]+1)*dx[1]
 
-	return xi,yi,dBz
+        return xi,yi,dBz
+
 
 def getPs(h5pDir,h5pStub,t,dt=10.0):
 	tSlc = np.int(t/dt)
