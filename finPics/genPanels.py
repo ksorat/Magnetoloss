@@ -16,7 +16,7 @@ from matplotlib.patches import Wedge
 #4: O+ trajectories
 
 doFig1 = True
-doFig2 = False
+doFig2 = True
 doFig3 = False
 doFig4 = False
 
@@ -100,7 +100,7 @@ if (doFig1):
 	fig = plt.figure(figsize=figSizeFull)#,tight_layout=True)
 	gs = gridspec.GridSpec(Ns+2,Nt,height_ratios=HRs,hspace=0.1,wspace=0.1)#,bottom=0.05)
 
-	wedgeLW = 0.75
+	wedgeLW = 1.5
 	for t in range(Nt):
 		xi,yi,dBz = getFld(vtiDir,Ts[t])
 		for s in range(Ns):
@@ -151,7 +151,64 @@ if (doFig1):
 	plt.savefig(fOut,dpi=figQ)
 	plt.close('all')
 	lfmv.trimFig(fOut)
-	
+
 #Figure 2 (KHI panel figure)
 if (doFig2):
 	fOut = fOuts[1]
+	Spcs = ["H+","e-"]
+	h5ps = ["H.100keV.h5part","e.100keV.h5part"]
+	fldDomX = [-5,10]
+	Mrk = [-60,60] #Which lines to mark
+	RMax = 20
+	RMin = 1.05
+	lLW = 1.5
+	Ts = 3100 #Time to use for data
+
+	#Setup pic
+	fig = plt.figure(figsize=figSizeFull)#,tight_layout=True)
+	gs = gridspec.GridSpec(1,2,hspace=0.1,wspace=0.1)
+
+	#Get field data and then loop over species
+	Ns = len(Spcs)
+	#Get field data
+	xi,yi,dBz = getFld(vtiDir,Ts)
+	radScl = np.pi/180.0
+
+	for s in range(Ns):
+		Ax = fig.add_subplot(gs[0,s])
+
+		if (s==0):
+			fldDomY = [-15,0]
+		else:
+			fldDomY = [0,15]	
+
+		#Make line
+		Phi = radScl*Mrk[s]
+		p0 = (RMin*np.cos(Phi),RMin*np.sin(Phi))
+		p1 = (RMax*np.cos(Phi),RMax*np.sin(Phi))
+		khiLine = [p0,p1]
+		(ln_xs, ln_ys) = zip(*khiLine)
+
+		#Now do KHI marker
+		Ax.add_line(Line2D(ln_xs,ln_ys,linewidth=lLW,color='springgreen'))
+
+		#Fields
+		fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud')
+
+		#Particles
+		xs,ys,zs = getPs(h5pDir,h5ps[s],Ts)
+		pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
+
+		#Extra
+		lfmv.addEarth2D()
+		plt.axis('scaled')
+		plt.xlim(fldDomX)
+		plt.ylim(fldDomY)
+		plt.xlabel('GSM-X [Re]',fontsize=LabFS)
+		plt.ylabel('GSM-Y [Re]',fontsize=LabFS)
+		plt.title(Spcs[s],fontsize=TitFS)
+
+	#Finish up
+	plt.savefig(fOut,dpi=figQ)
+	plt.close('all')
+	lfmv.trimFig(fOut)
