@@ -334,7 +334,7 @@ if (doFig4):
 	hRat = list(4*np.ones(Nx+1))
 	hRat[0] = 0.2
 
-	fig = plt.figure(figsize=figSize)#,tight_layout=True)
+	fig = plt.figure(figsize=figSizeFull)#,tight_layout=True)
 	gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
 	n = 0
