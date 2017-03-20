@@ -15,13 +15,15 @@ from matplotlib.lines import Line2D
 #2: KHI Panel
 #3: Rewind Panel
 #4: O+ trajectories
+#5: Loss over time figure
 
 doFig1 = False
-doFig2 = True
+doFig2 = False
 doFig3 = True
-doFig4 = False
+doFig4 = True
+doFig5 = True
 
-fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png"]
+fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png","LossT.png"]
 
 figSizeFull = (12,12) #For full panel
 figSizeHalf = (6,6)
@@ -41,6 +43,7 @@ pSize = 2; pMark = 'o'; pLW = 0.2
 LabFS = "large"
 TitFS = "large"
 cbFS = "medium"
+LegFS = "large"
 
 #Some global file info
 #Locations
@@ -227,6 +230,10 @@ if (doFig2):
 if (doFig3):
 	fOut = fOuts[2]
 
+	xRootDir = os.path.expanduser('~') + "/Work/Magnetoloss/rewe" #Data
+	xvtiDir = xRootDir + "/" + "eqSlc"
+	xh5pDir = xRootDir + "/" "H5p"
+
 	Spcs = ["$K_{0} = 50$ [keV]","$K_{0} = 100$ [keV]"]
 	h5ps = ["eRewind.50keV.h5part","eRewind.100keV.h5part"]
 	Nt = 5
@@ -249,7 +256,7 @@ if (doFig3):
 	gs = gridspec.GridSpec(Ns,Nt,hspace=0.1,wspace=0.1)#,bottom=0.05)
 
 	for t in range(Nt):
-		xi,yi,dBz = getFld(vtiDir,Ts[t],tSlc=Tslcs[t])
+		xi,yi,dBz = getFld(xvtiDir,Ts[t],tSlc=Tslcs[t])
 		for s in range(Ns):
 			Ax = fig.add_subplot(gs[s,t])
 
@@ -274,7 +281,7 @@ if (doFig3):
 			lfmv.addEarth2D()
 
 			#Now do particles
-			xs,ys,zs = getPs(h5pDir,h5ps[s],Ts[t],tSlc=Tslcs[t])
+			xs,ys,zs = getPs(xh5pDir,h5ps[s],Ts[t],tSlc=Tslcs[t])
 			pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
 
 			#Bounds
@@ -360,3 +367,30 @@ if (doFig4):
 	plt.close('all')
 	lfmv.trimFig(fOut)
 
+#-------------------------------------------
+#Figure 5, loss over time
+if (doFig5):
+	fOut = fOuts[4]
+
+	fileStub = "100keV.h5part"
+	
+	spcs = ["H","O","e"]
+	Leg = ["H+","O+","e-"]
+	fig = plt.figure(figsize=figSizeHalf)
+	Ns = len(spcs)
+
+	for i in range(Ns):
+		fIn = h5pDir + "/" + spcs[i] + "." + fileStub
+		t,mpTp = lfmpp.getH5p(fIn,"mp")
+		Np = mpTp.shape[1]
+		mpT = mpTp.sum(axis=1)
+		print(Np)
+		plt.plot(t,mpT/Np)	
+	plt.legend(Leg,loc='lower right',fontsize=LegFS)
+	plt.xlabel('Time [s]',fontsize=LabFS)
+	plt.ylabel('Cumulative Loss Fraction',fontsize=LabFS)
+
+	#Finish up
+	plt.savefig(fOut,dpi=figQ)
+	plt.close('all')
+	lfmv.trimFig(fOut)
