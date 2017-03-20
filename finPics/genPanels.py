@@ -8,6 +8,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.patches import Wedge
+from matplotlib.lines import Line2D
 
 #Figures
 #1: Main Panel
@@ -212,3 +213,12 @@ if (doFig2):
 	plt.savefig(fOut,dpi=figQ)
 	plt.close('all')
 	lfmv.trimFig(fOut)
+
+#Figure 3 (Rewind panel figure)
+if (doFig3):
+	fOut = fOuts[2]
+
+	#Finish up
+	plt.savefig(fOut,dpi=figQ)
+	plt.close('all')
+	lfmv.trimFig(fOut)	
