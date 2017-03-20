@@ -19,7 +19,7 @@ from matplotlib.lines import Line2D
 
 doFig1 = False
 doFig2 = False
-doFig3 = True
+doFig3 = False
 doFig4 = True
 doFig5 = True
 
@@ -329,6 +329,13 @@ if (doFig4):
 	#IDs calculated elsewhere
 	IDs = [88748,18090,9935,50193,77676,98578,72886,71222,13845,50715,11522,11530]
 	tSlcs = getMPX(h5pFile,IDs)
+
+	#Gridspec defaults
+	hRat = list(4*np.ones(Nx+1))
+	hRat[0] = 0.2
+
+	fig = plt.figure(figsize=figSize)#,tight_layout=True)
+	gs = gridspec.GridSpec(Nx+1,Ny,height_ratios=hRat)
 
 	n = 0
 	for i in range(1,Nx+1):
