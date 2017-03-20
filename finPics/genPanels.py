@@ -59,7 +59,7 @@ def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc",tSlc=None):
 
         vtiFile = vtiDir + "/" + eqStub + ".%04d.vti"%(tSlc)
         print("Reading %s"%vtiFile)
-        
+
         dBz = lfmv.getVTI_SlcSclr(vtiFile).T
         ori,dx,ex = lfmv.getVTI_Eq(vtiFile)
         xi = ori[0] + np.arange(ex[0],ex[1]+1)*dx[0]
@@ -328,7 +328,7 @@ if (doFig4):
 
 	#IDs calculated elsewhere
 	IDs = [88748,18090,9935,50193,77676,98578,72886,71222,13845,50715,11522,11530]
-	tSlcs = getMPX(h5p,IDs)
+	tSlcs = getMPX(h5pFile,IDs)
 
 	n = 0
 	for i in range(1,Nx+1):
