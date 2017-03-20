@@ -18,7 +18,7 @@ from matplotlib.lines import Line2D
 
 doFig1 = False
 doFig2 = True
-doFig3 = False
+doFig3 = True
 doFig4 = False
 
 fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png"]
@@ -178,10 +178,6 @@ if (doFig2):
 	for s in range(Ns):
 		Ax = fig.add_subplot(gs[0,s])
 
-		if (s==0):
-			fldDomY = [-15,0]
-		else:
-			fldDomY = [0,15]	
 
 		#Make line
 		Phi = radScl*Mrk[s]
@@ -203,10 +199,19 @@ if (doFig2):
 		#Extra
 		lfmv.addEarth2D()
 		plt.axis('scaled')
+		if (s==0):
+			fldDomY = [-15,0]
+			plt.ylabel('GSM-Y [Re]',fontsize=LabFS)
+		else:
+			fldDomY = [0,15]
+			plt.ylabel('GSM-Y [Re]',fontsize=LabFS)
+			Ax.yaxis.tick_right()
+			Ax.yaxis.set_label_position("right")
+
 		plt.xlim(fldDomX)
 		plt.ylim(fldDomY)
 		plt.xlabel('GSM-X [Re]',fontsize=LabFS)
-		plt.ylabel('GSM-Y [Re]',fontsize=LabFS)
+		
 		plt.title(Spcs[s],fontsize=TitFS)
 
 	#Finish up
@@ -217,6 +222,60 @@ if (doFig2):
 #Figure 3 (Rewind panel figure)
 if (doFig3):
 	fOut = fOuts[2]
+
+	Spcs = ["$K_{0} = 50$ [keV]","$K_{0} = 100$ [keV]"]
+	h5ps = ["eRewind.50keV.h5part","eRewind.100keV.h5part"]
+	Nt = 5
+	T0 = 3750
+	dT = 75
+	fldDomX = [-10,10]
+	fldDomY = [5,20]
+
+	#Times to plot
+	Ts = np.zeros(Nt,dtype=np.int)
+	Ts = T0-dT*np.arange(Nt)
+
+	#Time slices to use
+	Tslcs = (0.5*(T0-Ts) ).astype(int)
+
+	Ns = len(Spcs)
+	Nt = Nt
+
+	fig = plt.figure(figsize=figSizeFull)#,tight_layout=True)
+	gs = gridspec.GridSpec(Ns,Nt,hspace=0.1,wspace=0.1)#,bottom=0.05)
+
+	for t in range(Nt):
+		xi,yi,dBz = getFld(vtiDir,Ts[t],tSlc=Tslcs[t])
+		for s in range(Ns):
+			Ax = fig.add_subplot(gs[s,t])
+
+			if (t == 0):
+				plt.ylabel(Spcs[s],fontsize=LabFS)
+			elif (t == Nt-1):
+				plt.ylabel("GSM-Y [Re]",fontsize=LabFS)
+				Ax.yaxis.tick_right()
+				Ax.yaxis.set_label_position("right")
+			else:
+				plt.setp(Ax.get_yticklabels(),visible=False)
+
+			if (s < Ns-1):
+				plt.setp(Ax.get_xticklabels(),visible=False)
+			else:
+				plt.xlabel('GSM-X [Re]',fontsize=LabFS)
+			if (s == 0):
+				plt.title("T = %d [s]"%(Ts[t]-T0),,fontsize=TitFS)
+
+			#Now do plots
+			fldPlt = Ax.pcolormesh(xi,yi,dBz,vmin=fldBds[0],vmax=fldBds[1],cmap=fldCMap,shading='gouraud',alpha=fldOpac)
+			lfmv.addEarth2D()
+
+			#Now do particles
+			xs,ys,zs = getPs(h5pDir,h5ps[s],Ts[t],tSlc=Tslcs[t])
+			pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=pBds[0],vmax=pBds[1],cmap=pCMap,linewidth=pLW)
+
+			#Bounds
+			plt.axis('scaled')
+			plt.xlim(fldDomX); plt.ylim(fldDomY)
 
 	#Finish up
 	plt.savefig(fOut,dpi=figQ)
