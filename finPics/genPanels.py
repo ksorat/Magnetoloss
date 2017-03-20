@@ -230,7 +230,7 @@ if (doFig2):
 #Figure 3 (Rewind panel figure)
 if (doFig3):
 	fOut = fOuts[2]
-	figSizeRew = (12,6) #For full panel
+	figSizeRew = (12,4) #For full panel
 
 	xRootDir = os.path.expanduser('~') + "/Work/Magnetoloss/rewe" #Data
 	xvtiDir = xRootDir + "/" + "eqSlc"
