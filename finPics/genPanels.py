@@ -22,7 +22,9 @@ doFig4 = False
 
 fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png"]
 
-figSize = (12,12) #For full panel
+figSizeFull = (12,12) #For full panel
+figSizeHalf = (6,6)
+
 figQ = 300 #DPI
 
 #Some global color info
@@ -95,7 +97,7 @@ if (doFig1):
 	Ns = len(Spcs)
 	Nt = len(Ts)
 	
-	fig = plt.figure(figsize=figSize)#,tight_layout=True)
+	fig = plt.figure(figsize=figSizeFull)#,tight_layout=True)
 	gs = gridspec.GridSpec(Ns+2,Nt,height_ratios=HRs,hspace=0.1,wspace=0.1)#,bottom=0.05)
 
 	wedgeLW = 0.75
@@ -147,3 +149,9 @@ if (doFig1):
 	cb2.set_label("Particle Energy [keV]",fontsize=cbFS)
 	
 	plt.savefig(fOut,dpi=figQ)
+	plt.close('all')
+	lfmv.trimFig(fOut)
+	
+#Figure 2 (KHI panel figure)
+if (doFig2):
+	fOut = fOuts[1]
