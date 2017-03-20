@@ -229,6 +229,7 @@ if (doFig2):
 #Figure 3 (Rewind panel figure)
 if (doFig3):
 	fOut = fOuts[2]
+	figSizeRew = (12,6) #For full panel
 
 	xRootDir = os.path.expanduser('~') + "/Work/Magnetoloss/rewe" #Data
 	xvtiDir = xRootDir + "/" + "eqSlc"
@@ -248,11 +249,11 @@ if (doFig3):
 
 	#Time slices to use
 	Tslcs = (0.5*(T0-Ts) ).astype(int)
-
+	print(Tslcs)
 	Ns = len(Spcs)
 	Nt = Nt
 
-	fig = plt.figure(figsize=figSizeFull)#,tight_layout=True)
+	fig = plt.figure(figsize=figSizeRew)#,tight_layout=True)
 	gs = gridspec.GridSpec(Ns,Nt,hspace=0.1,wspace=0.1)#,bottom=0.05)
 
 	for t in range(Nt):
