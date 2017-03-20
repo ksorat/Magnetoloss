@@ -58,7 +58,8 @@ def getFld(vtiDir,t,dt=10.0,eqStub="eqSlc",tSlc=None):
                 tSlc = np.int(t/dt)
 
         vtiFile = vtiDir + "/" + eqStub + ".%04d.vti"%(tSlc)
-
+        print("Reading %s"%vtiFile)
+        
         dBz = lfmv.getVTI_SlcSclr(vtiFile).T
         ori,dx,ex = lfmv.getVTI_Eq(vtiFile)
         xi = ori[0] + np.arange(ex[0],ex[1]+1)*dx[0]
