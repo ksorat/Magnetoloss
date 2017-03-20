@@ -21,7 +21,7 @@ doFig1 = False
 doFig2 = False
 doFig3 = False
 doFig4 = True
-doFig5 = True
+doFig5 = False
 
 fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png","LossT.png"]
 
@@ -325,7 +325,7 @@ if (doFig4):
 	Nk = Nx*Ny
 	DomX = [-15,12]
 	DomY = [-20,20]
-
+	pSizeO = 10
 	#IDs calculated elsewhere
 	IDs = [88748,18090,9935,50193,77676,98578,72886,71222,13845,50715,11522,11530]
 	tSlcs = getMPX(h5pFile,IDs)
@@ -364,7 +364,7 @@ if (doFig4):
 			#Now do particles
 			xs,ys,zs = getPTop(h5pFile,IDs[n])
 	
-			pPlt = Ax.scatter(xs,ys,s=pSize,marker=pMark,c=zs,vmin=0,vmax=1,cmap=pCMap,linewidth=pLW)
+			pPlt = Ax.scatter(xs,ys,s=pSizeO,marker=pMark,c=zs,vmin=0,vmax=1,cmap=pCMap,linewidth=pLW)
 			
 			plt.plot(xs,ys,'w-',linewidth=lLw)
 			plt.axis('scaled')
