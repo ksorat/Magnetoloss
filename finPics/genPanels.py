@@ -16,7 +16,7 @@ from matplotlib.lines import Line2D
 #3: Rewind Panel
 #4: O+ trajectories
 
-doFig1 = True
+doFig1 = False
 doFig2 = True
 doFig3 = False
 doFig4 = False
