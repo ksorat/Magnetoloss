@@ -95,6 +95,7 @@ if (doFig1):
 	Ns = len(Spcs)
 	Nt = len(Ts)
 	
+	fig = plt.figure(figsize=figSize)#,tight_layout=True)
 	gs = gridspec.GridSpec(Ns+2,Nt,height_ratios=HRs,hspace=0.1,wspace=0.1)#,bottom=0.05)
 
 	wedgeLW = 0.75
