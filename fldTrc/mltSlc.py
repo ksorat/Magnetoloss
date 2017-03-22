@@ -5,11 +5,10 @@ import os
 from visit import *
 from visit_utils import *
 from visit_utils.common import lsearch #lsearch(dir(),"blah")
-import lfmGrids as lfm
 import pyVisit as pyv
 
-#fIn = "fldDatLorez.vti"
-fIn = "fldDat.vti"
+fIn = "fldDatLorez.vti"
+#fIn = "fldDat.vti"
 db = fIn
 Quiet = True
 doProd = True

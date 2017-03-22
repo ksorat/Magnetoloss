@@ -19,8 +19,8 @@ from matplotlib.lines import Line2D
 
 doFig1 = False
 doFig2 = False
-doFig3 = True
-doFig4 = False
+doFig3 = False
+doFig4 = True
 doFig5 = False
 
 fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png","LossT.png"]
@@ -320,7 +320,7 @@ def getMPX(h5pFile,IDs):
 if (doFig4):
 	fOut = fOuts[3]
 	h5pFile = h5pDir + "/" + "O.100keV.h5part"
-	lLw = 0.25
+	lLw = 1.0
 	Nx = 3; Ny = 4
 	Nk = Nx*Ny
 	DomX = [-15,12]
