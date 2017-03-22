@@ -27,7 +27,7 @@ thR = 60
 
 #dLam = 5 #+/ from critical latitude
 dLam = 5 #+/ from critical latitude
-Np = 40
+Np = 30
 
 #Rc0 = 8.0
 #Rc1 = 11.0

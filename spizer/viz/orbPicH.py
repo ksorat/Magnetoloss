@@ -9,16 +9,21 @@ from visit_utils import *
 from visit_utils.common import lsearch #lsearch(dir(),"blah")
 import pyVisit as pyv
 import lfmPostproc as lfmpp
+import random
+
+np.random.seed(31337)
+random.seed(31337)
 
 #Config 1
 doSingle = True
 pId = 10
-Nstrd = 60
+#Nstrd = 60
+NumT = 60 #How many to trace
 
 #Config 2
-doSingle = True
-pId = 50
-Nstrd = 60
+# doSingle = True
+# pId = 50
+# Nstrd = 60
 
 #Nstrd = 4 #What fraction of points to trace
 
@@ -28,8 +33,8 @@ tRadTrj=0.0015
 FldCmap = "Summer" #Winter,YlGnBu,YlGn
 
 doProd = True
-Quiet = True
-User = False
+Quiet = False
+User = True
 
 SrcF = "fld.vti"
 #SrcF = "fldLorez.vti"
@@ -55,16 +60,18 @@ t,mp  = lfmpp.getH5pid(SrcP,"mp",pId)
 #Find unique MP crossings
 mpT,I = np.unique(tCr,return_index=True)
 print("Found %d MP crossings"%(len(I)-1))
-Ix = I[1::Nstrd] #Remove null point
+#Ix = I[1::Nstrd] #Remove null point
 
-i0 = Ix[0]
+#i0 = Ix[0] #Use first MPX
+
 #i1 = t.shape[0]-1
-#i0 = 0
+i0 = 0
 i1 = mp.argmax()
-print("I0 = %d, I1 = %d, Stride = %d"%(i0,i1,Nstrd))
+I = random.sample(range(i0,i1),NumT)
+#print("I0 = %d, I1 = %d, Stride = %d"%(i0,i1,Nstrd))
 
 #print("Found %d slices after first MP"%(i1-i0))
-I = range(i0,i1,Nstrd)
+#I = range(i0,i1,Nstrd)
 
 Ns = len(I) #Number of seeds
 print("Using %d seeds from crossings"%(Ns))
@@ -129,14 +136,14 @@ OpenDatabase(SrcP)
 ActivateDatabase(SrcP)
 
 Nt = TimeSliderGetNStates()
-print(Nt)
+#print(Nt)
 DefineScalarExpression("Trap","Op+Om")
 pyv.lfmPCol(SrcP,"Trap",cMap="Cool",vBds=[0,1],Legend=False,Light=True,Inv=False)
 pOp = GetPlotOptions()
 # pOp.lineType = 1
 # pOp.tubeResolution = 100
 # pOp.tubeRadiusBBox = 0.025
-print(pOp)
+#print(pOp)
 SetPlotOptions(pOp)
 
 AddOperator("PersistentParticles")
@@ -146,7 +153,7 @@ ppOp.stopIndex = Nt
 ppOp.connectParticles = 1
 ppOp.indexVariable = "id"
 ppOp.stride = 1
-print(ppOp)
+#print(ppOp)
 SetOperatorOptions(ppOp)
 
 AddOperator("Tube")
@@ -154,7 +161,7 @@ tOp = GetOperatorOptions(1)
 tOp.radiusFractionBBox = tRadTrj
 tOp.fineness = 10
 tOp.capping = 1
-print(tOp)
+#print(tOp)
 SetOperatorOptions(tOp)
 
 if (not doSingle):
@@ -163,7 +170,7 @@ if (not doSingle):
 	ivOp.lbound = pId-1
 	ivOp.ubound = pId
 	ivOp.variable = "id"
-	print(ivOp)
+	#print(ivOp)
 	SetOperatorOptions(ivOp)
 
 

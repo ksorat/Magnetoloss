@@ -9,10 +9,16 @@ from visit_utils import *
 from visit_utils.common import lsearch #lsearch(dir(),"blah")
 import pyVisit as pyv
 import lfmPostproc as lfmpp
+import random
+
+np.random.seed(31337)
+random.seed(31337)
 
 doSingle = True
 #pId = 50
-Nstrd = 10 #What fraction of points to trace
+#Nstrd = 10 #What fraction of points to trace
+
+NumT = 60 #How many to trace
 
 tRadFld=0.00125
 tRadTrj=0.0015
@@ -20,7 +26,7 @@ FldCmap = "Summer" #Winter,YlGnBu,YlGn
 
 doProd = True
 Quiet = False
-User = False
+User = True
 
 SrcF = "fld.vti"
 
@@ -44,16 +50,14 @@ t,mp  = lfmpp.getH5pid(SrcP,"mp",pId)
 #Find unique MP crossings
 mpT,I = np.unique(tCr,return_index=True)
 print("Found %d MP crossings"%(len(I)-1))
-Ix = I[1::Nstrd] #Remove null point
+#Ix = I[1::Nstrd] #Remove null point
 
-i0 = Ix[0]
+#i0 = Ix[0]
 #i1 = t.shape[0]-1
 #i0 = 0
+i0 = 0
 i1 = mp.argmax()
-print("I0 = %d, I1 = %d, Stride = %d"%(i0,i1,Nstrd))
-
-#print("Found %d slices after first MP"%(i1-i0))
-I = range(i0,i1,Nstrd)
+I = random.sample(range(i0,i1),NumT)
 
 Ns = len(I) #Number of seeds
 print("Using %d seeds from crossings"%(Ns))
