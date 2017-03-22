@@ -7,36 +7,45 @@ from visit_utils import *
 from visit_utils.common import lsearch #lsearch(dir(),"blah")
 import pyVisit as pyv
 
-fIn = "fldDatLorez.vti"
-#fIn = "fldDat.vti"
+np.random.seed(31337)
+
+#fIn = "fldDatLorez.vti"
+fIn = "fldDat.vti"
 db = fIn
 Quiet = True
 doProd = True
-doRand = True
+
+doGUI = False
 
 PhiCs = [0,15,30,45,60,75,90]
 LatCs = [25,25,25,22,17,12,7.5]
 thR = 60
 
-Nl = 3
-Nr = 10
+# Nl = 3
+# Nr = 10
+
+
+#dLam = 5 #+/ from critical latitude
 dLam = 5 #+/ from critical latitude
+Np = 30
 
 #Rc0 = 8.0
 #Rc1 = 11.0
-Rc0 = 8.5
+Rc0 = 8.0
 Rc1 = 11.0
+DelR = Rc1 - Rc0
 
 dpMax = 5.0
+
 dBzMax = 35
 
-Np = 2*Nl*Nr
+#Np = 2*Nl*Nr
 #Theta = np.linspace(30,150,Nl)
-Theta = np.linspace(-dLam,dLam,Nl)
-Rad = np.linspace(Rc0,Rc1,Nr)
-dR = Rad[1]-Rad[0]
+# Theta = np.linspace(-dLam,dLam,Nl)
+# Rad = np.linspace(Rc0,Rc1,Nr)
 
-pcOpac = 0.75
+# dR = Rad[1]-Rad[0]
+
 pcOpacP = 0.5
 
 if (Quiet):
@@ -71,52 +80,64 @@ for k in range(Nphi):
 
 	x = np.zeros(Np); y = np.zeros(Np); z = np.zeros(Np)
 	n=0
-	if (doRand):
-		DelR = Rc1 - Rc0
-		Q1 = np.random.rand(Np)
-		Q2 = np.random.rand(Np)
-		Q3 = np.random.rand(Np)
-		Theta = np.zeros(Np)
+	#Do random points in fan of r,latitude
+	np.random.seed(31337)
+	Q1 = np.random.rand(Np)
+	Q2 = 2*np.random.rand(Np)-1
 
-		R = (Q2*DelR + Rc0) #Random rads
-		dTh = (Q1*2*dLam - dLam) #Delta theta
-		Ip = Q3>=0.5; Im = Q3<0.5
-		Theta[Ip] = radScl*(ThCp+dTh[Ip])
-		Theta[Im] = radScl*(ThCm+dTh[Im])
+	R = (Q1*DelR + Rc0) #Random rads
+	L = (LatC+dLam)*Q2
+	Theta = 90 - L
+	x[:] = (R)*Cp*np.sin(Theta*radScl)
+	y[:] = (R)*Sp*np.sin(Theta*radScl)
+	z[:] = (R)*   np.cos(Theta*radScl)
 
-		x[:] = (R)*Cp*np.sin(Theta)
-		y[:] = (R)*Sp*np.sin(Theta)
-		z[:] = (R)*   np.cos(Theta)
+	# if (doRand):
+	# 	
+	# 	Q1 = np.random.rand(Np)
+	# 	Q2 = np.random.rand(Np)
+	# 	Q3 = np.random.rand(Np)
+	# 	Theta = np.zeros(Np)
 
-	else:
+	# 	R = (Q2*DelR + Rc0) #Random rads
+	# 	dTh = (Q1*2*dLam - dLam) #Delta theta
+	# 	Ip = Q3>=0.5; Im = Q3<0.5
+	# 	Theta[Ip] = radScl*(ThCp+dTh[Ip])
+	# 	Theta[Im] = radScl*(ThCm+dTh[Im])
 
-		for i in range(Nr):
-			for j in range(Nl):
+	# 	x[:] = (R)*Cp*np.sin(Theta)
+	# 	y[:] = (R)*Sp*np.sin(Theta)
+	# 	z[:] = (R)*   np.cos(Theta)
+
+	# else:
+
+	# 	for i in range(Nr):
+	# 		for j in range(Nl):
 	
-				thP = (ThCp + Theta[j])*radScl
-				thM = (ThCm + Theta[j])*radScl
-				R = Rad[i]
+	# 			thP = (ThCp + Theta[j])*radScl
+	# 			thM = (ThCm + Theta[j])*radScl
+	# 			R = Rad[i]
 	
-				x[n] = R*Cp*np.sin(thP)
-				y[n] = R*Sp*np.sin(thP)
-				z[n] = R*   np.cos(thP)
+	# 			x[n] = R*Cp*np.sin(thP)
+	# 			y[n] = R*Sp*np.sin(thP)
+	# 			z[n] = R*   np.cos(thP)
 	
-				x[n+1] = (R+dR)*Cp*np.sin(thM)
-				y[n+1] = (R+dR)*Sp*np.sin(thM)
-				z[n+1] = (R+dR)*   np.cos(thM)
+	# 			x[n+1] = (R+dR)*Cp*np.sin(thM)
+	# 			y[n+1] = (R+dR)*Sp*np.sin(thM)
+	# 			z[n+1] = (R+dR)*   np.cos(thM)
 	
-				n=n+2
+	# 			n=n+2
 
 	dPhiStr = "Phi-%f"%(PhiC)
 	
 	DefineScalarExpression("dPhi",dPhiStr)
 	
 	
-	print("Generating %d streamlines\n"%(Nr*Nl))
+	print("Generating %d streamlines\n"%(Np))
 	
 	#Add phi slice
 	#pyv.lfmPCol(db,"dBz",vBds=(-dBzMax,dBzMax),Inv=True,pcOpac=pcOpacP,Light=False,Legend=False)
-	pyv.lfmPCol(db,"Bmag",vBds=(10,500),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
+	pyv.lfmPCol(db,"Bmag",vBds=(1,500),cMap="viridis",Log=True,pcOpac=pcOpacP,Light=False,Legend=False)
 
 	AddOperator("Slice")
 	sOps = GetOperatorOptions(0); 
@@ -156,7 +177,8 @@ for k in range(Nphi):
 		#Only do streams for final version
 		scMap = "RdBu"
 		#scMap = "Cool"
-		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap=scMap,tRad=0.0015,Legend=False)
+		scMap = "difference"
+		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap=scMap,tRad=0.001,Legend=False)
 		icOp = GetOperatorOptions(0)
 		icOp.dataValue = 10
 		icOp.dataVariable = "dPhi" 
@@ -190,15 +212,18 @@ for k in range(Nphi):
 	DrawPlots()
 	print("Writing to %s at Phi=%f"%(fOut,PhiC))
 
-	swa = GetSaveWindowAttributes()
-	swa.fileName = fOut
-	SetSaveWindowAttributes(swa)
-	SaveWindow()
-	ResetView()
-	DeleteAllPlots()
-
-	pyv.killAnnotations()
-	#Run trim on file
-	#ComS = 'convert tmpVid/%s'%fOut + ' -trim -border 20x20 -bordercolor "#FFFFFF" P%d.png'%np.int(PhiC)
-	ComS = 'convert tmpVid/%s'%fOut + ' -trim P%d.png'%np.int(PhiC)
-	os.system(ComS)
+	if (doGUI):
+		OpenGUI()
+	else:
+		swa = GetSaveWindowAttributes()
+		swa.fileName = fOut
+		SetSaveWindowAttributes(swa)
+		SaveWindow()
+		ResetView()
+		DeleteAllPlots()
+	
+		pyv.killAnnotations()
+		#Run trim on file
+		#ComS = 'convert tmpVid/%s'%fOut + ' -trim -border 20x20 -bordercolor "#FFFFFF" P%d.png'%np.int(PhiC)
+		ComS = 'convert tmpVid/%s'%fOut + ' -trim P%d.png'%np.int(PhiC)
+		os.system(ComS)

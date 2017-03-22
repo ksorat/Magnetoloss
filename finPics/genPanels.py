@@ -320,7 +320,7 @@ def getMPX(h5pFile,IDs):
 if (doFig4):
 	fOut = fOuts[3]
 	h5pFile = h5pDir + "/" + "O.100keV.h5part"
-	lLw = 1.0
+	lLw = 0.25
 	Nx = 3; Ny = 4
 	Nk = Nx*Ny
 	DomX = [-15,12]
