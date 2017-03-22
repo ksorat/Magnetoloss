@@ -19,8 +19,8 @@ from matplotlib.lines import Line2D
 
 doFig1 = False
 doFig2 = False
-doFig3 = False
-doFig4 = True
+doFig3 = True
+doFig4 = False
 doFig5 = False
 
 fOuts = ["fpPanel.png","khiPanel.png","rewePanel.png","OTrjs.png","LossT.png"]
@@ -236,7 +236,7 @@ if (doFig3):
 	xvtiDir = xRootDir + "/" + "eqSlc"
 	xh5pDir = xRootDir + "/" "H5p"
 
-	Spcs = ["$K_{0} = 50$ [keV]","$K_{0} = 100$ [keV]"]
+	Spcs = ["$K_{0} = 50$ keV","$K_{0} = 100$ keV"]
 	h5ps = ["eRewind.50keV.h5part","eRewind.100keV.h5part"]
 	Nt = 5
 	T0 = 3750

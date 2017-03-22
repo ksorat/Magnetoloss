@@ -19,9 +19,9 @@ from matplotlib.patches import Wedge
 
 doFig1 = False
 doFig2 = False
-doFig3 = False
+doFig3 = True
 doFig4 = False
-doFig5 = True
+doFig5 = False
 
 fOuts = ["msRad.png","msTime.png","piVdp.png","mpLoss.png","mpLoss1st.png"]
 
@@ -164,7 +164,8 @@ if (doFig2):
 
 	lfmv.showDualHist(aTms[0],aTms[1],bins,alph=0.75,Norm=True,Cum=False,LogH=doLog)
 	plt.legend(Leg,fontsize=LegFS)
-	plt.xlabel("Time in Magnetosheath [s]",fontsize=LabFS)
+	#plt.xlabel("Time in Magnetosheath [s]",fontsize=LabFS)
+	plt.xlabel("$\Delta t$ [s]",fontsize=LabFS)
 	plt.ylabel("Density",fontsize=LabFS)
 	plt.xlim(T0,Tf)
 	plt.ylim(pMin,pMax)
@@ -234,11 +235,11 @@ if (doFig3):
 	
 		#Add several helpful lines
 		plt.plot(PhiI,PhiI,'w--'   ,linewidth=lLW)
-		plt.plot(PhiI,PhiI+30,'w--',linewidth=lLW)
-		plt.plot(PhiI,PhiI+60,'w--',linewidth=lLW)
-	
-		plt.plot(PhiI,PhiI-30,'w--',linewidth=lLW)
-		plt.plot(PhiI,PhiI-60,'w--',linewidth=lLW)
+
+		plt.plot(PhiI,PhiI+30,'k--',linewidth=lLW)
+		plt.plot(PhiI,PhiI+60,'k--',linewidth=lLW)
+		plt.plot(PhiI,PhiI-30,'k--',linewidth=lLW)
+		plt.plot(PhiI,PhiI-60,'k--',linewidth=lLW)
 	
 	
 		plt.hlines(0,piB[0],piB[1],colors='k',linewidth=lLW,linestyles='-')
