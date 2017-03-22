@@ -27,7 +27,7 @@ thR = 60
 
 #dLam = 5 #+/ from critical latitude
 dLam = 5 #+/ from critical latitude
-Np = 30
+Np = 40
 
 #Rc0 = 8.0
 #Rc1 = 11.0
@@ -81,7 +81,7 @@ for k in range(Nphi):
 	x = np.zeros(Np); y = np.zeros(Np); z = np.zeros(Np)
 	n=0
 	#Do random points in fan of r,latitude
-	np.random.seed(31337)
+	np.random.seed(31337+1)
 	Q1 = np.random.rand(Np)
 	Q2 = 2*np.random.rand(Np)-1
 
@@ -177,7 +177,7 @@ for k in range(Nphi):
 		#Only do streams for final version
 		scMap = "RdBu"
 		#scMap = "Cool"
-		scMap = "difference"
+		#scMap = "difference"
 		pyv.lfmStream(fIn,"Bfld",x,y,z,cMap=scMap,tRad=0.001,Legend=False)
 		icOp = GetOperatorOptions(0)
 		icOp.dataValue = 10
